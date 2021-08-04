@@ -1,0 +1,10 @@
+{
+    "modules": {
+        "tools": {
+            "CutCoCreate": {
+                "title": "My CutCoCreate",
+                "content": "I am a Vue Addon"
+            }
+        }
+    }
+}

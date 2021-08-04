@@ -19,6 +19,9 @@
   "tacticalMark": {
     "type": "tool"
   },
+  "CutCoCreate": {
+    "type": "tool"
+  },
   "ColorCodeMap": {
     "path": "cosi/ColorCodeMap",
     "type": "tool"
