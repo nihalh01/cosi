@@ -23,7 +23,7 @@ Yuxiang Zhang, HafenCity Universität Hamburg
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making
 
-### Zusammen-fassung
+### Zusammenfassung
 Bei der Planung städtischer und sozialer Infrastruktur sind Entscheidungsprozesse in der öffentlichen Verwaltung häufig durch langwierige Verfahren und eine fragmentierte Datengrundlage charakterisiert. D.h. Bedarfe werden zu spät erkannt, oder die Konkretisierung der Planung verzögert sich durch das aufwendige Beschaffen von Informationen. 
 <br></br>
 Das vorliegende Handbuch  beschreibt  das *Cockpit Städtische Infrastrukturen* für Hamburg als digitales Analyse- und Planungswerkzeug, welches mithilfe eines leicht zugänglichen User-Interface statistische und georeferenzierte Daten bündelt, visualisiert und integriert, um Planungsbedarfe zu identifizieren und Planungsprozesse zu beschleunigen. 
@@ -362,6 +362,7 @@ Das Werkzeug erlaubt die Ermittlung aller Gebiete (Stadtteile oder stat. Gebiete
 
 ## Simulation
 Eine erste Simulationsfunktion wurde entwickelt. Sobald diese in die Produktion überführt wurde, folgt eine schrittweise Anleitung an dieser Stelle.
+**Anleitung Einbinden**
 
 ## Dienste
 
