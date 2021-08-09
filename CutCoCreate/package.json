@@ -1,0 +1,15 @@
+{
+  "name": "cutcocreate",
+  "version": "1.0.0",
+  "description": "Standarddatenpaket Download",
+  "title": "CUT Co-Create",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citysciencelab/mpportalconfigs"
+  },
+  "scripts": {},
+  "dependencies": {
+    "vuetify": "^2.5.1"
+  }
+}
