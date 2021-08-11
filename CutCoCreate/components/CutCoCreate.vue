@@ -5,6 +5,7 @@ import getters from "../store/gettersCutCoCreate";
 import mutations from "../store/mutationsCutCoCreate";
 import {initializeLayerList} from "masterportalAPI/src/rawLayerList";
 import actions from "../../schoolRoutePlanning/store/actionsSchoolRoutePlanning";
+import axios from "axios";
 
 export default {
     name: "CutCoCreate",
@@ -13,14 +14,8 @@ export default {
     },
     data () {
         return {
-            colors: [
-                "primary",
-                "secondary",
-                "yellow darken-2",
-                "red",
-                "orange",
-            ],
-            model: 0
+            loadedContent: null,
+            activeTool: null
         };
     },
     computed: {
@@ -38,6 +33,7 @@ export default {
         this.applyTranslationKey(this.name);
     },
     methods: {
+        ...mapActions("Tools", ["setToolActive"]),
         ...mapMutations("Tools/CutCoCreate", Object.keys(mutations)),
         ...mapActions("Tools/CutCoCreate", Object.keys(actions)),
         // These application wide getters and setters can be found in 'src/modules/map/store'
@@ -61,15 +57,39 @@ export default {
                 console.log("center on step " + e);
             }
             if (Object.prototype.hasOwnProperty.call(currentStep, "layers")) {
-                const layerList = this.layerList();
+                // const layerList = this.layerList();
+                const layerList = Radio.request("ModelList", "getModelsByAttributes", {isVisibleInTree: true});
                 for (const layer of layerList) {
-                    if (currentStep.layers.includes(layer.values_.id)) {
-                        this.setLayerVisibility(layer.values_.id, true);
-                    } else {
-                        this.setLayerVisibility(layer.values_.id, false);
+                    if (currentStep.layers.includes(layer.attributes.id) && !layer.attributes.isVisibleInMap) {
+                        layer.setIsVisibleInMap(true);
+                    } else if (!currentStep.layers.includes(layer.attributes.id) && layer.attributes.isVisibleInMap) {
+                        layer.setIsVisibleInMap(false);
                     }
                 }
             }
+            if (Object.prototype.hasOwnProperty.call(currentStep, "content")) {
+                const contentPromise = this.getStepContentFromFile(currentStep, this.storyConf.htmlFolder + currentStep.content);
+                contentPromise
+                    .then((data) => this.loadedContent = data)
+                    .catch(err => console.error(err));
+            } else {
+                this.loadedContent = null;
+            }
+            if (Object.prototype.hasOwnProperty.call(currentStep, "activeTool")) {
+                this.activeTool = currentStep.activeTool;
+                this.setToolActive({id: this.activeTool, active: "true"});
+            } else if (this.activeTool !== undefined) {
+                // TODO: deactivate the tool again
+                this.setToolActive({id: this.activeTool, active: "false"});
+            }
+        },
+
+        getStepContentFromFile: function (step, url) {
+            return axios.get(url)
+                .then(response => response.data)
+                .then(content => {
+                    return content;
+                });
         },
 
         /**
@@ -126,13 +146,10 @@ export default {
                 v-if="active"
                 id="vue-addon"
             >
-                <v-app>
-                    <div class="text-h3">
-                        {{ storyConf.name }}
-                    </div>
+                <h3>{{ storyConf.name }}</h3>
+                <v-app id="vuetify-wrapper">
                     <div v-if="storyConf !== undefined && storyConf.hasOwnProperty('steps')">
-                        <v-carousel v-model="model"
-                                    :continuous="false"
+                        <v-carousel :continuous="false"
                                     hide-delimiters
                                     @change="storyStepChange"
                         >
@@ -147,7 +164,7 @@ export default {
                                         align="start"
                                         justify="center"
                                     >
-                                        <div class="text-h5">
+                                        <div class="text-h4">
                                             {{ step.title }}
                                         </div>
                                     </v-row>
@@ -156,8 +173,25 @@ export default {
                                         justify="center"
                                     >
                                         <div class="text">
-                                            {{step}}
+                                            {{ step }}
                                         </div>
+                                    </v-row>
+                                    <v-row
+                                        v-if="step.hasOwnProperty('content')"
+                                        align="start"
+                                        justify="center"
+                                    >
+                                        <div class="text-h5">
+                                            {{ step.content }}
+                                        </div>
+                                    </v-row>
+                                    <v-row
+                                        v-if="loadedContent !== undefined"
+                                        align="start"
+                                        justify="center"
+                                    >
+                                        <div class="text-h5"
+                                             v-html="loadedContent" />
                                     </v-row>
                                     <v-row
                                         style="height: 30px"
@@ -177,3 +211,13 @@ export default {
         </template>
     </Tool>
 </template>
+
+<style lang="less" scoped>
+    ::v-deep {
+        @import (less) "../node_modules/vuetify/dist/vuetify.min.css";
+
+        .row {
+            margin: 0 !important;
+        }
+    }
+</style>
