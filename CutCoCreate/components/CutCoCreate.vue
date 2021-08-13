@@ -47,8 +47,10 @@ export default {
          */
         storyStepChange (e) {
             const currentStep = this.storyConf.steps[e];
+
             if (Object.prototype.hasOwnProperty.call(currentStep, "flyToCoordinate")) {
                 const mapView = this.map().getView();
+
                 mapView.animate({
                     center: currentStep.flyToCoordinate,
                     duration: 2000,
@@ -59,28 +61,42 @@ export default {
             if (Object.prototype.hasOwnProperty.call(currentStep, "layers")) {
                 // const layerList = this.layerList();
                 const layerList = Radio.request("ModelList", "getModelsByAttributes", {isVisibleInTree: true});
+
                 for (const layer of layerList) {
                     if (currentStep.layers.includes(layer.attributes.id) && !layer.attributes.isVisibleInMap) {
                         layer.setIsVisibleInMap(true);
-                    } else if (!currentStep.layers.includes(layer.attributes.id) && layer.attributes.isVisibleInMap) {
+                        layer.set("isSelected", true);
+                    }
+                    else if (!currentStep.layers.includes(layer.attributes.id) && layer.attributes.isVisibleInMap) {
                         layer.setIsVisibleInMap(false);
+                        layer.set("isSelected", false);
                     }
                 }
+                //TODO: the rerender does not work yet - just the Radio method triggger is done
+                Radio.trigger("TableMenu", "rerenderLayers");
             }
             if (Object.prototype.hasOwnProperty.call(currentStep, "content")) {
                 const contentPromise = this.getStepContentFromFile(currentStep, this.storyConf.htmlFolder + currentStep.content);
+
                 contentPromise
+                    // eslint-disable-next-line no-return-assign
                     .then((data) => this.loadedContent = data)
                     .catch(err => console.error(err));
-            } else {
+            }
+            else {
                 this.loadedContent = null;
             }
             if (Object.prototype.hasOwnProperty.call(currentStep, "activeTool")) {
                 this.activeTool = currentStep.activeTool;
-                this.setToolActive({id: this.activeTool, active: "true"});
-            } else if (this.activeTool !== undefined) {
+                //this.setToolActive({id: this.activeTool, active: "true"});
+
+                this.$store.commit(`Tools/${this.activeTool}/setActive`, true);
+                console.log(this.$store)
+            }
+            else if (this.activeTool) {
                 // TODO: deactivate the tool again
-                this.setToolActive({id: this.activeTool, active: "false"});
+                // this.setToolActive({id: this.activeTool, active: "false"});
+                this.$store.commit(`Tools/${this.activeTool}/setActive`, false);
             }
         },
 
@@ -122,7 +138,8 @@ export default {
                             text: "<strong>Die Datei '" + storyConfUrl + "' konnte nicht geladen werden!</strong>",
                             kategorie: "alert-warning"
                         });
-                    } else {
+                    }
+                    else {
                         this.setStoryConf(storyConf);
                     }
                 });
@@ -139,7 +156,7 @@ export default {
         :render-to-window="renderToWindow"
         :resizable-window="resizableWindow"
         :deactivate-gfi="deactivateGFI"
-        :initialWidth="700"
+        :initial-width="700"
     >
         <template #toolBody>
             <div
@@ -149,9 +166,10 @@ export default {
                 <h3>{{ storyConf.name }}</h3>
                 <v-app id="vuetify-wrapper">
                     <div v-if="storyConf !== undefined && storyConf.hasOwnProperty('steps')">
-                        <v-carousel :continuous="false"
-                                    hide-delimiters
-                                    @change="storyStepChange"
+                        <v-carousel
+                            :continuous="false"
+                            hide-delimiters
+                            @change="storyStepChange"
                         >
                             <v-carousel-item
                                 v-for="(step, index) in storyConf.steps"
@@ -190,8 +208,10 @@ export default {
                                         align="start"
                                         justify="center"
                                     >
-                                        <div class="text-h5"
-                                             v-html="loadedContent" />
+                                        <div
+                                            class="text-h5"
+                                            v-html="loadedContent"
+                                        />
                                     </v-row>
                                     <v-row
                                         style="height: 30px"
