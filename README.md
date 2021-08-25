@@ -16,13 +16,13 @@ Nicola Stradtmann, HafenCity University Hamburg
 Johanna Fleischer, Hafen City University
 Yuxiang Zhang, HafenCity University Hamburg
 
-### was standing
+### Status
 06/17/2021
 
 ### Keywords
 GIS, Dashboard, Data-Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making
 
-### Together-version
+### Summary
 In urban and social infrastructure planning, decision-making processes in public administration are often characterized by lengthy procedures and a fragmented database. This implies that requirements are identified too late, or the time-consuming process of obtaining information delays the planning specification.
 <br></br>
 This manual describes the *Cockpit Urban Infrastructures* for Hamburg as a digital analysis and planning tool, which uses an easily accessible user interface to bundle, visualize and integrate statistical and geo-referenced data in order to identify planning needs and accelerate planning processes.
@@ -86,7 +86,7 @@ structure (for a precise list, see appendix). These data sets contain time serie
 
 *Note: For reasons of data protection law, the data provider filters those data sets which, in the case of sensitive data, could be traced back to single individuals.*
 
-**Datensatz (Bsp.)**
+**Data sets (Example)**
 | `Verwaltungseinheit`        | `Stadtteil`
 ------------ | -------------
 `Bezirk` | `Hamburg-Nord`
@@ -196,11 +196,11 @@ The topic tree is divided into background maps, a catalog of specialist data and
 
 The topics contain information that is represented symbolically or by areas on the map. In Figure 4, for example, the red dots represent the existing daycare centers in the area, while the purple lines represent areas that belong to the development plans layer.  
 
-A legend on the active topics can be displayed by clicking on the "Legend" tab. Independently of this, further information on the respective topic can be called up by clicking on the info button to the right of the layer. Information such as a brief description of the topic including the data status and a legend on the topic are displayed. There are also links to download sources and a WFS or WMF address behind the info button.  
+Clicking on the "Legend" tab displays the active topics and the info button to the layer's right calls upon further information on the respective topic. Information such as a brief description of the topic, including the data status and a legend, are displayed. There are also links to download sources and a WFS or WMF address behind the info button.  
 
-Clicking on an object on the map opens an information panel for the current selection (sports facility, daycare center, etc.). Information about the object is displayed on the information board. Data relevant to data protection (personal) are not displayed.  
+Clicking on an object on the map opens an information panel for the current selection (e.g., sports facility and daycare center). The information board displays the object information. Data protection-relevant (personal) data is not visible.  
 
-It is possible to adjust the order and the transparency of the active layers: Under "Selected topics" there is an info button and a setting wheel for each selected topic. A click on the wheel opens the setting options for order and transparency.
+It is possible to adjust the active layers' order and transparency: Under "Selected topics". There is an info button and a setting wheel for each selected topic. A click on the wheel opens the setting options for order and transparency.
 
 ## Accessibility
 
@@ -241,9 +241,9 @@ Various aids have been created in CoSI to make it easier to read.
 *Note: The facility overview is not yet activated for production.*
 
 ### Resident query
-Basically, this function offers the possibility of determining the exact number of residents by drawing a rectangle or circle or by drawing an area. This tool comes from the master portal and has been integrated into the module “accessibility analysis”.
+This function offers the possibility of determining the exact number of residents by drawing a rectangle or circle or drawing an area. This tool comes from the master portal and has been integrated into the module "accessibility analysis."
 
-When calling up directly under the "Analysis" tab, the area over which the query is to be carried out must be specified manually (by drawing a rectangle or circle or by drawing an area).
+When calling up directly under the "Analysis" tab, the area over which the query is to be carried out must be specified manually (by drawing a rectangle, circle, or an area).
 
 When used within the context of the accessibility analysis, the area does not have to be specified manually, but the calculated catchment area is adopted as the area.
 
@@ -254,7 +254,7 @@ An accessibility analysis can be carried out in two ways: 1) from a reference po
 This tool was implemented using OpenRouteService, a service developed and provided by the Heidelberg Institute for Geoinformation Technology. Use is covered by the Creative Commons license CC BY 4.0. Further information can be found at: https: // heigit. org / de / ortsbasierte-dienste-und-navigation / https: //openrouteservice.org/services/
 
 **1) Accessibility from a reference point**
-Indicates an area that can be reached from a point on the map selected by the user within a distance specified by the user. The distance can be given in time or in meters. Accessibility is calculated based on the means of transport specified by the user. The polygons are automatically adjusted when the mode of transport or other parameters are changed.
+displays an area that can be reached from a user-selected point on the map within a user-specified distance. The distance can be given in time or in meters. The accessibility is calculated depending on the means of transport specified by the user. The polygons are automatically adjusted when the mode of transport or other parameters are changed.
 
 The module can be used without first selecting and confirming a planning area. 
 
@@ -274,7 +274,7 @@ The module can be used without first selecting and confirming a planning area.
 10. **Polygon** - Shows the area that can be reached from the reference point as a heat map, depending on the previously entered parameters.
 
 **2) Accessibility in the area**
-Shows the coverage and accessibility of a previously specified type of facility (e.g. kindergartens) in the specified catchment area (planning area). The catchment area is the distance from the respective facility and can be specified in time or in meters. Accessibility depends on the means of transport specified.
+shows the coverage and accessibility of a previously specified type of facility (e.g., kindergartens) in the defined catchment area (planning area). The catchment area is the distance from the facility and can be specified in time or meters. Accessibility depends on the means of transport specified.
 
 ![Illustration 7th - Accessibility in the area](https://user-images.githubusercontent.com/79461871/127782106-b66ef81e-928a-4f1f-87c6-ba404c0d8a18.JPG)
 
@@ -288,7 +288,7 @@ Shows the coverage and accessibility of a previously specified type of facility 
 6. **Polygons** - Show the areas that can be reached from the respective facility as a heatmap, depending on the previously entered parameters. The catchment areas calculated in this way can overlap. This module can be used to make visible where gaps arise with regard to the facility coverage in the area. 	
 
 ### Filter
-The active, selected topics can be searched and filtered according to the categories of their data sets by clicking on the "Filter" tab. The map automatically zooms in on the filter results. Only results in the selected areas are included. The filter is available for all technical data sets that have meaningful filterable attributes (such as area, use, carrier, etc.).
+The active, selected topics can be searched and filtered according to the categories of their data sets by clicking on the "Filter" tab. The map automatically zooms in on the filter results. It includes only results in the selected areas. The filter is available for all technical data sets with meaningful, filterable attributes (e.g., area, use, and carrier).
 
 ![Illustration 8th - filters](https://user-images.githubusercontent.com/79461871/127782108-14cf240d-948c-48ec-a94d-cb921da9e510.JPG)
 
@@ -304,7 +304,7 @@ The active, selected topics can be searched and filtered according to the catego
 4. **Delete filter:** Individual selection by clicking the red "X" or delete the entire selection by clicking the "Delete all" button.
 
 ### Supply analysis
-The "Supply Analysis" tool calculates the relationship between two data records. The data sets can either be regional statistical data or facility data from the menu "Topics / Technical data". In order for the supply analysis to be used, at least two data records must have been loaded.
+The "Supply Analysis" tool calculates the relationship between two data records. The data sets can be regional statistical data or facility data from the "Topics/Technical data" menu. At least two data records must be given to use this tool.
 
 ![Illustration 9 - Supply analysis, settings](https://user-images.githubusercontent.com/79461871/127782111-691aff4e-ece2-4c1c-a259-a5760bae1886.JPG)
 
@@ -334,7 +334,7 @@ The individual functions of the tool are explained in detail below:
 4. **Show in dashboard** - The results table can be transferred directly to the dashboard for later use.
 
 ### Comparable areas
-The tool allows the determination of all areas (city districts or stat. Areas) in which the selected parameters predominate, or those which are similar to the selected reference area in these parameters.
+The tool allows the determination of all areas (city districts or stat. areas) in which the selected parameters predominate, or those which are similar to the selected reference area in these parameters.
 
 ![Illustration 11 - Comparable areas](https://user-images.githubusercontent.com/79461871/127782118-05befeba-3d13-4c8b-b7d5-71ffdb6186d0.JPG)
 
@@ -390,19 +390,19 @@ When you start CoSI, a frame of reference is first established and a planning ar
 	 - Click on the pen to the right of “Reset selection”. A drawing tool is activated; This allows the user to draw a rectangle over the selection area in order to select it.
 	 - Both options described above can also be combined with one another, the order being irrelevant. The users can therefore first select individual administrative units and then activate the drawing tool in order to add additional administrative units or to proceed the other way round.
 
-The defined planning area can be adjusted at any time; the area can be expanded (both by clicking and using the drawing tool), reduced (by clicking marked administrative units can be deselected) or completely reset (by clicking on “Reset selection”).
+The defined planning area can be adjusted at any time; the area can be expanded (both by clicking and using the drawing tool), reduced (by clicking marked administrative units can be deselected), or completely reset (by clicking on "Reset selection").
 
 A planning area does not always have to be defined first in every context of use; Certain analysis tools such as the "Accessibility Analysis" and "Comparable Areas" can be used without specifying an area beforehand.
 
 The following information applies to such cases:
-1.	No data records are loaded, ie it is not possible to display the regional statistical data. Regional statistical data are also not displayed in the dashboard.
+1.	No data records are loaded, i.e., it is not possible to display the regional statistical data. Regional statistical data are also not displayed in the dashboard.
 2.	When adding topics from the specialist data, the loading process could take longer
 3.	The availability analysis may not work reliably for a very large number of facilities.
 
 ## Map analysis of regional statistical data
 In addition to the technical data layers, the basis of all CoSI analysis functions are the data records of the StaNord database, which are available as time series for the various administrative units (see Sect. Regional statistical data). These can be visualized directly and dynamically on the map for the selected planning area. The color scaling and legend are generated dynamically from the selection. The most recent data set is always displayed.
 
-The tool for visualizing regional statistical data enables the selection of regional statistical data sets that are available for the selected districts. It can only be used if areas have already been selected using the area selection tool. The tool can visualize the selected data sets on the map and generates a dynamic legend. Furthermore, data sets for several years can be selected and, if desired, animated in consecutive order.
+The tool for visualizing regional statistical data enables the selection of regional statistical data sets that are available for the selected districts. It can only be used if areas have already been selected using the area selection tool. The tool can visualize the selected data sets on the map and generates a dynamic legend. Furthermore, data sets for several years can be chosen and, if desired, animated in consecutive order.
 
 ![Illustration 15th - Window for map analysis of statistical data](https://user-images.githubusercontent.com/79461871/127782132-cc308d4a-a00a-4422-bcdd-0a75c6321f15.JPG)
 
@@ -422,7 +422,7 @@ The individual functions of the tool are explained in detail below:
 11.	You can use the button to show and hide the names of the selected areas on the map.
 
 ## Dashboard
-The dashboard forms the "heart" of the analysis functions in CoSI. All evaluations of the map-based tools as well as the underlying data sets come together here. It always shows the city as a whole, the selected statistical areas and the associated reference areas (of the higher-level administrative unit) with all StaNord characteristic data in tabular form and houses a number of statistical analysis tools such as diagrams, correlations or ratio formation. In addition, the evaluation results of all other CoSI modules can be displayed in the dashboard and used here for further evaluations or displays.
+The dashboard forms the "heart" of the analysis functions in CoSI. All evaluations of the map-based tools as well as the underlying data sets come together here. It always shows the city as a whole, the selected statistical areas, and the associated reference areas (of the higher-level administrative unit) with all StaNord characteristic data in tabular form. It houses several statistical analysis tools such as diagrams, correlations, or ratio formation. In addition, the evaluation results of all other CoSI modules can be displayed in the dashboard and used here for further evaluations or displays.
 
 ![Illustration 16 - Dashboard overview](https://user-images.githubusercontent.com/79461871/127782139-9508d8ac-0202-46db-8f35-f7375845ea31.JPG)
 
@@ -434,7 +434,7 @@ The dashboard forms the "heart" of the analysis functions in CoSI. All evaluatio
 4. **Shut down**
 
 ### Structure (technology)
-According to its basic function, the dashboard is a freely configurable work environment that can be configured as freely as possible both for your own work and for the visualization and presentation of the results (more on this under InfoScreen and Outlook). According to its structure, the Dashboard is completely ignorant of the content that is presented on it. So it is conceivable to expand it at will in future development steps.
+According to its basic function, the dashboard is a freely configurable work environment that can be configured as freely as possible both for your own work and for the visualization and presentation of the results (more on this under InfoScreen and Outlook). According to its structure, the Dashboard is entirely ignorant of the content that is presented on it. So it is conceivable to expand it at will in future development steps.
 
 Using a simple, preconfigured function, content from other modules can be transferred to the dashboard and displayed there as a new widget.
 
@@ -462,31 +462,30 @@ All widgets (with the exception of the overview table) can be deleted using the 
 All more in-depth interactions with the contents of the dashboard or widgets take place via a context menu, which is called up by right-clicking on an element. Which functions are available depends on the respective element. If no functions are available on an element, the context menu does not open. Context functions are currently implemented in the summary table and the diagrams.
 
 ### The Overview table
-By default, the table is the first widget that is automatically displayed when the dashboard is opened. The table shows all indicators of the StaNord data for the selected areas as well as the associated reference areas of the next larger administrative unit i.e, the respective city districts at stat. Areas and the districts in districts. All data sets are grouped by topic and contain continuous time series, which are expanded annually (see p.regional statistical data). In addition, calculated average and total values for the original selection are shown.
-
-The table shows all indicators of the StaNord data for your selected areas. In addition, you will see 
+By default, the table is the first widget that is automatically displayed when the dashboard is opened. The table shows all indicators of the StaNord data for the selected areas as well as the associated reference areas of the next larger administrative unit, i.e., the respective city districts at stat. Areas and the districts in districts. All data sets are grouped by topic and contain continuous time series, expanded annually (see p.regional statistical data). In addition, calculated average and total values for the original selection are shown.
 
 **Calculations**
 >The reference areas are not included. Also, only total and average values are calculated for absolute and not for proportional values, since the reference values are not clear and can therefore lead to incorrect calculations. For example, the “proportion of the population with a migration background” refers to the “total population”, “Proportion of women 15 to under 65 years of age who are subject to social insurance contributions”, however, to the absolute number of women between 15 and 65 who, in this form, at the StaNord- Data is not available as a data set. Theoretically, referencing the reference data record in the database is conceivable. However, this is a data issue that must be decided in coordination between UDH and StaNord in future development steps.
 
-The associated reference areas of the next largest administrative unit as well as calculated average and total values for your selection (the reference areas are not included).
-You can zoom in on an area name on the map by clicking on it. You can move or hide table columns. Hidden columns are not taken into account when creating a diagram. 
+The table shows all indicators of the StaNord data for your selected areas. In addition, you can see the corresponding reference areas of the next largest administrative unit as well as calculated average and total values for your selection (the reference areas are not included).
 
-In the context menu you can 1) create diagrams from table columns or 2) offset table rows with one another (form quotients). The calculation results are added to the table as a new line for all years and areas. You can select multiple rows in the table for grouped diagrams using a check box or pressed the CTRL key.
+By clicking on an area name, you can zoom in to that area on the map. You can move or hide table columns. Hidden columns are not taken into account when creating the chart.
+
+In the context menu, you can 1) create diagrams from table columns or 2) offset table rows with one another (form quotients). The calculation results are added to the table as a new line for all years and areas. You can select multiple rows in the table for grouped diagrams using a check box or pressed the CTRL-key.
 The table can be filtered using the selection field (top right). The original and the filtered table can be downloaded as an XLSX file.
 
-Please note: In regional statistical areas with less than 100 inhabitants or a category with fewer than 10 individual persons, no value is given for data protection reasons. This can lead to unwanted outliers and misrepresentations when creating diagrams.
+Please note: No value is given for data protection in regional statistical areas with less than 100 inhabitants or a category with fewer than 10 individual persons. This can lead to unwanted outliers and misrepresentations when creating diagrams.
 
 The table can be filtered using the selection field (top right). The original and the filtered table can be downloaded as XLSX (see Download XLSX). By clicking on an area name, the map zooms in on it.
 
-Table columns can also be moved or hidden. When creating a diagram, the order of the areas shown (in the case of bar charts) depends on the selected column order. In turn, hidden columns are not taken into account when creating the diagram.
+Table columns can also be moved or hidden. When creating a diagram, the order of the areas shown (in bar charts) depends on the selected column order. In turn, hidden columns are not taken into account when creating the diagram.
 
-*Note: At present, columns with numerical names (stat. Areas) cannot be moved, but are always shown in the table on the left in ascending order of their numbers.*
+*Note: At present, columns with numerical names (stat. Areas) cannot be moved but are always shown in the table on the left in ascending order of their numbers.*
 
 ### Context functions
-In the context menu you can 1) create diagrams from table columns or 2) offset table rows with one another (form quotients). The calculation results are added to the table as a new line for all years and areas. You can select multiple rows in the table for grouped diagrams using a check box or pressed the CTRL key.
+In the context menu, you can 1) create diagrams from table columns or 2) offset table rows with one another (form quotients). The calculation results are added to the table as a new line for all years and areas. You can select multiple rows in the table for grouped diagrams using a check box or pressed the CTRL-key.
 
-Please note: In regional statistical areas with less than 100 inhabitants or a category with fewer than 10 individual persons, no value is given for data protection reasons. This can lead to unwanted outliers and misrepresentations when creating diagrams.
+Please note: No value is given for data protection in regional statistical areas with less than 100 inhabitants or a category with fewer than 10 individual persons. This can lead to unwanted outliers and misrepresentations when creating diagrams.
 
 ![Illustration 17th - Context functions summary table](https://user-images.githubusercontent.com/79461871/127782168-6df58d11-5f69-4b07-b9fd-0b0671fa3ef5.JPG)
 
