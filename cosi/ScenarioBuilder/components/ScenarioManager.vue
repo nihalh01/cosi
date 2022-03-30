@@ -157,7 +157,7 @@ export default {
             </span>
         </div>
         <div class="mb-2">
-            Anlegen und Verwalten der Szenarien für fiktive Daten. In einem Szenario können Einrichtungen und Wohnquartiere simuliert, sowie bestehende Einrichtungen verändert werden.
+            {{ $t('additional:modules.tools.cosi.scenarioManager.infotext') }}
         </div>
         <v-row dense>
             <v-col cols="6">

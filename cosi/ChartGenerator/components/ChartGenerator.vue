@@ -210,7 +210,7 @@ export default {
 
             zip.generateAsync({type: "blob"})
                 .then(function (content) {
-                    saveAs(content, "cosi_graphen.zip");
+                    saveAs(content, this.$t("additional:modules.tools.cosi.chartGenerator.zipFile"));
                 });
         },
         /**

@@ -13,7 +13,8 @@
                     "districtLevel": "District Level",
                     "selectedDistricts": "Selected Districts",
                     "activeTool": "Active Tool",
-                    "categories": "Statistical Data"
+                    "categories": "Statistical Data",
+                    "calculations": "Calculations"
                 }
             }
         }

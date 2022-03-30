@@ -21,7 +21,8 @@
                     "prevChart": "Vorherigen Graphen auswählen",
                     "yToZero": "Y-Achse skalieren",
                     "yToZeroTooltip": "Y-Achse bei 0 oder beim niedrigstem Wert des Datensatzes starten.",
-                    "yStacked": "Y-Achse stapeln"
+                    "yStacked": "Y-Achse stapeln",
+                    "zipFile": "cosi_graphen.zip"
                 }
             }
         }

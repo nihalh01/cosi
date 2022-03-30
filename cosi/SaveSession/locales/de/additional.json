@@ -29,7 +29,18 @@
                     "yes": "Ja",
                     "no": "Nein",
                     "success": "Sitzung erfolgreich gespeichert!",
-                    "settingsChanged": "Ihre Einstellungen wurden geändert"
+                    "settingsChanged": "Ihre Einstellungen wurden geändert",
+                    "successLoad": {
+                        "_1": "Sitzung ",
+                        "_2": " vom ",
+                        "_3": " erfolgreich geladen."
+
+                    },
+                    "quickSave": "Schnelles Speichern",
+                    "quickSaveHint": "Speichern Sie Sitzungen im Cache des Browsers (bspw. Edge, Firefox). Diese können über den Button 'Letzte Laden' wiederhergestellt werden. Wenn Sie den Browser-Cache löschen gehen auf diese Art gespeicherte Sitzungen verloren! Nicht mehr als ein Speicherstand möglich.",
+                    "saveLocal": "Lokal speichern",
+                    "saveLocalHint": "Speichern Sie die aktuelle Sitzung als lokale Datei auf Ihrem PC. Über den Button 'Datei laden' können Sie die Sitzung wieder aufrufen. Sie können diese Dateien mit anderen CoSI-Nutzern austauschen.",
+                    "additionalInfo": "Bitte beachten Sie, dass nicht alle Daten und Aktionen gespeichert werden können. Das Speichern bezieht sich im Wesentlichen auf die Bereichs- und Themenauswahl, die Analyse und die Simulationsergebnisse. Welche Daten gespeichert werden können, entnehmen Sie bitte der Anleitung."
                 }
             }
         }

@@ -9,7 +9,7 @@
                     "dataB": "Statistical Data",
                     "warningNoData": "Neither statistical data, nor facility data are loaded. Please select some areas first with the area selection tool or load topics from the main menu.",
                     "noFeaturesWarning": "You have not selected any areas as a basis for statistical data. Please load some areas first via the area selection.",
-                    "noFacilitiesWarning": "Sie haben keine Themengebiete als Grundlage für Einrichtungsdaten ausgewählt. Bitte wählen Sie zuerst die gewünschten Themengebiete über das Hauptmenü aus.",
+                    "noFacilitiesWarning": "You have not selected any subject areas as the basis for setup data. Please select the desired subject areas via the main menu first.",
                     "placeholderA": "Select (counter) parameter",
                     "placeholderB": "Select (denominator) reference value",
                     "noData": "No data was found for the selected facility parameter in the search radius. Please change the parameter or expand your area selection",
@@ -35,7 +35,40 @@
                     "switchFieldType": "Switch between statistical and facility data",
                     "calcPer": "calculate per",
                     "ofData": "of data",
-                    "infoTooltip": "Tool information"
+                    "infoTooltip": "Tool information",
+                    "relation": "Relation",
+                    "capacity": "Capacity",
+                    "need": "Demand",
+                    "coverage": "Coverage (%)",
+                    "total": "Total",
+                    "average": "Average",
+                    "sumable": "Sumable",
+                    "count": "Amount",
+                    "areaWarning": "Warning regarding the district: ",
+                    "xlsFile": "calculateratio.xls",
+                    "years": "Years",
+                    "chartHeader": "Calculate Ratio - Visualization ",
+                    "table": {
+                        "text": {
+                            "scope": "District",
+                            "capacity": "Capacity",
+                            "need": "Demand",
+                            "coverage": "Coverage"
+                        },
+                        "help": {
+                            "scope": "This column lists the identifiers for the respective data sets. In most cases, these are the selected areas.",
+                            "typeA": "This is the result of the data query of the first field (1) (left).",
+                            "typeB": "This is the result of the data query of the second field (2) (right).",
+                            "relation": "This field lists the value of field (1) and field (2) divided by each other. The result is rounded to two decimal places.",
+                            "capacity": "This column is displayed if a 'Factor F' has been determined for one of the two selection fields. It indicates for how many units of the reference group the facilities can be provided.",
+                            "need": "This column is displayed if a 'Factor F' has been determined for one of the two selection fields. It indicates how many facilities would be required for the total number of units in the reference group.",
+                            "coverage": "This field indicates to what % the demand is covered. It is influenced by the adjustable 'Factor F' and the adjustable value 'Calculate per X of the reference group'."
+                        },
+                        "noData": "No data available",
+                        "itemsPerPage": "Items Per Page",
+                        "dataIncomplete": "Data incomplete",
+                        "dataIncompleteHint": "Data records marked with * contain facilities for which the selected parameter (e.g. 'number of students' for schools) is not stored. In this case, the median value of the available complete data sets is used for the calculation."
+                    }
                 }
             }
         }

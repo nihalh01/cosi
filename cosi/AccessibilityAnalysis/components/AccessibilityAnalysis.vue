@@ -520,7 +520,7 @@ export default {
                             <v-select
                                 v-if="mode === 'region'"
                                 v-model="_selectedFacilityName"
-                                placeholder="Keine Auswahl"
+                                :placeholder="$t('additional:modules.tools.cosi.accessibilityAnalysis.noSelection')"
                                 :items="facilityNames"
                                 :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.topic')"
                                 outlined
@@ -529,7 +529,7 @@ export default {
                             <v-select
                                 v-if="mode === 'path'"
                                 v-model="_selectedDirections"
-                                placeholder="Keine Auswahl"
+                                :placeholder="$t('additional:modules.tools.cosi.accessibilityAnalysis.noSelection')"
                                 :item-text="getDirectionsText"
                                 return-object
                                 :items="[routingDirections || {distance: '-', duration: '-'}]"
@@ -540,7 +540,7 @@ export default {
                             />
                             <v-select
                                 v-model="_transportType"
-                                title="Verkehrsmittel"
+                                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.meansOfTransport')"
                                 :items="transportTypes"
                                 :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.transportType')"
                                 item-text="name"
@@ -551,7 +551,7 @@ export default {
                             />
                             <v-select
                                 v-model="_scaleUnit"
-                                title="Maßeinheit der Entfernung"
+                                :title="$t('additional:modules.tools.cosi.accessibilityAnalysis.scaleUnit')"
                                 :items="scaleUnits"
                                 :label="$t('additional:modules.tools.cosi.accessibilityAnalysis.scaleUnit')"
                                 item-text="name"

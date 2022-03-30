@@ -21,7 +21,8 @@
                     "prevChart": "Previous chart",
                     "yToZero": "Scale Y-Axis",
                     "yToZeroTooltip": "Start Y-Axis at 0 or resp. at the lowest possible value",
-                    "yStacked": "Stack Y-Axis"
+                    "yStacked": "Stack Y-Axis",
+                    "zipFile": "cosi_graphs.zip"
                 }
             }
         }

@@ -9,10 +9,6 @@
     "path": "cosi/cosiFileImport",
     "type": "tool"
   },
-  "ImportedFeatureHandler": {
-    "path": "cosi/ImportedFeatureHandler",
-    "type": "tool"
-  },
   "populationRequest": {
     "type": "tool"
   },

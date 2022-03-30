@@ -50,7 +50,9 @@
                     "paginationRemoveAll": "Remove all results in this tool",
                     "paginationDownloadAll": "Download all results as GeoJSON",
                     "paginationPrev": "Select previous result",
-                    "paginationNext": "Select next result"
+                    "paginationNext": "Select next result",
+                    "noSelection": "No Selection",
+                    "meansOfTransport": "Means Of Transport"
                 }
             }
         }

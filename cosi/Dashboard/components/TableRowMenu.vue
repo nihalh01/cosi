@@ -59,7 +59,7 @@ export default {
         >
             <template #activator="{ on, attrs }">
                 <v-icon
-                    title="Menü öffnen"
+                    :title="$t('additional:modules.tools.cosi.dashboard.openMenu')"
                     v-bind="attrs"
                     v-on="on"
                 >
@@ -98,7 +98,7 @@ export default {
                         </v-list-item>
                         <div
                             class="ml-12"
-                            :title="!_item.visualized ? 'Visualisierung in der Karte muss aktiv sein.' : ''"
+                            :title="!_item.visualized ? $t('additional:modules.tools.cosi.dashboard.tableRowMenu.visualizeActive') : ''"
                         >
                             <v-list-item
                                 dense
@@ -115,7 +115,7 @@ export default {
                             <v-list-item
                                 dense
                                 :disabled="!_item.visualized"
-                                :title="!_item.visualized ? 'Visualisierung in der Karte muss aktiv sein.' : ''"
+                                :title="!_item.visualized ? $t('additional:modules.tools.cosi.dashboard.tableRowMenu.visualizeActive') : ''"
                                 @click="setShowMapNames(!showMapNames)"
                             >
                                 <v-list-item-icon>

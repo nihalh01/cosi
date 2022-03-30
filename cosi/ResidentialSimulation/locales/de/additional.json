@@ -7,6 +7,7 @@
                     "subTitle": "Quartier anlegen",
                     "help": "Lorem Ipsum",
                     "geom": "Geometrie",
+                    "defaultName": "Mein Wohnquartier",
                     "noGeomWarning": "Bitte erst Geometrie festlegen!",
                     "helpDrawGeom": "Polygon zeichnen oder auswählen",
                     "units": "Wohneinheiten",
@@ -36,7 +37,13 @@
                     "editFeature": "Wohnquartier bearbeiten",
                     "dateOfCompletion": "Jahr der Fertigstellung",
                     "valueError": "Die Operation würde folgende ungültige Werte zu Folge haben:",
-                    "bounds": "Grenzwerte:"
+                    "bounds": "Grenzwerte:",
+                    "newResidentialSimulation": "Neue fiktive Wohnquartiere mitsamt Bewohnerstruktur anlegen und die statistischen Daten im Gebiet entsprechend modifizieren.",
+                    "quarterName": "Quartiername",
+                    "baseArea": "Grundfläche",
+                    "area": "Fläche",
+                    "totalInhabitants": "Bewohner insgesamt",
+                    "popDensity": "Bevökerungsdichte"
                 },
                 "referencePicker": {
                     "reference": "Referenzgebiet",

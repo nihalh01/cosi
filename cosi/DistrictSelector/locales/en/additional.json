@@ -6,6 +6,7 @@
                     "title": "Select Area",
                     "dropdownLabel": "Bitte wählen Sie einen Bezugsrahmen aus",
                     "multiDropdownLabel": "Areas",
+                    "districtLevel": "Frame of reference",
                     "inputLabel": "Buffer[m] (optional)",
                     "additionalLayer": "Guidelayers",
                     "additionalLayerToggle": "show",

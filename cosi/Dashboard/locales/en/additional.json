@@ -21,6 +21,7 @@
                     "tableRowMenu": {
                         "expandTooltip": "Show/Hide all years",
                         "visualize": "Show on the map",
+                        "visualizeActive": "Visualization on map needs to be active",
                         "visualizeTooltip": "Toggle map visualization on/off",
                         "animate": "Animate over time",
                         "districtName": "Show/Hide district names",
@@ -39,7 +40,9 @@
                         "standardCharts": "Create bar- / line- / pie chart",
                         "chartForMultipleRows": "Chart for selected rows",
                         "correlationChart": "Create correlation / scatter chart"
-                    }
+                    },
+                    "openMetaData": "Open meta data",
+                    "openMenu": "Open menu"
                 }
             }
         }

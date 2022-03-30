@@ -89,7 +89,7 @@ export default {
             </template>
         </v-autocomplete>
         <v-icon
-            title="Metadaten öffnen"
+            :title="$t('additional:modules.tools.cosi.dashboard.openMetaData')"
             class="float-left mt-2"
             @click="openMetadata()"
         >

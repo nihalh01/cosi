@@ -36,9 +36,13 @@
                     "paginationRemove": "Diese Analysedaten entfernen",
                     "paginationRemoveAll": "Alle Analysedaten entfernen",
                     "paginationPrev": "Den vorherigen Analysedatensatz auswählen",
-                    "paginationNext": "Den nächsten Analysedatensatz auswählen"
-
-
+                    "paginationNext": "Den nächsten Analysedatensatz auswählen",
+                    "filterNumber": "Filter-Nr.",
+                    "attribute": "Attribut",
+                    "field": "Feld",
+                    "refValue": "Ref.-Wert",
+                    "posTol": "+ Toleranz",
+                    "negTol": "- Toleranz"
                 }
             }
         }

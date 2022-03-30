@@ -21,6 +21,7 @@
                     "tableRowMenu": {
                         "expandTooltip": "Alle Jahre ein-/ausblenden",
                         "visualize": "In der Karte visualisieren",
+                        "visualizeActive": "Visualisierung in der Karte muss aktiv sein",
                         "visualizeTooltip": "In der Karte ein-/ausblenden",
                         "animate": "Zeitreihe animieren",
                         "districtName": "Gebietsnamen ein- / ausblenden",
@@ -39,7 +40,9 @@
                         "standardCharts": "Balken- / Linien- / Tortendiagramme erstellen",
                         "chartForMultipleRows": "Diagramm für ausgewählte Zeilen",
                         "correlationChart": "Korrelation / Streuungsdiagramm erstellen"
-                    }
+                    },
+                    "openMetaData": "Metadaten öffnen",
+                    "openMenu": "Menü öffnen"
                 }
             }
         }

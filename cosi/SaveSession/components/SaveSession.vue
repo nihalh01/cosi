@@ -229,7 +229,7 @@ export default {
                 request.onerror = (err) => {
                     console.error(err);
                     this.addSingleAlert({
-                        content: "Die Sitzung konnte nicht gespeichert werden. Die Fehlermeldung finden Sie, indem Sie die Taste F12 drücken. Wenden Sie sich bitte damit an Ihren Administrator.",
+                        content: this.$t("additional:modules.tools.cosi.saveSession.error"),
                         category: "Error",
                         displayClass: "error"
                     });
@@ -299,7 +299,7 @@ export default {
             catch (e) {
                 console.error(e);
                 this.addSingleAlert({
-                    content: "Die letzte Sitzung konnte nicht geladen werden. Die Fehlermeldung finden Sie, indem Sie die Taste F12 drücken. Wenden Sie sich bitte damit an Ihren Administrator.",
+                    content: this.$t("additional:modules.tools.cosi.saveSession.loadError"),
                     category: "Error",
                     displayClass: "error"
                 });
@@ -326,7 +326,7 @@ export default {
                     console.warn("File could not be read");
 
                     this.addSingleAlert({
-                        content: "Die Datei konnte nicht gelesen werden.",
+                        content: this.$t("additional:modules.tools.cosi.saveSession.errorFileRead"),
                         category: "Warning",
                         displayClass: "warning"
                     });
@@ -343,7 +343,7 @@ export default {
             this.setActive(false);
             this.parseState(this.storePaths, state);
             this.addSingleAlert({
-                content: `Sitzung ${session.meta?.title} vom ${session.meta?.created} erfolgreich geladen.`,
+                content: this.$t("additional:modules.tools.cosi.saveSession.successLoad._1") + this.session.meta?.title + this.$t("additional:modules.tools.cosi.saveSession.successLoad._2") + this.session.meta?.created + this.$t("additional:modules.tools.cosi.saveSession.successLoad._3"),
                 category: "Erfolg",
                 displayClass: "success"
             });
@@ -429,11 +429,10 @@ export default {
                     />
                     <v-container class="flex btn-grid">
                         <v-card-title secondary-title>
-                            Schnelles Speichern
+                            {{ $t('additional:modules.tools.cosi.saveSession.quickSave') }}
                         </v-card-title>
                         <div class="mb-2">
-                            Sitzungen im Browser (z.B. Edge, Firefox) speichern. Diese können beim Start von CoSI über den Button 'Letzte Laden' wieder geladen werden. <br>
-                            Wenn Browserverlauf oder Cache geleert werden, geht dieser Speicherstand verloren! Es kann immer nur eine Sitzung vorgehalten werden.
+                            {{ $t('additional:modules.tools.cosi.saveSession.quickSaveHint') }}
                         </div>
                         <v-row class="flex">
                             <v-col
@@ -507,10 +506,10 @@ export default {
                         </v-row>
                         <v-divider />
                         <v-card-title secondary-title>
-                            Lokales Speichern
+                            {{ $t('additional:modules.tools.cosi.saveSession.saveLocal') }}
                         </v-card-title>
                         <div class="mb-2">
-                            Sitzungen als Datei auf dem Rechner speichern und über den Button 'Datei laden' wieder laden. Diese können jederzeit wieder geladen oder mit anderen CoSI Nutzer:innen geteilt werden.
+                            {{ $t('additional:modules.tools.cosi.saveSession.saveLocalHint') }}
                         </div>
                         <v-row class="flex">
                             <v-col
@@ -567,7 +566,7 @@ export default {
                             dense
                         >
                             <small>
-                                Bitte beachten Sie, dass nicht alle Daten und Aktionen gespeichert werden können. Grundsätzlich bezieht sich das Speichern auf die Gebiets- und Themenauswahl, Analyse- und Simulationsergebnisse. Welche Daten gespeichert werden können entnehmen Sie bitte der Anleitung.
+                                {{ $t('additional:modules.tools.cosi.saveSession.additionalInfo') }}
                             </small>
                         </v-row>
                     </v-container>

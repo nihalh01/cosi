@@ -41,7 +41,7 @@ export default {
             editStatsTable: false,
             geometry: null,
             neighborhood: {
-                name: "Mein Wohnquartier",
+                name: this.$t("additional:modules.tools.cosi.residentialSimulation.defaultName"),
                 area: 0,
                 residents: 0,
                 avgHouseholdSize: 2.5,
@@ -436,7 +436,7 @@ export default {
                                 </span>
                             </div>
                             <div class="mb-2">
-                                Neue fiktive Wohnquartiere mitsamt Bewohnerstruktur anlegen und die statistischen Daten im Gebiet entsprechend modifizieren.
+                                {{ $t('additional:modules.tools.cosi.residentialSimulation.newResidentialSimulation') }}
                             </div>
                             <ReferenceDistrictPicker
                                 :groups-list="groupsList"
@@ -460,7 +460,7 @@ export default {
                                 <v-col cols="9">
                                     <v-text-field
                                         v-model="neighborhood.name"
-                                        label="Quartiername"
+                                        :label="$t('additional:modules.tools.cosi.residentialSimulation.quarterName')"
                                     />
                                 </v-col>
                             </v-row>
@@ -472,25 +472,25 @@ export default {
                             />
                             <v-row dense>
                                 <v-col cols="3">
-                                    <v-subheader>Grundfläche</v-subheader>
+                                    <v-subheader>{{ $t('additional:modules.tools.cosi.residentialSimulation.baseArea') }}</v-subheader>
                                 </v-col>
                                 <v-col cols="9">
                                     <v-text-field
                                         v-model="polygonArea"
                                         readonly
-                                        label="Fläche"
+                                        :label="$t('additional:modules.tools.cosi.residentialSimulation.area')"
                                         suffix="m²"
                                     />
                                 </v-col>
                             </v-row>
                             <v-row dense>
                                 <v-col cols="3">
-                                    <v-subheader>Bewohnerzahl insgesamt</v-subheader>
+                                    <v-subheader>{{ $t('additional:modules.tools.cosi.residentialSimulation.totalInhabitants') }}</v-subheader>
                                 </v-col>
                                 <v-col cols="9">
                                     <v-text-field
                                         v-model="neighborhood.residents"
-                                        label="Einwohner gesamt"
+                                        :label="$t('additional:modules.tools.cosi.residentialSimulation.totalInhabitants')"
                                         suffix="EW"
                                         @input="updateResidents"
                                     />
@@ -600,7 +600,7 @@ export default {
                             </v-row>
                             <v-row dense>
                                 <v-col cols="3">
-                                    <v-subheader>Bevölkerungsdichte</v-subheader>
+                                    <v-subheader>{{ $t('additional:modules.tools.cosi.residentialSimulation.popDensity') }}</v-subheader>
                                 </v-col>
                                 <v-col cols="9">
                                     <SimpleSlider

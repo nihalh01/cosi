@@ -268,7 +268,7 @@ export default {
                     <template #default>
                         <thead>
                             <tr class="header-row">
-                                <th>Einrichtung</th>
+                                <th>{{ $t('additional:modules.tools.cosi.featureEditor.facility') }}</th>
                                 <th>Name</th>
                             </tr>
                         </thead>

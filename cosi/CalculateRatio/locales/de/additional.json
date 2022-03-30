@@ -35,7 +35,40 @@
                     "switchFieldType": "Statistische Daten / Einrichtungsdaten wechseln",
                     "calcPer": "berechnen pro",
                     "ofData": "der Datengrundlage",
-                    "infoTooltip": "Werkzeuginformationen"
+                    "infoTooltip": "Werkzeuginformationen",
+                    "relation": "Verhältnis",
+                    "capacity": "Kapazität",
+                    "need": "Bedarf",
+                    "coverage": "Bedarfsdeckung (%)",
+                    "total": "Gesamt",
+                    "average": "Durchschnitt",
+                    "sumable": "Aufsummierbar",
+                    "count": "Anzahl",
+                    "areaWarning": "Warnung für das Gebiet: ",
+                    "xlsFile": "versorgungsanalyse.xls",
+                    "years": "Jahre",
+                    "chartHeader": "Versorgungsanalyse - Visualisierung ",
+                    "table": {
+                        "text": {
+                            "scope": "Gebiet",
+                            "capacity": "Kapazität",
+                            "need": "Bedarf",
+                            "coverage": "Bedarfsdeckung (%)"
+                        },
+                        "help": {
+                            "scope": "In dieser Spalte werden die Identifikatoren für die jeweiligen Datensätze aufgelistet. In den meisten Fällen handelt es sich dabei um die ausgewählten Gebiete.",
+                            "typeA": "Dies ist das Ergebnis der Datenabfrage des ersten Feldes (1) (links).",
+                            "typeB": "Dies ist das Ergebnis der Datenabfrage des zweiten Feldes (2) (rechts).",
+                            "relation": "In diesem Feld werden die Werte des Feldes (1) und des Feldes (2) durcheinander geteilt. Das Ergebnis wird auf zwei Stellen hinter dem Komma gerundet.",
+                            "capacity": "Diese Tabellenspalte wird angezeigt, wenn für eines der beiden Auswahlfelder ein Faktor F bestimmt wurde. Es gibt an, für wieviele Einheiten der Referenzgruppe die Einrichtungen bereitgestellt werden können.",
+                            "need": "Diese Tabellenspalte wird angezeigt, wenn für eines der beiden Auswahlfelder ein Faktor F bestimmt wurde. Es gibt an, für wieviele Einrichtungen für die Gesamtzahl der Einheiten der Referenzgruppe benötigt werden würden.",
+                            "coverage": "Dieses Feld gibt an, zu wieviel % der Bedarf gedeckt ist. Es wird durch den einstellbaren Faktor F und den einstellbaren Wert 'für X der Referenzgruppe berechnen' beeinflusst."
+                        },
+                        "noData": "Keine Daten vorhanden",
+                        "itemsPerPage": "Einträge pro Seite",
+                        "dataIncomplete": "Datensätze unvollständig",
+                        "dataIncompleteHint": "Mit einem * gekennzeichnete Datensätze enthalten Einrichtungen, für die das ausgewählte Parameter (wie bspw. bei Schulen 'Schülerzahl') nicht hinterlegt ist. In diesem Fall wird für diesen Datensatz mit dem Medianwert der vorhandenen vollständigen Datensätze kalkuliert."
+                    }
                 }
             }
         }

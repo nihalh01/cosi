@@ -671,7 +671,7 @@ export default {
                         return [_row[_row.length - 1], ..._row.slice(0, _row.length - 1)];
                     })
                 ],
-                headers = ["Referenzgebiet", "Filter-Nr.", "Name", "Attribut", "Quotient", "Feld", "Min.", "Max.", "Ref.-Wert", "- Toleranz", "+ Toleranz"],
+                headers = [this.$t("additional:modules.tools.cosi.queryDistricts.referenceDistrict"), this.$t("additional:modules.tools.cosi.queryDistricts.filterNumber"), "Name", this.$t("additional:modules.tools.cosi.queryDistricts.attribute"), "Quotient", this.$t("additional:modules.tools.cosi.queryDistricts.field"), "Min.", "Max.", this.$t("additional:modules.tools.cosi.queryDistricts.refVal"), this.$t("additional:modules.tools.cosi.queryDistricts.negTol"), this.$t("additional:modules.tools.cosi.queryDistricts.posTol")],
                 // filters = this.layerFilterModels.map((filter, i) => [
                 filters = this.dataSets[index].inputs.layerFilterModels.map((filter, i) => [
                     // this.selectedDistrict,

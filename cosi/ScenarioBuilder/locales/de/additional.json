@@ -14,7 +14,7 @@
                     "createFeature": "Anlegen",
                     "helpCreateFeature": "Neue Einrichtung erstellen",
                     "resetFeature": "Werte Zurücksetzen",
-                    "helpResetFeature": "Die konfigurieren Werte der Einrichtung zurücksetzen",
+                    "helpResetFeature": "Die konfigurierten Werte der Einrichtung zurücksetzen",
                     "warningNoData": "Es wurden bisher keine Themendaten geladen. Bitte wählen Sie mindestens ein Analysethema aus dem Themenbaum.",
                     "required": "Erforderlich",
                     "requiredFieldMissing": "Eines oder mehrere erforderliche Felder wurden nicht ausgefüllt.",
@@ -26,7 +26,8 @@
                     "defineFeature": "Neue Einrichtung definieren",
                     "undo": "Schritt zurück",
                     "pick": "Polygon in der Karte wählen",
-                    "editFeature": "Simulierte Einrichtung löschen?"
+                    "editFeature": "Simulierte Einrichtung löschen?",
+                    "infoText": "Für die ausgewählten Fachdaten Themen können neue fiktive Einrichtungen angelegt werden. Diese können für alle CoSI Analysefunktionen verwendet werden. Sie werden außerhalb CoSI's nicht gespeichert."
                 },
                 "moveFeatures": {
                     "title": "Einrichtungen verschieben",
@@ -61,7 +62,8 @@
                     "pruneAllFeaturesWarning": "Wollen Sie wirklich alle Daten in diesem Szenario löschen?",
                     "pruneNeighborhoodsWarning": "Wollen Sie wirklich alle erstellten Wohnquartiere in diesem Szenario löschen?",
                     "pruneSimulatedFeaturesWarning": "Wollen Sie wirklich alle erstellten Einrichtungen in diesem Szenario löschen?",
-                    "noActiveScenario": "Bitte wählen Sie ein Szenario oder legen Sie ein neues an."
+                    "noActiveScenario": "Bitte wählen Sie ein Szenario oder legen Sie ein neues an.",
+                    "infoText": "Anlegen und Verwalten der Szenarien für fiktive Daten. In einem Szenario können Einrichtungen und Wohnquartiere simuliert, sowie bestehende Einrichtungen verändert werden."
                 },
                 "dataTypes": {
                     "decimal": "Zahl",
@@ -82,7 +84,8 @@
                     "noScenarioWarning": "Bitte erstellen Sie erst ein Szenario um Einrichtungen bearbeiten zu können.",
                     "reset": "Zurücksetzen",
                     "confirmDelete": "Möchten Sie die ausgewählte Einrichtung wirklich löschen?",
-                    "confirmReset": "Möchten Sie die ausgewählte Einrichtung wirklich auf ihren Ursprungszustand zurücksetzen?"
+                    "confirmReset": "Möchten Sie die ausgewählte Einrichtung wirklich auf ihren Ursprungszustand zurücksetzen?",
+                    "facility": "Einrichtung"
                 }
             }
         }

@@ -36,7 +36,13 @@
                     "paginationRemove": "Remove this analysis set",
                     "paginationRemoveAll": "Remove all analysis sets",
                     "paginationPrev": "Select the previous analysis set",
-                    "paginationNext": "Select the next analysis set"
+                    "paginationNext": "Select the next analysis set",
+                    "filterNumber": "Filter #.",
+                    "attribute": "Attribute",
+                    "field": "Field",
+                    "refValue": "Reference Value",
+                    "posTol": "+ calc. tolerance",
+                    "negTol": "- calc. tolerance"
                 }
             }
         }
