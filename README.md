@@ -1,5 +1,7 @@
 # CoSI – Cockpit for Social Infrastructure
 
+This is a fork of [Geowerkstatt Hamburg's Masterportal/Addons Repository](https://bitbucket.org/geowerkstatt-hamburg/addons/src). The directory `/cosi` contains all modules of the CoSI addon for the Masterportal as used within Hamburg. The configuration files for the CoSI portal can be found in the [cosi-portal] repository.
+
 The [CoSI protoype](https://github.com/citysciencelab/cosi-prototype) was developed in 2019 by the CityScienceLab as a proof of concept.
 The prototype has since been adapted to work in the [Urban Data Platform](http://www.urbandataplatform.hamburg/) environment and is now based on the [Masterportal](https://bitbucket.org/geowerkstatt-hamburg/masterportal/src) (Hamburg's Urban Data Platform Web-Gis) code.
 
