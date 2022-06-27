@@ -3,7 +3,7 @@ ___
 ## Cockpit Städtische Infrastrukturen
 #### GIS + datenbasierte Analyse- und Planungstools in der Hamburger Stadtverwaltung
 ___
-![CoSI Logo](../cosi/assets/cosi_logo_jf.png)
+![CoSI Logo](cosi/assets/cosi_logo_jf.png)
 
 ___
 
@@ -829,7 +829,7 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 
 ### Sitzung Speichern/Laden 
 
-![Abbildung 29: Sitzung Speichern](../cosi/utils/assets/screenshots/sitzungspeichern.png)
+![Abbildung 29: Sitzung Speichern](cosi/utils/assets/screenshots/sitzungspeichern.PNG)
 *Abbildung 29: Sitzung speichern / laden*
 
 Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst
@@ -857,7 +857,7 @@ Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informatione
 <div style="page-break-after: always;"></div>
 
 ### Vorlagen
-![Abbildung 30: Vorlagen](../cosi/utils/assets/screenshots/vorlagen.png)
+![Abbildung 30: Vorlagen](cosi/utils/assets/screenshots/vorlagen.PNG)
 
 *Abbildung 30: Vorlagen*
 
@@ -883,7 +883,7 @@ ___
 ____
 
 ### Statistische Datenübersicht
-![Abbildung 31: Statistische Datenübersicht](../cosi/utils/assets/screenshots/statdashboard.png)
+![Abbildung 31: Statistische Datenübersicht](cosi/utils/assets/screenshots/statdashboard.PNG)
 *Abbildung 31: Statistische Datenübersicht*
 
 1. **Gruppen ein-/ausklappen**
