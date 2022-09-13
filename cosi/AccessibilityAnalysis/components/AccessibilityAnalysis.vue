@@ -692,26 +692,27 @@ export default {
                                     <strong>{{ $t("additional:modules.tools.cosi.accessibilityAnalysis.legend") }}</strong>
                                 </h5>
                                 <div id="legend">
-                                    <template v-for="(j, i) in _steps">
-                                        <span :key="i">
-                                            <svg
-                                                width="15"
-                                                height="15"
-                                            >
-                                                <circle
-                                                    cx="7.5"
-                                                    cy="7.5"
-                                                    r="7.5"
-                                                    :style="`fill: ${
-                                                        legendColors[i]
-                                                    }; stroke-width: 0.5; stroke: #e3e3e3;`"
-                                                />
-                                            </svg>
-                                            <span :key="i * 2 + _steps.length">
-                                                {{ j }}
-                                            </span>
+                                    <span
+                                        v-for="(j, i) in _steps"
+                                        :key="i"
+                                    >
+                                        <svg
+                                            width="15"
+                                            height="15"
+                                        >
+                                            <circle
+                                                cx="7.5"
+                                                cy="7.5"
+                                                r="7.5"
+                                                :style="`fill: ${
+                                                    legendColors[i]
+                                                }; stroke-width: 0.5; stroke: #e3e3e3;`"
+                                            />
+                                        </svg>
+                                        <span :key="i * 2 + _steps.length">
+                                            {{ j }}
                                         </span>
-                                    </template>
+                                    </span>
                                 </div>
                             </v-col>
                         </v-row>

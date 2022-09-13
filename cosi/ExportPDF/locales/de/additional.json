@@ -1,0 +1,12 @@
+{
+    "modules": {
+        "tools": {
+            "cosi": {
+                "exportPDF": {
+                    "title": "PDF exportieren",
+                    "helloWorld": "Hallo Welt"
+                }
+            }
+        }
+    }
+}

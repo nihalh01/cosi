@@ -1119,9 +1119,9 @@ export default {
                                         transition:0.3s;
                                     }
 
-                                    &.active {
-                                        //border:1px solid #222;
-                                    }
+                                    // &.active {
+                                    //     border:1px solid #222;
+                                    // }
 
                                     &:after {
                                         content:'';
