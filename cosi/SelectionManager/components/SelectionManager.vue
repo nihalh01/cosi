@@ -8,7 +8,7 @@ import VectorSource from "ol/source/Vector.js";
 import getBoundingGeometry from "../../utils/getBoundingGeometry.js";
 import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
 import ToolInfo from "../../components/ToolInfo.vue";
-import {getModelByAttributes} from "../../utils/radioBridge.js";
+import {addModelsByAttribute, getModelByAttributes} from "../../utils/radioBridge.js";
 import Feature from "ol/Feature";
 import Polygon from "ol/geom/Polygon";
 import {default as turfCenterOfMass} from "@turf/center-of-mass";
@@ -256,6 +256,9 @@ export default {
                 if (model) {
                     model.set("isSelected", true);
                 }
+                else {
+                    addModelsByAttribute({name: layerName});
+                }
             });
         },
         /**
@@ -278,18 +281,19 @@ export default {
         allSelections () {
             const flatArray = this.selections.map(selection => selection.selection).flat();
 
-            this.addNewSelection({selection: flatArray, source: this.$t("additional:modules.tools.cosi.selectionManager.title"), id: this.$t("additional:modules.tools.cosi.selectionManager.allSelections") + " (" + flatArray.length + ")"});
+            this.addNewSelection({selection: flatArray, source: this.$t("additional:modules.tools.cosi.selectionManager.title"), id: this.$t("additional:modules.tools.cosi.selectionManager.allSelections") + " (" + this.selections.length + ")"});
             this.highlightSelection(this.selections.length - 1);
             this.allSelectionsPossible = false;
         },
         /**
              * @description Calculates the center of each feature and draws a polygon along these points.
+             * @param {Array} selectionArray - Array of selections that i supposed to be connected
              * @returns {void}
              */
-        connectSelections () {
+        connectSelections (selectionArray) {
             const format = new GeoJSON(),
                 newPolygonCoords = [],
-                selectionsCopy = this.selections.map(selection => selection.selection);
+                selectionsCopy = selectionArray.map(selection => selection.selection);
 
             selectionsCopy.forEach(selection => {
                 if (Array.isArray(selection)) {
@@ -349,6 +353,11 @@ export default {
                 this.rerenderSelection(index);
             }
         },
+        /**
+             * @description Creates a new selection from the buffered value.
+             * @param {Integer} index - Index of the chosen selection in this.selections
+             * @returns {void}
+             */
         addBufferAsSelection (index) {
             this.addNewSelection({selection: this.selections[index].bufferedSelection, source: this.$t("additional:modules.tools.cosi.selectionManager.title"), id: this.$t("additional:modules.tools.cosi.selectionManager.buffer") + " " + this.selections[index].id});
             this.selections[index].settings.buffer = 0;
@@ -389,8 +398,7 @@ export default {
              * @param {Integer} index - Index of the chosen selection in this.selections
              * @returns {void}
              */
-        addMergedSelection (index) {
-            this.selectionsToMerge.push(index);
+        addMergedSelection () {
             const flatSelections = this.selections.filter((selection, i) => this.selectionsToMerge.includes(i)).map(selection => selection.selection),
                 flatArray = flatSelections.flat();
 
@@ -457,8 +465,8 @@ export default {
                     <button
                         class="connect_btn"
                         :title="$t('additional:modules.tools.cosi.selectionManager.title_connect_selections')"
-                        :class="{disabled: selections.map(selection => selection.selection).flat().length < 3}"
-                        @click="connectSelections()"
+                        :class="{disabled: selections.map(selection => selection.selection).flat().length > 3}"
+                        @click="connectSelections(selections)"
                     >
                         <v-icon>mdi-vector-selection</v-icon>
                     </button>
@@ -469,6 +477,52 @@ export default {
                     >
                         <v-icon>mdi-close-box-multiple</v-icon>
                     </button>
+                </div>
+                <div class="cache">
+                    <div class="cache_head">
+                        <p>{{ $t('additional:modules.tools.cosi.selectionManager.cache') }}</p>
+                        <div class="function_buttons cache_buttons">
+                            <button
+                                v-if="selectionsToMerge.length > 0"
+                                :title="$t('additional:modules.tools.cosi.selectionManager.title_merge')"
+                                class="combine_btn"
+                                @click="addMergedSelection()"
+                            >
+                                <v-icon>mdi-vector-combine</v-icon>
+                            </button>
+                            <button
+                                class="connect_btn"
+                                :title="$t('additional:modules.tools.cosi.selectionManager.title_connect_selections')"
+                                :class="{disabled: selections.map(selection => selection.selection).flat().length < 3}"
+                                @click="connectSelections()"
+                            >
+                                <v-icon>mdi-vector-selection</v-icon>
+                            </button>
+                            <button
+                                class="remove_all_btn"
+                                :title="$t('additional:modules.tools.cosi.selectionManager.title_remove_all')"
+                                @click="removeAllSelections()"
+                            >
+                                <v-icon>mdi-close-box-multiple</v-icon>
+                            </button>
+                        </div>
+                    </div>
+                    <ul class="cache_selections">
+                        <li
+                            v-for="(selection, i) in selectionsToMerge"
+                            :key="i"
+                            class="cache_selection"
+                        >
+                            {{ selection }}
+                            <button
+                                class="remove_cached_btn"
+                                :title="$t('additional:modules.tools.cosi.selectionManager.title_remove_cached_selection')"
+                                @click="selectionsToMerge.splice(i, 1);"
+                            >
+                                <v-icon>mdi-close</v-icon>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
                 <ul class="groups">
                     <li
@@ -508,7 +562,7 @@ export default {
                                             <v-icon>mdi-eye-outline</v-icon>
                                         </button>
                                         <button
-                                            v-if="activeSelection !== null && activeSelection !== i"
+                                            v-if="selections.length > 1"
                                             :title="$t('additional:modules.tools.cosi.selectionManager.title_add')"
                                             class="add_btn"
                                             :class="{
@@ -518,14 +572,14 @@ export default {
                                         >
                                             <v-icon>mdi-plus</v-icon>
                                         </button>
-                                        <button
+                                        <!--<button
                                             v-if="selectionsToMerge.length > 0 && activeSelection === i"
                                             :title="$t('additional:modules.tools.cosi.selectionManager.title_merge')"
                                             class="combine_btn"
                                             @click="addMergedSelection(i)"
                                         >
                                             <v-icon>mdi-vector-combine</v-icon>
-                                        </button>
+                                        </button>-->
                                         <button
                                             class="freeze_btn"
                                             :class="{highlight: selection.storedLayers.length > 0}"
@@ -703,6 +757,32 @@ export default {
 
                     li {
                         flex:1 0 100%;
+                    }
+                }
+
+                .cache {
+                    margin:5px;
+
+                    ul {
+                        justify-content:flex-end;
+
+                        li {
+                            flex:0 0 auto;
+                            padding:5px 10px;
+                            font-size:10px;
+                            margin-left:3px;
+                            margin-top:3px;
+                            background:#ccc;
+
+                            button {
+                                margin-left:10px;
+
+                                .v-icon {
+                                    font-size:10px;
+                                    color:#444;
+                                }
+                            }
+                        }
                     }
                 }
 
