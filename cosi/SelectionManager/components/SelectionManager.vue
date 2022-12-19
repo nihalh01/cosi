@@ -8,17 +8,22 @@ import VectorSource from "ol/source/Vector.js";
 import getBoundingGeometry from "../../utils/getBoundingGeometry.js";
 import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
 import ToolInfo from "../../components/ToolInfo.vue";
-import {addModelsByAttribute, getModelByAttributes} from "../../utils/radioBridge.js";
+import {addModelsByAttributes, getModelByAttributes} from "../../utils/radioBridge.js";
+import Modal from "../../../../src/share-components/modals/components/ModalItem.vue";
 import Feature from "ol/Feature";
 import Polygon from "ol/geom/Polygon";
 import {default as turfCenterOfMass} from "@turf/center-of-mass";
+import {default as turfConcave} from "@turf/concave";
+import {featureCollection as turfFeatureCollection} from "@turf/helpers";
 import GeoJSON from "ol/format/GeoJSON";
 import {Fill, Stroke, Style} from "ol/style.js";
+import LoaderOverlay from "../../../../src/utils/loaderOverlay.js";
 
 export default {
     name: "SelectionManager",
     components: {
-        ToolInfo
+        ToolInfo,
+        Modal
     },
     data () {
         return {
@@ -29,7 +34,9 @@ export default {
             // array that stores the indexes of selections that are about to be merged
             selectionsToMerge: [],
             // Bool that reacts to changes in the this.selections array
-            allSelectionsPossible: true
+            allSelectionsPossible: true,
+            // Helper variable to deal with broken loader
+            dataLoaded: false
         };
     },
     computed: {
@@ -54,8 +61,38 @@ export default {
         // that pattern allows us to use data from external tools and apply internal methods to it.
         acceptSelection (selection) {
             if (selection) {
-                this.selections.push(selection);
-                this.highlightSelection(this.selections.length - 1);
+                let dataToLoad = false;
+
+                // check for stored vector layers to load
+                selection.storedLayers.forEach(layerName => {
+                    if (!getModelByAttributes({type: "layer", name: layerName})) {
+                        addModelsByAttributes({name: layerName});
+                        dataToLoad = true;
+                    }
+                });
+
+                const format = new GeoJSON();
+
+                selection.selection = selection.selection.map(sel => format.readFeature(sel));
+
+                this.addSelection(selection);
+                if (dataToLoad) {
+                    console.log("testMeHere", dataToLoad);
+                    this.dataLoaded = true;
+                }
+                else {
+                    this.highlightSelection(this.selections.length - 1);
+                }
+            }
+        },
+        // watcher on activeSet so that the active selection can be changed via the setActiveSelection mutation from outside of the component
+        activeSet (oldValue, newValue) {
+            if (oldValue === newValue) {
+                this.removeLayer();
+                this.setActiveSelection(null);
+            }
+            else {
+                this.toggleSelection(newValue);
             }
         },
         /**
@@ -109,46 +146,19 @@ export default {
         ...mapActions("Tools/SelectionManager", Object.keys(actions)),
         ...mapMutations("Maps", ["setLayerVisibility", "addLayerToMap", "removeLayerFromMap"]),
         /**
-             * @description Creates VectorLayer for the chosen selection
-             * @param {Integer} index - Index of the chosen selection in this.selections
-             * @param {boolean} forceUpdate - update even if selection hasn't changed
-             * @returns {void}
-             */
-        highlightSelection (index) {
+         * @description Toggles the active selection on click in frontend
+         * @param {*} index - Index of the chosen selection in this.selections
+         * @returns {void}
+         */
+        toggleSelection (index) {
             if (this.activeSelection !== index) {
                 this.setActiveSelection(index);
-                if (this.selections[index].storedLayers.length > 0) {
-                    this.setStoredLayersActive(this.selections[index].storedLayers);
-                }
+
                 if (this.selections[index].settings.bufferActive) {
                     this.rerenderSelection(index);
                 }
                 else {
-
-                    //  remove selection manager layers
-                    this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager").forEach(layer => this.map.removeLayer(layer));
-
-                    const vectorSource = new VectorSource({
-                            features: this.selections[index].selection
-                        }),
-                        layer = new VectorLayer({
-                            name: "selection_manager",
-                            source: vectorSource,
-                            style: new Style({
-                                fill: new Fill({
-                                    color: "rgba(214, 96, 93, 0.35)"
-                                }),
-                                stroke: new Stroke({
-                                    color: "#D6605D",
-                                    width: 3
-                                })
-                            })
-                        });
-
-                    layer.setZIndex(9999);
-                    this.map.addLayer(layer);
-
-                    setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].selection, 0));
+                    this.highlightSelection(index);
                 }
             }
             else {
@@ -157,38 +167,75 @@ export default {
             }
         },
         /**
+             * @description Creates VectorLayer for the chosen selection
+             * @param {Integer} index - Index of the chosen selection in this.selections
+             * @param {boolean} forceUpdate - update even if selection hasn't changed
+             * @returns {void}
+             */
+        highlightSelection (index) {
+            if (this.selections[index].storedLayers.length > 0) {
+                this.setStoredLayersActive(this.selections[index].storedLayers);
+            }
+
+            //  remove selection manager layers
+            this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager").forEach(layer => this.map.removeLayer(layer));
+
+            const vectorSource = new VectorSource({
+                    features: this.selections[index].selection
+                }),
+                layer = new VectorLayer({
+                    name: "selection_manager",
+                    source: vectorSource,
+                    style: new Style({
+                        fill: new Fill({
+                            color: "rgba(214, 96, 93, 0.35)"
+                        }),
+                        stroke: new Stroke({
+                            color: "#D6605D",
+                            width: 3
+                        })
+                    })
+                });
+
+            layer.setZIndex(9999);
+            this.map.addLayer(layer);
+
+            setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].selection, 0));
+        },
+        /**
              * @description Creates VectorLayer for the chosen selection if there is a buffer value and overwrites standard selection.
              * @param {Integer} index - Index of the chosen selection in this.selections
              * @returns {void}
              */
         rerenderSelection (index) {
-            if (this.activeSelection === index) {
-
-                //  remove selection manager layers
-                this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager").forEach(layer => this.map.removeLayer(layer));
-
-                const vectorSource = new VectorSource({
-                        features: this.selections[index].bufferedSelection
-                    }),
-                    layer = new VectorLayer({
-                        name: "selection_manager",
-                        source: vectorSource,
-                        style: new Style({
-                            fill: new Fill({
-                                color: "rgba(214, 187, 47, 0.35)"
-                            }),
-                            stroke: new Stroke({
-                                color: "#D6B62F",
-                                width: 3
-                            })
-                        })
-                    });
-
-                layer.setZIndex(9999);
-                this.map.addLayer(layer);
-
-                setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].bufferedSelection));
+            if (this.selections[index].storedLayers.length > 0) {
+                this.setStoredLayersActive(this.selections[index].storedLayers);
             }
+
+            //  remove selection manager layers
+            this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager").forEach(layer => this.map.removeLayer(layer));
+
+            const vectorSource = new VectorSource({
+                    features: this.selections[index].bufferedSelection
+                }),
+                layer = new VectorLayer({
+                    name: "selection_manager",
+                    source: vectorSource,
+                    style: new Style({
+                        fill: new Fill({
+                            color: "rgba(214, 187, 47, 0.35)"
+                        }),
+                        stroke: new Stroke({
+                            color: "#D6B62F",
+                            width: 3
+                        })
+                    })
+                });
+
+            layer.setZIndex(9999);
+            this.map.addLayer(layer);
+
+            setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].bufferedSelection));
         },
         /**
              * @description Creates VectorLayer for the chosen selection on hover in the selection menu.
@@ -240,7 +287,7 @@ export default {
              * @returns {void}
              */
         setStoredLayersActive (storedLayers) {
-            //  inverse the stored layers to get the theme data layers that are about to hideflat().filter(layer => !storedLayers.includes(layer.id)),
+            //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
                     model = getModelByAttributes({type: "layer", id: layerId});
@@ -250,16 +297,18 @@ export default {
                 }
             });
 
-            storedLayers.forEach(layerName => {
+            // show all layers stored in the current selection
+            storedLayers.forEach(async layerName => {
+
                 const model = getModelByAttributes({type: "layer", name: layerName});
 
                 if (model) {
                     model.set("isSelected", true);
-                }
-                else {
-                    addModelsByAttribute({name: layerName});
+                    await this.$nextTick();
+                    LoaderOverlay.hide();
                 }
             });
+
         },
         /**
              * @description Adds index of selection to extendedOptions to extend to option menu in the frontend.
@@ -287,11 +336,13 @@ export default {
         },
         /**
              * @description Calculates the center of each feature and draws a polygon along these points.
-             * @param {Array} selectionArray - Array of selections that i supposed to be connected
+             * @param {Array} selectionInc - Array of selections that is supposed to be connected
+             * @param {bool} indexArr - if true selections must be mapped via index from this.selections
              * @returns {void}
              */
-        connectSelections (selectionArray) {
-            const format = new GeoJSON(),
+        connectSelections (selectionInc, indexArr) {
+            const selectionArray = indexArr ? this.selections.filter(selection => selectionInc.includes(this.selections.indexOf(selection))) : selectionInc,
+                format = new GeoJSON(),
                 newPolygonCoords = [],
                 selectionsCopy = selectionArray.map(selection => selection.selection);
 
@@ -310,9 +361,13 @@ export default {
                 }
             });
 
-            selectionsCopy.push(new Feature(new Polygon([newPolygonCoords.map(point => point.geometry.coordinates)])));
-            this.addNewSelection({selection: selectionsCopy.flat(), source: this.$t("additional:modules.tools.cosi.selectionManager.title"), id: this.$t("additional:modules.tools.cosi.selectionManager.connectedSelections") + " (" + selectionsCopy.length - 1 + ")"});
+            selectionsCopy.push(new Feature(new Polygon(turfConcave(turfFeatureCollection(newPolygonCoords)).geometry.coordinates)));
+            this.addNewSelection({selection: selectionsCopy.flat(), source: this.$t("additional:modules.tools.cosi.selectionManager.title"), id: this.$t("additional:modules.tools.cosi.selectionManager.connectedSelections") + " (" + (selectionsCopy.length - 1) + ")"});
             this.highlightSelection(this.selections.length - 1);
+
+            if (indexArr) {
+                this.selectionsToMerge = [];
+            }
         },
         /**
              * @description Toggles the buffered selection to overwrite standard selection on the OL Layer.
@@ -382,6 +437,10 @@ export default {
 
             if (this.selections.length === 0) {
                 this.removeLayer();
+            }
+
+            if (this.selectionsToMerge.includes(index)) {
+                this.selectionsToMerge.splice(this.selectionsToMerge.indexOf(index), 1);
             }
         },
         /**
@@ -466,7 +525,7 @@ export default {
                         class="connect_btn"
                         :title="$t('additional:modules.tools.cosi.selectionManager.title_connect_selections')"
                         :class="{disabled: selections.map(selection => selection.selection).flat().length > 3}"
-                        @click="connectSelections(selections)"
+                        @click="connectSelections(selections, false)"
                     >
                         <v-icon>mdi-vector-selection</v-icon>
                     </button>
@@ -494,7 +553,7 @@ export default {
                                 class="connect_btn"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_connect_selections')"
                                 :class="{disabled: selections.map(selection => selection.selection).flat().length < 3}"
-                                @click="connectSelections()"
+                                @click="connectSelections(selectionsToMerge, true)"
                             >
                                 <v-icon>mdi-vector-selection</v-icon>
                             </button>
@@ -557,7 +616,7 @@ export default {
                                                 highlight: activeSelection === i,
                                                 scaledHighlight: selection.settings.bufferActive,
                                             }"
-                                            @click.exact="highlightSelection(i)"
+                                            @click.exact="toggleSelection(i)"
                                         >
                                             <v-icon>mdi-eye-outline</v-icon>
                                         </button>
@@ -649,6 +708,21 @@ export default {
                 </ul>
             </div>
         </div>
+        <Modal
+            :show-modal="dataLoaded"
+            @modalHid="dataLoaded = false"
+            @clickedOnX="dataLoaded = false"
+            @clickedOutside="dataLoaded = false"
+        >
+            <h4> {{ $t('additional:modules.tools.cosi.selectionManager.dataLoaded') }} </h4>
+            <button
+                :title="$t('additional:modules.tools.cosi.selectionManager.title_toggle_buffer')"
+                class="accept_btn"
+                @click="highlightSelection(selections.length - 1);"
+            >
+                <v-icon>mdi-selection-drag</v-icon>
+            </button>
+        </Modal>
     </div>
 </template>
 

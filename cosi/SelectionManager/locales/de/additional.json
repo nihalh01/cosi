@@ -11,6 +11,7 @@
                     "connectedSelections": "Auswahl verbunden",
                     "buffer": "Veränderte Auswahl",
                     "cache": "Zwischenspeicher",
+                    "dataLoaded": "Die gewünschten Themendaten wurden erfolgreich geladen",
                     "title_view": "Auswahl ein/aus",
                     "title_add": "Auswahl zum Zwischenspeicher hinzufügen",
                     "title_merge": "Zwischenauswahl zusammenführen",

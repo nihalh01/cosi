@@ -26,8 +26,8 @@ const actions = {
                 }
             },
             mergedPolygons = [];
-
-
+        
+            console.log("what is da problem", selection);
         for (let i = 0; i < selection.length; i++) {
 
             // turns feature into geojson readable for turf
