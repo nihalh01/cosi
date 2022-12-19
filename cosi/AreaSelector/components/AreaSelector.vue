@@ -69,7 +69,7 @@ export default {
                 this.drawingLayer.getSource().addFeature(this.feature);
             }
 
-            this.addNewSelection({selection: [new Feature(geom)], source: this.$t("additional:modules.tools.cosi.areaSelector.title"), id: "areaselector-index"});
+            this.addNewSelection({selection: [new Feature(geom)], source: this.$t("additional:modules.tools.cosi.areaSelector.title"), id: this.$t("additional:modules.tools.cosi.areaSelector.title") + " #" + new Feature(geom).ol_uid});
             setBBoxToGeom.call(this, geom || this.boundingGeometry);
         }
     },

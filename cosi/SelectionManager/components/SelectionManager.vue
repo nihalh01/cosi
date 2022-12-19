@@ -9,7 +9,6 @@ import getBoundingGeometry from "../../utils/getBoundingGeometry.js";
 import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
 import ToolInfo from "../../components/ToolInfo.vue";
 import {addModelsByAttributes, getModelByAttributes} from "../../utils/radioBridge.js";
-import Modal from "../../../../src/share-components/modals/components/ModalItem.vue";
 import Feature from "ol/Feature";
 import Polygon from "ol/geom/Polygon";
 import {default as turfCenterOfMass} from "@turf/center-of-mass";
@@ -22,8 +21,7 @@ import LoaderOverlay from "../../../../src/utils/loaderOverlay.js";
 export default {
     name: "SelectionManager",
     components: {
-        ToolInfo,
-        Modal
+        ToolInfo
     },
     data () {
         return {
@@ -76,13 +74,7 @@ export default {
                 selection.selection = selection.selection.map(sel => format.readFeature(sel));
 
                 this.addSelection(selection);
-                if (dataToLoad) {
-                    console.log("testMeHere", dataToLoad);
-                    this.dataLoaded = true;
-                }
-                else {
-                    this.highlightSelection(this.selections.length - 1);
-                }
+                this.highlightSelection(this.selections.length - 1);
             }
         },
         // watcher on activeSet so that the active selection can be changed via the setActiveSelection mutation from outside of the component
@@ -243,23 +235,25 @@ export default {
              * @returns {void}
              */
         hoverSelection (index) {
-            this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager_hover_layer").forEach(layer => this.map.removeLayer(layer));
+            if(this.activeSelection != index) {
+                this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager_hover_layer").forEach(layer => this.map.removeLayer(layer));
 
-            const vectorSource = new VectorSource({
-                    features: this.selections[index].selection
-                }),
-                layer = new VectorLayer({
-                    name: "selection_manager_hover_layer",
-                    source: vectorSource,
-                    style: new Style({
-                        fill: new Fill({
-                            color: "rgba(214, 96, 93, 0.2)"
+                const vectorSource = new VectorSource({
+                        features: this.selections[index].selection
+                    }),
+                    layer = new VectorLayer({
+                        name: "selection_manager_hover_layer",
+                        source: vectorSource,
+                        style: new Style({
+                            fill: new Fill({
+                                color: "rgba(214, 96, 93, 0.2)"
+                            })
                         })
-                    })
-                });
+                    });
 
-            layer.setZIndex(9999);
-            this.map.addLayer(layer);
+                layer.setZIndex(9999);
+                this.map.addLayer(layer);
+            }
         },
         /**
              * @description Removes the hover selection layer.
@@ -287,6 +281,8 @@ export default {
              * @returns {void}
              */
         setStoredLayersActive (storedLayers) {
+            LoaderOverlay.show();
+            
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
@@ -299,16 +295,15 @@ export default {
 
             // show all layers stored in the current selection
             storedLayers.forEach(async layerName => {
-
+                await this.$nextTick();
                 const model = getModelByAttributes({type: "layer", name: layerName});
 
                 if (model) {
                     model.set("isSelected", true);
-                    await this.$nextTick();
-                    LoaderOverlay.hide();
                 }
             });
-
+            
+            LoaderOverlay.hide();
         },
         /**
              * @description Adds index of selection to extendedOptions to extend to option menu in the frontend.
@@ -512,7 +507,11 @@ export default {
                         :locale="currentLocale"
                     />
                 </div>
-                <div class="function_buttons all_function_buttons">
+                <div 
+                    v-if="selections.length > 1"
+                    class="function_buttons all_function_buttons function_grp"
+                >
+                    <p class="menu_title">{{ $t('additional:modules.tools.cosi.selectionManager.allSelectionsMenu') }}</p>
                     <button
                         class="all_btn"
                         :title="$t('additional:modules.tools.cosi.selectionManager.title_all_selections')"
@@ -537,10 +536,13 @@ export default {
                         <v-icon>mdi-close-box-multiple</v-icon>
                     </button>
                 </div>
-                <div class="cache">
-                    <div class="cache_head">
-                        <p>{{ $t('additional:modules.tools.cosi.selectionManager.cache') }}</p>
+                <div 
+                    v-if="selectionsToMerge.length > 0"
+                    class="cache function_grp"
+                >
+                    <div class="cache_head head">
                         <div class="function_buttons cache_buttons">
+                            <p class="menu_title">{{ $t('additional:modules.tools.cosi.selectionManager.cache') }}</p>
                             <button
                                 v-if="selectionsToMerge.length > 0"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_merge')"
@@ -552,7 +554,7 @@ export default {
                             <button
                                 class="connect_btn"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_connect_selections')"
-                                :class="{disabled: selections.map(selection => selection.selection).flat().length < 3}"
+                                :class="{disabled: selectionsToMerge.length < 3}"
                                 @click="connectSelections(selectionsToMerge, true)"
                             >
                                 <v-icon>mdi-vector-selection</v-icon>
@@ -560,7 +562,7 @@ export default {
                             <button
                                 class="remove_all_btn"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_remove_all')"
-                                @click="removeAllSelections()"
+                                @click="selectionsToMerge = []"
                             >
                                 <v-icon>mdi-close-box-multiple</v-icon>
                             </button>
@@ -572,7 +574,7 @@ export default {
                             :key="i"
                             class="cache_selection"
                         >
-                            {{ selection }}
+                            {{ selections[selection].abv }}
                             <button
                                 class="remove_cached_btn"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_remove_cached_selection')"
@@ -602,9 +604,11 @@ export default {
                                         extended: extendedOptions.includes(i),
                                         hoverHighlight: selectionsToMerge.includes(i) && activeSelection !== i
                                     }"
-                                    @hover="hoverSelection(i)"
+                                    @mouseover="hoverSelection(i)"
+                                    @mouseleave="resetHovers"
                                     @focus="hoverSelection(i)"
                                 >
+                                    <span class="hint">{{ selection.abv }}</span>
                                     <p>{{ selection.id }}</p>
                                     <ul
                                         class="function_buttons"
@@ -708,21 +712,6 @@ export default {
                 </ul>
             </div>
         </div>
-        <Modal
-            :show-modal="dataLoaded"
-            @modalHid="dataLoaded = false"
-            @clickedOnX="dataLoaded = false"
-            @clickedOutside="dataLoaded = false"
-        >
-            <h4> {{ $t('additional:modules.tools.cosi.selectionManager.dataLoaded') }} </h4>
-            <button
-                :title="$t('additional:modules.tools.cosi.selectionManager.title_toggle_buffer')"
-                class="accept_btn"
-                @click="highlightSelection(selections.length - 1);"
-            >
-                <v-icon>mdi-selection-drag</v-icon>
-            </button>
-        </Modal>
     </div>
 </template>
 
@@ -782,11 +771,11 @@ export default {
                     }
                 }
 
-                .all_function_buttons {
-                    width:90px;
+                .all_function_buttons, .cache_buttons {
+                    width:auto;
                     height:30px;
                     margin:0px 5px 0px auto;
-                    border-bottom: 1px solid #aaa;
+                    // border-bottom: 1px solid #aaa;
                     display:flex;
                     flex-flow:row wrap;
                     justify-content:flex-end;
@@ -835,10 +824,15 @@ export default {
                 }
 
                 .cache {
-                    margin:5px;
+                    margin:3px 0px;
+                    border-top:1px solid #ccc;
+                    border-bottom:1px solid #ccc;
+                    background:whitesmoke;
 
                     ul {
                         justify-content:flex-end;
+                        padding:5px;
+                        box-sizing:border-box;
 
                         li {
                             flex:0 0 auto;
@@ -851,12 +845,26 @@ export default {
                             button {
                                 margin-left:10px;
 
+                                &.disabled {
+                                    pointer-events:none;
+                                    opacity:0.6;
+                                }
+
                                 .v-icon {
                                     font-size:10px;
                                     color:#444;
                                 }
                             }
                         }
+                    }
+                }
+
+                .function_grp {
+                    .menu_title {
+                        color:#aaa;
+                        font-size:90%;
+                        line-height:30px;
+                        margin-right:5px;
                     }
                 }
 
@@ -882,7 +890,7 @@ export default {
                             background:whitesmoke;
                             border-bottom:1px solid #ccc;
                             height:30px;
-                            padding-left:20px;
+                            padding-left:10px;
                             text-align:left;
                             box-sizing:border-box;
                             overflow:hidden;
@@ -954,8 +962,22 @@ export default {
                                     }
                                 }
 
+                            span.hint {
+                                display:inline;
+                                font-size:75%;
+                                padding:0px 3px;
+                                box-sizing:border-box;
+                                color:#888;
+                                height:20px;
+                                width:38px;
+                                text-align:center;
+                                line-height:20px;
+                                margin:5px 6px 5px 0px;
+                                border:1px solid #888;
+                            }
+
                             p {
-                                flex-basis:calc(100% - 140px);
+                                // flex-basis:calc(100% - 170px);
                                 line-height:30px;
                             }
 
@@ -1061,6 +1083,10 @@ export default {
                                         color:whitesmoke;
                                     }
                                 }
+                            }
+
+                            &:hover {
+                                cursor:pointer;
                             }
                         }
                     }

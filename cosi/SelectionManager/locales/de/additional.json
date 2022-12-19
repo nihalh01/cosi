@@ -8,6 +8,7 @@
                     "noData": "Keine Daten vorhanden",
                     "mergedSelections": "Kombinierte Auswahl",
                     "allSelections": "Alle aktiven ausgewählt",
+                    "allSelectionsMenu": "Alle Auswahlen",
                     "connectedSelections": "Auswahl verbunden",
                     "buffer": "Veränderte Auswahl",
                     "cache": "Zwischenspeicher",
