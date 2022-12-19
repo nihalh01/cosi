@@ -1,4 +1,4 @@
-import getClusterSource from "./getClusterSource";
+import {getLayerSource} from "./layer/getLayerSource";
 import Vue from "vue";
 import {getItemsByAttributes, getCollection} from "../utils/radioBridge.js";
 
@@ -97,7 +97,7 @@ export function setBboxGeometryToLayer (itemList, bboxGeometry, app) {
 
         // layer already exists in the model list
         if (model) {
-            const source = getClusterSource(model.layer);
+            const source = getLayerSource(model.layer);
             let url = `${model.attributes.url}?service=WFS&version=${model.attributes.version}&request=GetFeature&typeName=${model.attributes.featureType}&srsName=${crs}`;
 
             url += bboxGeometry ? `&bbox=${bboxGeometry.getExtent().toString()},${crs}` : "";

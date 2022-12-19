@@ -1,5 +1,5 @@
 
-import {unpackCluster} from "./getClusterSource";
+import {unpackCluster} from "./features/unpackCluster";
 import store from "../../../src/app-store";
 
 /**

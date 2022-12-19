@@ -1,6 +1,6 @@
 import ScenarioFeature from "./ScenarioFeature";
 import ScenarioNeighborhood from "./ScenarioNeighborhood";
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import Feature from "ol/Feature";
 import {featuresToGeoJsonCollection} from "../../utils/features/convertToGeoJson";
 import {downloadJsonToFile} from "../../utils/download";
@@ -296,7 +296,7 @@ export default class Scenario {
         this.isActive = true;
 
         for (const item of this.simulatedFeatures) {
-            if (!getClusterSource(item.layer)
+            if (!getLayerSource(item.layer)
                 .getFeatures()
                 .find(feature => feature === item.feature)) {
                 item.renderFeature(this.guideLayer);

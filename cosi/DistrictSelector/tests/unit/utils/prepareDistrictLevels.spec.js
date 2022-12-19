@@ -1,4 +1,14 @@
-import {getAllDistrictsWithoutLayer, getDistricts, getFeatureTypes, getLayerById, getNameList, getPropertyNameList, prepareDistrictLevels, setProperties} from "../../../utils/prepareDistrictLevels.js";
+import {
+    getAllDistrictsWithoutLayer,
+    getDistricts,
+    getFeatureTypes,
+    getLayerById,
+    getNameList,
+    getPropertyNameList,
+    prepareDistrictLevels,
+    setProperties,
+    mapDistrictNames
+} from "../../../utils/prepareDistrictLevels.js";
 import {expect} from "chai";
 import Source from "ol/source/Vector.js";
 import Layer from "ol/layer/Vector.js";
@@ -96,13 +106,6 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
             expect(getDistricts({keyOfAttrName: undefined})).to.be.an("array").to.be.empty;
         });
 
-        it("should return district hamburg if label is 'Hamburg'", () => {
-            const districts = getDistricts({label: "Hamburg", layer: layer, keyOfAttrName: "verwaltungseinheit"});
-
-            expect(districts).to.be.an("array");
-            expect(districts[0].getLabel()).to.equal("hamburg_gesamt");
-        });
-
         it("should returns two districts", () => {
             const districts = getDistricts({label: "Stadtteil", layer: layer, keyOfAttrName: "name"});
 
@@ -139,6 +142,14 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
             expect(featureTypes).to.be.an("array").to.have.lengthOf(2);
             expect(featureTypes[0]).to.be.an("array").to.be.empty;
             expect(featureTypes[1]).to.be.an("array").to.be.empty;
+        });
+
+        it("should return an array of arrays, if typeNames provided", () => {
+            const featureTypes = getFeatureTypes(["123", "456"], ["abc", ["def"]]);
+
+            expect(featureTypes).to.be.an("array").to.have.lengthOf(2);
+            expect(featureTypes[0]).to.be.an("array").to.deep.equal(["abc"]);
+            expect(featureTypes[1]).to.be.an("array").to.deep.equal(["def"]);
         });
 
         it("should return an array of arrays", () => {
@@ -413,6 +424,24 @@ describe("addons/DistrictSelector/utils/prepareDistrictLevels.js", () => {
             prepareDistrictLevels(testArray, layerList);
             expect(testArray[0]).to.have.not.property("nameList");
             expect(testArray[0]).to.have.not.property("districts");
+        });
+    });
+
+    describe("mapDistrictNames", () => {
+        it("should return the original name, if no districtNamesMap provided", () => {
+            const
+                districtName = "Unterschweineöde",
+                districtLevel = {layerId: "xyz"};
+
+            expect(mapDistrictNames(districtName, districtLevel)).to.equal(districtName);
+        });
+        it("should return the synonym name, if districtNamesMap provided", () => {
+            const
+                districtName = "Unterschweineöde",
+                synonym = "Oberschweineöde",
+                districtLevel = {layerId: "xyz", districtNamesMap: {[districtName]: synonym}};
+
+            expect(mapDistrictNames(districtName, districtLevel)).to.equal(synonym);
         });
     });
 });

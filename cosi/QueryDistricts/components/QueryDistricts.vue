@@ -859,19 +859,16 @@ export default {
                                 >{{ selectedDistrict }}</span>
                             </div>
                         </div>
-                        <template
+                        <LayerFilter
                             v-for="filter in layerFilterModels"
-                        >
-                            <LayerFilter
-                                id="layer-filter"
-                                :key="filter.layerId"
-                                :locale="currentLocale"
-                                v-bind="filter"
-                                class="layer-filter"
-                                @update="updateFilter"
-                                @close="closeFilter"
-                            />
-                        </template>
+                            id="layer-filter"
+                            :key="filter.layerId"
+                            :locale="currentLocale"
+                            v-bind="filter"
+                            class="layer-filter"
+                            @update="updateFilter"
+                            @close="closeFilter"
+                        />
                         <v-divider v-if="resultNames" />
                         <div
                             v-if="resultNames"

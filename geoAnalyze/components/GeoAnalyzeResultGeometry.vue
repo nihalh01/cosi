@@ -31,6 +31,12 @@ export default {
         },
         sum_hospitals_beds: function () {
             return this.results?.hospitals?.[0]?.sum_planbetten || "keine Daten vorhanden";
+        },
+        sum_care_facility: function () {
+            return this.results?.pflege?.[0]?.sum_pflege || "keine Daten vorhanden";
+        },
+        sum_care_places: function () {
+            return this.results?.pflege?.[0]?.sum_plaetze || "keine Daten vorhanden";
         }
     }
 };
@@ -95,6 +101,21 @@ export default {
             </dt>
             <dd class="col-6">
                 {{ sum_hospitals_beds }}
+            </dd>
+        </dl>
+        <hr>
+        <dl class="dl-horizontal row">
+            <dt class="col-6 d-flex justify-content-end">
+                Summe der Pflegeeinrichtungen:
+            </dt>
+            <dd class="col-6">
+                {{ sum_care_facility }}
+            </dd>
+            <dt class="col-6 d-flex justify-content-end">
+                Summe der Pflegeplätze:
+            </dt>
+            <dd class="col-6">
+                {{ sum_care_places }}
             </dd>
         </dl>
     </div>

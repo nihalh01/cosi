@@ -9,6 +9,7 @@ import {generateColorScale} from "../../utils/colorScale.js";
 import groupMapping from "../../utils/groupMapping";
 import mapping from "../../assets/mapping.json";
 import ChartDataset from "../../ChartGenerator/classes/ChartDataset";
+import {mapDistrictNames} from "../../DistrictSelector/utils/prepareDistrictLevels";
 
 export default {
     name: "ColorCodeMap",
@@ -219,9 +220,9 @@ export default {
          */
         renderVisualization () {
             if (this.visualizationState) {
-                const results = this.selectedStatFeatures.filter(x => x.getProperties().kategorie === this.selectedFeature),
+                const results = this.selectedStatFeatures.filter(x => x.get("kategorie") === this.selectedFeature),
                     resultValues = results.map(x => {
-                        const yearValue = x.getProperties()[this.yearSelector + this.selectedYear];
+                        const yearValue = x.get(this.yearSelector + this.selectedYear);
 
                         if (yearValue !== undefined) {
                             return yearValue;
@@ -237,7 +238,9 @@ export default {
                 this.updateLegendList += 1;
                 this.selectedFeatures.forEach(district => {
                     const getStyling = district.getStyle(),
-                        matchResults = results.find(x => utils.unifyString(x.getProperties()[this.keyOfAttrNameStats]) === utils.unifyString(district.getProperties()[this.keyOfAttrName]));
+                        matchResults = results.find(
+                            x => utils.unifyString(x.get(this.keyOfAttrNameStats)) === utils.unifyString(mapDistrictNames(district.get(this.keyOfAttrName), this.selectedDistrictLevel))
+                        );
 
                     if (matchResults) {
                         if (this.originalStyling === null) {
@@ -245,7 +248,7 @@ export default {
                         }
 
                         const styleArray = [],
-                            match_props = matchResults.getProperties()[this.yearSelector + this.selectedYear];
+                            match_props = matchResults.get(this.yearSelector + this.selectedYear);
 
                         getStyling.fill = match_props !== undefined ? new Fill({color: utils.getRgbArray(this.colorScale.scale(match_props), 0.75)}) : new Fill({color: "rgba(0, 0, 0, 0.75)"});
                         getStyling.zIndex = 1;
@@ -276,8 +279,8 @@ export default {
                                         color: [240, 240, 240],
                                         width: 2
                                     }),
-                                    text: matchResults.getProperties()[this.yearSelector + this.lastYear] !== undefined
-                                        ? this.lastYear + ": " + parseFloat(matchResults.getProperties()[this.yearSelector + this.lastYear]).toLocaleString("de-DE") + "  (" + parseFloat(Math.round((matchResults.getProperties()[this.yearSelector + this.lastYear] / match_props) * 100)) + "%)"
+                                    text: matchResults.get(this.yearSelector + this.lastYear) !== undefined
+                                        ? this.lastYear + ": " + parseFloat(matchResults.get(this.yearSelector + this.lastYear)).toLocaleString("de-DE") + "  (" + parseFloat(Math.round((matchResults.get(this.yearSelector + this.lastYear) / match_props) * 100)) + "%)"
                                         : this.$t("additional:modules.tools.colorCodeMap.noData"),
                                     offsetY: 25,
                                     overflow: true
@@ -299,7 +302,7 @@ export default {
                                         color: [255, 255, 255]
                                     }),
                                     padding: [5, 10, 5, 10],
-                                    text: matchResults.getProperties()[this.keyOfAttrNameStats],
+                                    text: matchResults.get(this.keyOfAttrNameStats),
                                     offsetY: -35,
                                     overflow: true
                                 })
@@ -342,7 +345,7 @@ export default {
             // todo generate Legend for CC Data
             this.selectedFeatures.forEach(district => {
                 const getStyling = district.getStyle(),
-                    matchResults = this.colorCodeMapDataset.find(x => utils.unifyString(x.name) === utils.unifyString(district.getProperties()[this.keyOfAttrName]));
+                    matchResults = this.colorCodeMapDataset.find(x => utils.unifyString(x.name) === utils.unifyString(district.get(this.keyOfAttrName)));
 
                 if (matchResults) {
                     if (this.originalStyling === null) {
@@ -408,10 +411,12 @@ export default {
          */
         generateGraphData () {
             this.graphData = [];
-            const results = this.selectedStatFeatures.filter(x => x.getProperties().kategorie === this.selectedFeature);
+            const results = this.selectedStatFeatures.filter(x => x.get("kategorie") === this.selectedFeature);
 
             this.selectedFeatures.forEach(district => {
-                const matchResults = results.find(x => utils.unifyString(x.getProperties()[this.keyOfAttrNameStats]) === utils.unifyString(district.getProperties()[this.keyOfAttrName]));
+                const matchResults = results.find(
+                    x => utils.unifyString(x.get(this.keyOfAttrNameStats)) === utils.unifyString(mapDistrictNames(district.get(this.keyOfAttrName), this.selectedDistrictLevel))
+                );
 
                 this.prepareGraphData(matchResults);
             });
@@ -423,13 +428,13 @@ export default {
          */
         prepareGraphData (dataset) {
             const newDataset = {
-                label: dataset?.getProperties()[this.keyOfAttrNameStats],
+                label: dataset?.get(this.keyOfAttrNameStats),
                 data: []
             };
 
-            this.dataCategory = dataset?.getProperties().kategorie;
+            this.dataCategory = dataset?.get("kategorie");
             this.availableYears.forEach(year => {
-                newDataset.data.push(dataset.getProperties()[this.yearSelector + year]);
+                newDataset.data.push(dataset.get(this.yearSelector + year));
             });
 
             this.graphData.push(newDataset);

@@ -22,7 +22,7 @@ import ScenarioManager from "./ScenarioManager.vue";
 import ScenarioFeature from "../classes/ScenarioFeature";
 import {geomPickerUnlisten, geomPickerResetLocation, geomPickerClearDrawPolygon, geomPickerSetGeometry} from "../../utils/geomPickerHandler";
 import ToolInfo from "../../components/ToolInfo.vue";
-import {unpackCluster} from "../../utils/getClusterSource";
+import {unpackCluster} from "../../utils/features/unpackCluster";
 import {getAddress} from "../../utils/geocode";
 import LoaderOverlay from "../../../../src/utils/loaderOverlay.js";
 import {getModelByAttributes} from "../../utils/radioBridge.js";

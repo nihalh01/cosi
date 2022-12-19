@@ -1,4 +1,4 @@
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import deepEqual from "deep-equal";
 
 /**
@@ -20,7 +20,7 @@ function getFeatureByGeom (source, geom) {
  */
 export default async function checkAndReplaceOriginalFeature (feature, layer) {
     const
-        source = getClusterSource(layer),
+        source = getLayerSource(layer),
         originalFeature = source.getFeatureById(feature.getId()) || getFeatureByGeom(source, feature.get("originalData").geometry);
 
     if (originalFeature && feature !== originalFeature) {

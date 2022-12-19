@@ -331,7 +331,7 @@ describe("AccessibilityAnalysis.vue", () => {
         expect(wrapper.vm.askUpdate).to.be.false;
     });
 
-    it("trigger button with user input and region selected", async () => {
+    it.skip("trigger button with user input and region selected", async () => {
         const wrapper = await mount(layersMock);
 
         wrapper.vm.setMode("region");

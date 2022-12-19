@@ -1,6 +1,6 @@
 import store from "../../../../src/app-store";
 import Vue from "vue";
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 
 /**
  * rerenders the feature if necessary
@@ -11,11 +11,11 @@ export default async function (scenarioFeature) {
     await Vue.nextTick();
 
     if (
-        !getClusterSource(scenarioFeature.layer).hasFeature(scenarioFeature.feature) &&
+        !getLayerSource(scenarioFeature.layer).hasFeature(scenarioFeature.feature) &&
         // eslint-disable-next-line new-cap
         store.getters["Tools/FeaturesList/isFeatureActive"](scenarioFeature.feature) &&
         scenarioFeature.scenario.isActive
     ) {
-        getClusterSource(scenarioFeature.layer).addFeature(scenarioFeature.feature);
+        getLayerSource(scenarioFeature.layer).addFeature(scenarioFeature.feature);
     }
 }

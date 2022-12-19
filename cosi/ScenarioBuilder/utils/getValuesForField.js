@@ -3,7 +3,7 @@ import {getFeatureGET as wfsGetFeature} from "../../../../src/api/wfs/getFeature
 import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import store from "../../../../src/app-store";
 import {WFS} from "ol/format.js";
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 
 const wfsReader = new WFS();
 
@@ -36,7 +36,7 @@ export default async function getValuesForField (field, layerId) {
     }
     else {
         const layer = layerById(layerId),
-            source = getClusterSource(layer);
+            source = getLayerSource(layer);
 
         allFeatures = source.getFeatures();
     }

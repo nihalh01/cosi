@@ -1,5 +1,6 @@
 import requestIsochrones from "./requestIsochrones";
-import {readFeatures, transformFeatures} from "../components/util.js";
+import {readFeatures} from "../components/util.js";
+import {transformFeatures} from "../../utils/features/transform";
 import {polygon as turfPolygon} from "@turf/helpers";
 import {default as turfUnion} from "@turf/union";
 import {default as turfBooleanPointInPolygon} from "@turf/boolean-point-in-polygon";

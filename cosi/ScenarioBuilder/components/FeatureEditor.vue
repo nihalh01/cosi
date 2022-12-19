@@ -1,7 +1,7 @@
 <script>
 import {mapGetters} from "vuex";
 import Modal from "../../../../src/share-components/modals/components/ModalItem.vue";
-import {unpackCluster} from "../../utils/getClusterSource";
+import {unpackCluster} from "../../utils/features/unpackCluster";
 import beautifyKey from "../../../../src/utils/beautifyKey";
 import ToolInfo from "../../components/ToolInfo.vue";
 

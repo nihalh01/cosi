@@ -1,7 +1,7 @@
 <script>
 import {Select, Translate} from "ol/interaction";
 import {mapGetters, mapActions} from "vuex";
-import {unpackCluster} from "../../utils/getClusterSource";
+import {unpackCluster} from "../../utils/features/unpackCluster";
 import highlightVectorFeature from "../../utils/highlightVectorFeature";
 import {getSearchResultsCoordinates} from "../../utils/getSearchResultsGeom";
 import Point from "ol/geom/Point";

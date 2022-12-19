@@ -1,10 +1,10 @@
 import {WFS} from "ol/format.js";
 import {getFeaturePOST as wfsGetFeature} from "../../../../src/api/wfs/getFeature.js";
 import {parseFeatures} from "../utils/prepareStatsFeatures";
+import {mapDistrictNames} from "../utils/prepareDistrictLevels";
 import {equalTo} from "ol/format/filter";
 import Vue from "vue";
 import Collection from "ol/Collection";
-import {compensateInconsistency} from "../../utils/unifyString";
 import LoaderOverlay from "../../../../src/utils/loaderOverlay.js";
 
 const actions = {
@@ -22,7 +22,6 @@ const actions = {
      * @returns {void}
      */
     async loadStatFeatures ({dispatch, rootGetters}, {districtLevel, districts, getStatFeatures, recursive = true}) {
-        // commit("setLoadend", false);
         dispatch("Alerting/addSingleAlert", {content: "Datensätze werden geladen"}, {root: true});
         LoaderOverlay.show();
 
@@ -33,7 +32,7 @@ const actions = {
             // check if statFeatures are already loaded
             if (districts[i].statFeatures.length === 0) {
                 for (let j = 0; j < urls.length; j++) {
-                    const districtName = compensateInconsistency(districts[i].getName()),
+                    const districtName = mapDistrictNames(districts[i].getName(), districtLevel),
                         statFeatures = await getStatFeatures(urls[j], {
                             featureTypes: districtLevel.featureTypes[j],
                             srsName: rootGetters["Maps/projectionCode"],
@@ -122,6 +121,7 @@ const actions = {
     },
 
     /**
+     * triggers an lifecycle update event by altering the state for one tick
      * @param {Object} store - The vuex store.
      * @param {Function} store.commit - Function to dispatch an action.
      * @returns {void}

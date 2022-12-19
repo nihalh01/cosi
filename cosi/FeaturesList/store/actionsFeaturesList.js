@@ -1,4 +1,4 @@
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import {createVectorLayerMappingObject} from "../utils/getVectorlayerMapping";
 
 const actions = {
@@ -14,7 +14,7 @@ const actions = {
         const
             layerById = rootGetters["Maps/getLayerById"],
             layer = layerById({layerId: featureItem.layerId}),
-            source = getClusterSource(layer);
+            source = getLayerSource(layer);
 
         // remove all highlightings to avoid undefined errors on the map
         dispatch("Maps/removeHighlightFeature", null, {root: true});

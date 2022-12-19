@@ -75,13 +75,6 @@ export function getDistricts ({layer, keyOfAttrName, label, duplicateDistrictNam
         return [];
     }
 
-    // Sets missing attribute "verwaltungseinheit" = "hamburg_gesamt" to the hamburg administration feature
-    if (label === "Hamburg") {
-        layer.getSource().getFeatures().forEach(feature => {
-            feature.set("verwaltungseinheit", "hamburg_gesamt");
-        });
-    }
-
     const districts = [];
 
     layer.getSource().getFeatures().forEach(function (feature) {
@@ -147,13 +140,19 @@ export function getFeatureTypes (urls, typeNames) {
         console.error(`prepareDistrictLevels.getFeatureTypes: ${urls} has to be defined and an array.`);
         return [];
     }
-    const featureTypes = [];
+    const
+        _typeNames = typeNames?.map(typeName => typeof typeName === "string" ? [typeName] : typeName), // map strings to list for WFS request
+        featureTypes = [];
 
     for (let i = 0; i < urls.length; i++) {
-        featureTypes[i] = Array.isArray(typeNames?.[i]) ?
-            typeNames[i] :
-            rawLayerList.getLayerList().reduce((_typeNames, layer) => {
-                return layer?.url === urls[i] ? [..._typeNames, layer.featureType] : _typeNames;
+        /**
+         * if a featureType list is provided, use the list from config.json
+         * alternatively extract from services.json
+         */
+        featureTypes[i] = Array.isArray(_typeNames?.[i]) ?
+            _typeNames[i] :
+            rawLayerList.getLayerList().reduce((_featureTypes, layer) => {
+                return layer?.url === urls[i] ? [..._featureTypes, layer.featureType] : _featureTypes;
             }, []);
     }
 
@@ -264,4 +263,14 @@ export function setProperties (evt) {
         // unbind the listener
         unByKey(eventKeys[this.layerId]);
     }
+}
+
+/**
+ * Retrieves synonymous district names from a map provided in config.json
+ * @param {String} districtName - the district name to map
+ * @param {Object} districtLevel - the districtLevel to check
+ * @returns {String} the district name synonym or the original district name
+ */
+export function mapDistrictNames (districtName, districtLevel) {
+    return districtLevel.districtNamesMap?.[districtName] || districtName;
 }

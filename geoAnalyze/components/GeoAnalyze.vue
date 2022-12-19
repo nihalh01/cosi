@@ -319,6 +319,7 @@ export default {
                     v-model="selectedOption"
                     :focus-on-creation="true"
                     :options="options"
+                    :label="''"
                 />
             </form>
             <template v-if="Object.keys(result).length > 0">

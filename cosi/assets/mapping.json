@@ -200,8 +200,8 @@
     "valueType": "relative",
     "calculation": {
       "operation": "divide",
-      "category_A": "Bevölkerung mit Migrationshintergrund",
-      "category_B": "Bevölkerung insgesamt",
+      "category_A": "Bevölkerung mit Migrationshintergrund unter 18 Jahren",
+      "category_B": "Bevölkerung mit Migrationshintergrund",
       "modifier": 100
     }
   },
@@ -922,7 +922,7 @@
     "valueType": "relative"
   },
   {
-    "category": "gsa_anteil_bev_65_und_aelter_proz",
+    "category": "gsa_anteil_empf_grundsicherung_bev_ab65_proz",
     "value": "Anteil der Bevölkerung ab 65 Jahren Grundsicherung",
     "group": "Grundsicherung im Alter",
     "stat_gebiet": "112233",
@@ -937,7 +937,7 @@
     }
   },
   {
-    "category": "gsa_empfaenger_grundsicherung_65_und_aelter_anz",
+    "category": "gsa_empf_grundsicherung_ab65_anz",
     "value": "Empfänger von Grundsicherung und weiteren Hilfeleistungen ab 65 Jahre",
     "group": "Grundsicherung im Alter",
     "stat_gebiet": "112233",
@@ -946,8 +946,8 @@
     "valueType": "absolute"
   },
   {
-    "category": "wohn_mit_bindungsauslauf_anz",
-    "value": "Sozialwohnung mit Bindungsauslauf",
+    "category": "wohn_mit_bindungsauslauf_in_5_jahren_anz",
+    "value": "Sozialwohnung mit Bindungsauslauf (5 Jahre)",
     "group": "Wohnen",
     "stat_gebiet": "112233",
     "stadtteil": "11223344",
@@ -955,7 +955,7 @@
     "valueType": "absolute"
   },
   {
-    "category": "wohn_sozialwohnungen_ins_anz",
+    "category": "wohn_sozialwohnungen_anz",
     "value": "Sozialwohnungen",
     "group": "Wohnen",
     "stat_gebiet": "112233",

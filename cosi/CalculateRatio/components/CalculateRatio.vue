@@ -11,7 +11,7 @@ import {exportAsGeoJson} from "../utils/exportResults";
 import mapping from "../../assets/mapping.json";
 import ToolInfo from "../../components/ToolInfo.vue";
 import {getCenter} from "ol/extent";
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import {getModelByAttributes} from "../../utils/radioBridge.js";
 
 export default {
@@ -522,7 +522,7 @@ export default {
 
                 if (this[letter + "Switch"]) {
                     const findLayer = this.getVisibleLayerList.find(layer => layer.get("name") === this["selectedField" + letter].id),
-                        layerFeatures = getClusterSource(findLayer).getFeatures();
+                        layerFeatures = getLayerSource(findLayer).getFeatures();
 
                     this.calcHelper["type_" + letter] = "facility";
                     this.featureVals = [];

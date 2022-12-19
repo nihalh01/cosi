@@ -1,4 +1,4 @@
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import {addSimulationTag, removeSimulationTag} from "../utils/guideLayer";
 import storeOriginalFeatureData from "../utils/storeOriginalFeatureData";
 import checkAndReplaceOriginalFeature from "../utils/checkAndReplaceOriginalFeature";
@@ -36,10 +36,10 @@ export default class ScenarioFeature {
      * @returns {void}
      */
     renderFeature (guideLayer) {
-        getClusterSource(this.layer).addFeature(this.feature);
+        getLayerSource(this.layer).addFeature(this.feature);
 
         // Here the feauture is added again, if it has been removed from an other Tool. For example by an accessibility analysis.
-        this.eventKeys[this.feature.getId()] = getClusterSource(this.layer).on("change", () => {
+        this.eventKeys[this.feature.getId()] = getLayerSource(this.layer).on("change", () => {
             rerenderScenarioFeature(this);
         });
 
@@ -55,7 +55,7 @@ export default class ScenarioFeature {
      * @returns {void}
      */
     hideFeature () {
-        const source = getClusterSource(this.layer);
+        const source = getLayerSource(this.layer);
 
         // unbind the listener
         unByKey(this.eventKeys.modifier);
@@ -173,7 +173,7 @@ export default class ScenarioFeature {
          * @todo outsource to own method, merge with render event?
          */
         if (!this.feature.get("isSimulation")) {
-            this.eventKeys.modifier = getClusterSource(this.layer).on("change", (evt) => {
+            this.eventKeys.modifier = getLayerSource(this.layer).on("change", (evt) => {
                 const source = evt.target;
 
                 if (!source.hasFeature(this.feature) && this.scenario.isActive) {
@@ -208,7 +208,7 @@ export default class ScenarioFeature {
      * @returns {void}
      */
     linkModifiedFeatureToSource () {
-        this.eventKeys[this.feature.getId()] = getClusterSource(this.layer).on("change", () => checkAndReplaceOriginalFeature(this.feature, this.layer));
+        this.eventKeys[this.feature.getId()] = getLayerSource(this.layer).on("change", () => checkAndReplaceOriginalFeature(this.feature, this.layer));
     }
 
     /**

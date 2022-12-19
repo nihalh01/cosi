@@ -7,7 +7,7 @@ import mutations from "../store/mutationsFeaturesList";
 import actions from "../store/actionsFeaturesList";
 import getVectorlayerMapping from "../utils/getVectorlayerMapping";
 import {getContainingDistrictForFeature} from "../../utils/geomUtils";
-import getClusterSource from "../../utils/getClusterSource";
+import {getLayerSource} from "../../utils/layer/getLayerSource";
 import highlightVectorFeature from "../../utils/highlightVectorFeature";
 import DetailView from "./DetailView.vue";
 import FeatureIcon from "./FeatureIcon.vue";
@@ -358,7 +358,7 @@ export default {
             if (this.groupActiveLayer.length > 0) {
                 this.items = this.activeVectorLayerList.reduce((list, vectorLayer) => {
 
-                    const features = getClusterSource(vectorLayer).getFeatures(),
+                    const features = getLayerSource(vectorLayer).getFeatures(),
                         // only features that can be seen on the map
                         visibleFeatures = features.filter(this.isFeatureActive),
                         layerMap = this.layerMapById(vectorLayer.get("id")),
