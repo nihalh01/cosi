@@ -108,6 +108,7 @@ export default {
         ...mapGetters("Tools/DistrictSelector", ["boundingGeometry"]),
         ...mapGetters("Tools/FeaturesList", ["activeVectorLayerList", "isFeatureActive"]),
         ...mapGetters("Tools/AreaSelector", {areaSelectorGeom: "geometry"}),
+        ...mapGetters("Tools/SelectionManager", ["activeSelection"]),
         ...mapGetters("Tools/ScenarioBuilder", ["scenarioUpdated"]),
         ...mapGetters("Tools/Routing/Directions", ["directionsRouteSource", "directionsRouteLayer", "routingDirections"]),
         ...mapGetters("Tools/Routing", {routingActive: "active", activeRoutingToolOption: "activeRoutingToolOption"}),
@@ -255,7 +256,7 @@ export default {
         mode () {
             this.setSetByFeature(false);
 
-            if (this.mode === "region") {
+            if (this.mode === "region" && this.activeSelection === null) {
                 this.resetIsochroneBBox();
             }
 

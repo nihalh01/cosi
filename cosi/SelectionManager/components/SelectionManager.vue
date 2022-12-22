@@ -16,7 +16,6 @@ import {default as turfConcave} from "@turf/concave";
 import {featureCollection as turfFeatureCollection} from "@turf/helpers";
 import GeoJSON from "ol/format/GeoJSON";
 import {Fill, Stroke, Style} from "ol/style.js";
-import LoaderOverlay from "../../../../src/utils/loaderOverlay.js";
 
 export default {
     name: "SelectionManager",
@@ -52,6 +51,9 @@ export default {
         },
         activeLayerList () {
             return this.activeVectorLayerList.map(layer => layer.getProperties().name);
+        },
+        selectionsLength () {
+            return this.selections.length;
         }
     },
     watch: {
@@ -59,32 +61,28 @@ export default {
         // that pattern allows us to use data from external tools and apply internal methods to it.
         acceptSelection (selection) {
             if (selection) {
-                let dataToLoad = false;
-
                 // check for stored vector layers to load
                 selection.storedLayers.forEach(layerName => {
                     if (!getModelByAttributes({type: "layer", name: layerName})) {
                         addModelsByAttributes({name: layerName});
-                        dataToLoad = true;
                     }
                 });
 
                 const format = new GeoJSON();
 
                 selection.selection = selection.selection.map(sel => format.readFeature(sel));
-
+                selection.abv = this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? selection.id.match(/\b([A-Z0-9])/g).join("") + "-" + this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length : selection.id.match(/\b([A-Z0-9])/g).join("");
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
             }
         },
-        // watcher on activeSet so that the active selection can be changed via the setActiveSelection mutation from outside of the component
-        activeSet (oldValue, newValue) {
-            if (oldValue === newValue) {
-                this.removeLayer();
-                this.setActiveSelection(null);
+        // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
+        activeSelection (value) {
+            if (value !== null) {
+                this.activateSelection(value);
             }
             else {
-                this.toggleSelection(newValue);
+                this.removeLayer();
             }
         },
         /**
@@ -122,11 +120,15 @@ export default {
                 }
             }
         },
-        /**
-             * @description Sets the all selections button active again if the this.selections array changes.
-             * @returns {void}
-             */
-        selections () {
+        // Sets the all selections button active again if the this.selections array changes and updates the selection index
+        selectionsLength (newValue, oldValue) {
+            if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {
+                this.inputActiveSelection(newValue - 1);
+            }
+            else if (newValue && newValue < this.activeSelection + 1) {
+                this.inputActiveSelection(0);
+            }
+
             this.allSelectionsPossible = true;
         }
     },
@@ -138,24 +140,16 @@ export default {
         ...mapActions("Tools/SelectionManager", Object.keys(actions)),
         ...mapMutations("Maps", ["setLayerVisibility", "addLayerToMap", "removeLayerFromMap"]),
         /**
-         * @description Toggles the active selection on click in frontend
-         * @param {*} index - Index of the chosen selection in this.selections
-         * @returns {void}
-         */
-        toggleSelection (index) {
-            if (this.activeSelection !== index) {
-                this.setActiveSelection(index);
-
-                if (this.selections[index].settings.bufferActive) {
-                    this.rerenderSelection(index);
-                }
-                else {
-                    this.highlightSelection(index);
-                }
+             * @description Highlights activeSelection
+             * @param {Integer} index - Index of the active selection in this.selections
+             * @returns {void}
+             */
+        activateSelection (index) {
+            if (this.selections[index].settings.bufferActive) {
+                this.rerenderSelection(index);
             }
             else {
-                this.removeLayer();
-                this.setActiveSelection(null);
+                this.highlightSelection(index);
             }
         },
         /**
@@ -232,10 +226,11 @@ export default {
         /**
              * @description Creates VectorLayer for the chosen selection on hover in the selection menu.
              * @param {Integer} index - Index of the chosen selection in this.selections
+             * @param {Integer} color - RGB String of color that the hover shall have
              * @returns {void}
              */
-        hoverSelection (index) {
-            if(this.activeSelection != index) {
+        hoverSelection (index, color) {
+            if (this.activeSelection !== index) {
                 this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager_hover_layer").forEach(layer => this.map.removeLayer(layer));
 
                 const vectorSource = new VectorSource({
@@ -246,7 +241,7 @@ export default {
                         source: vectorSource,
                         style: new Style({
                             fill: new Fill({
-                                color: "rgba(214, 96, 93, 0.2)"
+                                color: color
                             })
                         })
                     });
@@ -280,9 +275,8 @@ export default {
              * @param {Array} storedLayers - The names of the stored layers inside the saved selection
              * @returns {void}
              */
-        setStoredLayersActive (storedLayers) {
-            LoaderOverlay.show();
-            
+        async setStoredLayersActive (storedLayers) {
+
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
@@ -295,15 +289,23 @@ export default {
 
             // show all layers stored in the current selection
             storedLayers.forEach(async layerName => {
-                await this.$nextTick();
                 const model = getModelByAttributes({type: "layer", name: layerName});
 
                 if (model) {
                     model.set("isSelected", true);
                 }
             });
-            
-            LoaderOverlay.hide();
+
+            // a bug in the loaderOverlay.hide() is not working, even if it's fired with a timeOut
+            // so here's a very! uncanny workaround to make it work in this case
+            await this.$nextTick();
+
+            // setTimout because something triggers LoaderOverlay.show() after the last $nextTick() and I can't figure out what
+            setTimeout(()=> {
+                // remove the classes manually
+                document.getElementById("loader").classList.remove("loader-is-loading");
+                document.getElementById("masterportal-container").classList.remove("blurry");
+            }, 1500);
         },
         /**
              * @description Adds index of selection to extendedOptions to extend to option menu in the frontend.
@@ -373,7 +375,6 @@ export default {
             if (this.selections[index].settings.bufferActive) {
                 this.selections[index].settings.bufferActive = false;
                 if (this.activeSelection === index) {
-                    this.setActiveSelection(null);
                     this.highlightSelection(index);
                 }
             }
@@ -419,7 +420,6 @@ export default {
              * @returns {void}
              */
         removeLayer () {
-            this.setActiveSelection(null);
             this.map.getLayers().getArray().filter(layer => layer.get("name") === "selection_manager").forEach(layer => this.map.removeLayer(layer));
         },
         /**
@@ -430,12 +430,20 @@ export default {
         removeSelection (index) {
             this.selections.splice(index, 1);
 
+            // if no selections are left => remove the ol layer
             if (this.selections.length === 0) {
+                this.inputActiveSelection(null);
                 this.removeLayer();
             }
 
+            // if selection was in cache => remove it there as well
             if (this.selectionsToMerge.includes(index)) {
                 this.selectionsToMerge.splice(this.selectionsToMerge.indexOf(index), 1);
+            }
+
+            // if selection was active selection => reset active selection
+            if (this.selections.length > 0 && index === this.activeSelection) {
+                this.inputActiveSelection(0);
             }
         },
         /**
@@ -445,7 +453,7 @@ export default {
         removeAllSelections () {
             this.clearAllSelections();
             this.removeLayer();
-            this.setActiveSelection(null);
+            this.inputActiveSelection(null);
         },
         /**
              * @description Merges selections from selectionToMerge array into a single selection.
@@ -507,11 +515,13 @@ export default {
                         :locale="currentLocale"
                     />
                 </div>
-                <div 
+                <div
                     v-if="selections.length > 1"
                     class="function_buttons all_function_buttons function_grp"
                 >
-                    <p class="menu_title">{{ $t('additional:modules.tools.cosi.selectionManager.allSelectionsMenu') }}</p>
+                    <p class="menu_title">
+                        {{ $t('additional:modules.tools.cosi.selectionManager.allSelectionsMenu') }}
+                    </p>
                     <button
                         class="all_btn"
                         :title="$t('additional:modules.tools.cosi.selectionManager.title_all_selections')"
@@ -536,13 +546,15 @@ export default {
                         <v-icon>mdi-close-box-multiple</v-icon>
                     </button>
                 </div>
-                <div 
+                <div
                     v-if="selectionsToMerge.length > 0"
                     class="cache function_grp"
                 >
                     <div class="cache_head head">
                         <div class="function_buttons cache_buttons">
-                            <p class="menu_title">{{ $t('additional:modules.tools.cosi.selectionManager.cache') }}</p>
+                            <p class="menu_title">
+                                {{ $t('additional:modules.tools.cosi.selectionManager.cache') }}
+                            </p>
                             <button
                                 v-if="selectionsToMerge.length > 0"
                                 :title="$t('additional:modules.tools.cosi.selectionManager.title_merge')"
@@ -573,6 +585,12 @@ export default {
                             v-for="(selection, i) in selectionsToMerge"
                             :key="i"
                             class="cache_selection"
+                            @click="inputActiveSelection(i)"
+                            @keyup="inputActiveSelection(i)"
+                            @mouseover="hoverSelection(i, 'rgba(47, 162, 255, 0.3)')"
+                            @focus="hoverSelection(i, 'rgba(47, 162, 255, 0.3)')"
+                            @mouseleave="resetHovers"
+                            @focusout="resetHovers"
                         >
                             {{ selections[selection].abv }}
                             <button
@@ -602,11 +620,12 @@ export default {
                                     class="selectionlevel"
                                     :class="{
                                         extended: extendedOptions.includes(i),
-                                        hoverHighlight: selectionsToMerge.includes(i) && activeSelection !== i
+                                        hoverHighlight: selectionsToMerge.includes(i)
                                     }"
-                                    @mouseover="hoverSelection(i)"
+                                    @mouseover="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
+                                    @focus="hoverSelection(i, 'rgba(214, 96, 93, 0.3)')"
                                     @mouseleave="resetHovers"
-                                    @focus="hoverSelection(i)"
+                                    @focusout="resetHovers"
                                 >
                                     <span class="hint">{{ selection.abv }}</span>
                                     <p>{{ selection.id }}</p>
@@ -620,7 +639,7 @@ export default {
                                                 highlight: activeSelection === i,
                                                 scaledHighlight: selection.settings.bufferActive,
                                             }"
-                                            @click.exact="toggleSelection(i)"
+                                            @click.exact="inputActiveSelection(i)"
                                         >
                                             <v-icon>mdi-eye-outline</v-icon>
                                         </button>
@@ -635,14 +654,6 @@ export default {
                                         >
                                             <v-icon>mdi-plus</v-icon>
                                         </button>
-                                        <!--<button
-                                            v-if="selectionsToMerge.length > 0 && activeSelection === i"
-                                            :title="$t('additional:modules.tools.cosi.selectionManager.title_merge')"
-                                            class="combine_btn"
-                                            @click="addMergedSelection(i)"
-                                        >
-                                            <v-icon>mdi-vector-combine</v-icon>
-                                        </button>-->
                                         <button
                                             class="freeze_btn"
                                             :class="{highlight: selection.storedLayers.length > 0}"
@@ -855,6 +866,12 @@ export default {
                                     color:#444;
                                 }
                             }
+
+                            &:hover {
+                                cursor:pointer;
+                                color:whitesmoke;
+                                background:#2FA2FF;
+                            }
                         }
                     }
                 }
@@ -898,7 +915,7 @@ export default {
 
                             &.hoverHighlight {
                                 background:#ddd;
-                                border-right:2px solid $brightred;
+                                border-right:2px solid #2FA2FF;
                             }
 
                             &.extended {
@@ -1015,18 +1032,18 @@ export default {
                                     }
 
                                     &.combine_btn {
-                                        background:$brightred;
+                                        background: #2FA2FF;
 
                                         .v-icon {
                                             color:whitesmoke;
                                         }
 
                                         &:hover {
-                                            border:1px solid $brightred;
+                                            border:1px solid 2px solid #2FA2FF;
                                             background:whitesmoke;
 
                                             .v-icon {
-                                                color:$brightred;
+                                                color:#2FA2FF;
                                             }
                                         }
                                     }
@@ -1036,11 +1053,11 @@ export default {
                                         border:1px solid #ccc;
 
                                         .v-icon {
-                                            color:$brightred;
+                                            color:#888;
                                         }
 
                                         &.highlight {
-                                            background:$brightred;
+                                            background:#2FA2FF;
 
                                             .v-icon {
                                                 color:whitesmoke;
