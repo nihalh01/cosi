@@ -24,7 +24,7 @@ const
  * @returns {Object[]} data for export
  */
 export function prepareTableExport (data, districtNames, timestamp, timestampPrefix = "jahr_") {
-    if (data.constructor !== Array) {
+    if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
     }
@@ -55,13 +55,13 @@ export function prepareTableExport (data, districtNames, timestamp, timestampPre
 /**
  * Prepares the table data for an XLSX export, just the table as displayed
  * @param {Object[]} data - the feature data from the featuresList
-* @param {String[]} districtNames - keys of the districts
+ * @param {String[]} districtNames - keys of the districts
  * @param {Number[]} timestamps - timestamps
  * @param {String} timestampPrefix - timestamp prefix
  * @returns {Object[]} data for export
  */
 export function prepareTableExportWithTimeline (data, districtNames, timestamps, timestampPrefix) {
-    if (data.constructor !== Array) {
+    if (!Array.isArray(data)) {
         console.error("prepareTableExport: data must be an array");
         return null;
     }

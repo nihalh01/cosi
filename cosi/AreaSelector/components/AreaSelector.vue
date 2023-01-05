@@ -6,7 +6,7 @@ import {mapGetters, mapMutations, mapActions} from "vuex";
 import getters from "../store/gettersAreaSelector";
 import mutations from "../store/mutationsAreaSelector";
 import {geomPickerUnlisten, geomPickerSetGeometry, geomPickerGetFeature} from "../../utils/geomPickerHandler";
-import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
+import {setBBoxToGeom} from "../../utils/setBBoxToGeom.js";
 import GeometryPicker from "../../components/GeometryPicker.vue";
 import {Stroke, Style} from "ol/style.js";
 import {featureToGeoJson} from "../../utils/features/convertToGeoJson";
@@ -20,15 +20,17 @@ export default {
         GeometryPicker
     },
     data () {
-        return {
-            polygonStyle: new Style({
-                stroke: new Stroke({
-                    width: 3,
-                    color: [232, 85, 115, 1],
-                    lineDash: [5, 5]
-                })
+        // non reactive data
+        this.feature = null;
+        this.drawingLayer = null;
+        this.drawingStyle = new Style({
+            stroke: new Stroke({
+                width: 3,
+                color: [232, 85, 115, 1],
+                lineDash: [5, 5]
             })
-        };
+        });
+        return {};
     },
     computed: {
         ...mapGetters("Tools/AreaSelector", Object.keys(getters)),
@@ -61,10 +63,9 @@ export default {
         },
 
         geometry (geom) {
-            const feature = geomPickerGetFeature(this.$refs["geometry-picker"]) || new Feature({geometry: geom});
-
-            this.setFeature(feature);
+            this.feature = geomPickerGetFeature(this.$refs["geometry-picker"]) || new Feature({geometry: geom});
             this.drawingLayer.getSource().clear();
+
             if (this.feature) {
                 this.drawingLayer.getSource().addFeature(this.feature);
             }
@@ -73,12 +74,10 @@ export default {
             setBBoxToGeom.call(this, geom || this.boundingGeometry);
         }
     },
-    /**
-    * @returns {void}
-    */
+
     created () {
-        this.createDrawingLayer();
         this.$on("close", this.close);
+        this.createDrawingLayer(this.id, this.drawingStyle);
     },
     methods: {
         ...mapMutations("Tools/AreaSelector", Object.keys(mutations)),
@@ -89,36 +88,32 @@ export default {
         ...mapActions("Maps", ["addNewLayerIfNotExists"]),
         ...mapActions("Tools/SelectionManager", ["addNewSelection"]),
 
-        /**
-         * Updates the geometry from the geomPicker in the data for later use when instantiating a new feature
-         * @param {module:ol/Geometry} geom the new geometry object
-         * @returns {void}
-         */
-        updateGeometry (geom) {
-            this.setGeometry(geom);
-            geomPickerUnlisten(this.$refs["geometry-picker"]);
+        close () {
+            this.setActive(false);
         },
 
         /**
-         * @description create a guide layer used for additional info to display on the map
+         * Create a guide layer used for additional info to display on the map.
+         * @param {String} id - The layer id.
+         * @param {ol/Style} style - The style for the layer.
          * @returns {void}
          */
-        async createDrawingLayer () {
-            const newLayer = await this.addNewLayerIfNotExists({layerName: this.id});
+        async createDrawingLayer (id, style) {
+            const newLayer = await this.addNewLayerIfNotExists({layerName: id});
 
             newLayer.setVisible(true);
-            newLayer.setStyle(this.polygonStyle);
-            this.setDrawingLayer(newLayer);
+            newLayer.setStyle(style);
 
-            return newLayer;
+            this.drawingLayer = newLayer;
         },
 
         /**
-        * closes this component and opens requestInhabitants component and executes makeRequest with the calculated geoJSON of this component
+        * Closes this component and opens requestInhabitants component and executes makeRequest with the calculated geoJSON of this component.
+        * @param {ol/Feature} feature - The feature whose geometry is used for the inhabitants request.
         * @returns {void}
         */
-        async requestInhabitants () {
-            const geoJson = featureToGeoJson(this.feature, false, this.projectionCode, this.projectionCode);
+        async requestInhabitants (feature) {
+            const geoJson = featureToGeoJson(feature, false, this.projectionCode, this.projectionCode);
 
             this.close();
             await this.$nextTick();
@@ -127,11 +122,13 @@ export default {
         },
 
         /**
-        * Closes this tool window by setting active to false
-        * @returns {void}
-        */
-        close () {
-            this.setActive(false);
+         * Updates the geometry from the geomPicker in the data for later use when instantiating a new feature.
+         * @param {module:ol/Geometry} geom - The new geometry object.
+         * @returns {void}
+         */
+        updateGeometry (geom) {
+            this.setGeometry(geom);
+            geomPickerUnlisten(this.$refs["geometry-picker"]);
         }
     }
 };
@@ -170,9 +167,9 @@ export default {
                     small
                     tile
                     color="grey lighten-1"
-                    @click="requestInhabitants"
+                    @click="requestInhabitants(feature)"
                 >
-                    {{ $t('additional:modules.tools.cosi.accessibilityAnalysis.requestInhabitants') }}
+                    {{ $t('additional:modules.tools.cosi.areaSelector.requestInhabitants') }}
                 </v-btn>
             </v-app>
         </template>

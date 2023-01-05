@@ -9,8 +9,8 @@
 export function getValue (item, header, timestamp) {
     let val;
 
-    if (item[header.value]) {
-        val = parseFloat(item[header.value][this.timestampPrefix + timestamp]);
+    if (header?.value && item[header.value]) {
+        val = parseFloat(item[header.value][String(this.timestampPrefix) + timestamp]);
     }
 
     return val ? val.toLocaleString(this.currentLocale) : "-";

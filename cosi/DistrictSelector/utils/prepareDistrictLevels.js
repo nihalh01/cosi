@@ -102,7 +102,7 @@ export function getDistricts ({layer, keyOfAttrName, label, duplicateDistrictNam
             // name of the district
             getName: () => {
                 // The names of St.Pauli and Co. are inconsistent in the different services.
-                if (feature.get(keyOfAttrName).indexOf("St. ") !== -1) {
+                if (feature.get(keyOfAttrName) && feature.get(keyOfAttrName).indexOf("St. ") !== -1) {
                     return feature.get(keyOfAttrName).replace(/ /, "");
                 }
                 return feature.get(keyOfAttrName);

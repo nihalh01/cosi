@@ -301,7 +301,7 @@ export function calculateCorrelation () {
  * @returns {Number} the average
  */
 export function getAverage (item, districtNames, timestamp, timestampPrefix) {
-    if (item.valueType !== "absolute") {
+    if (item?.valueType !== "absolute") {
         return "-";
     }
     let result = this.getTotal(item, districtNames, timestamp, timestampPrefix, true);
@@ -321,10 +321,10 @@ export function getAverage (item, districtNames, timestamp, timestampPrefix) {
  * @returns {Number} the total
  */
 export function getTotal (item, districtNames, timestamp, timestampPrefix, simple = false) {
-    if (!simple && item.calculation && item.valueType === "relative") {
+    if (!simple && item?.calculation && item?.valueType === "relative") {
         return this.getCulmulativeTotal(item, districtNames, timestamp, timestampPrefix);
     }
-    if (!simple && item.valueType !== "absolute") {
+    if (!simple && item?.valueType !== "absolute") {
         return "-";
     }
 

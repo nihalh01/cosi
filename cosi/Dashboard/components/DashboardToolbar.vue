@@ -8,10 +8,6 @@ export default {
         statsFeatureFilter: {
             type: Array,
             required: true
-        },
-        search: {
-            type: String,
-            required: true
         }
     },
     data: () => ({
@@ -31,14 +27,6 @@ export default {
             },
             set (value) {
                 this.$emit("setStatsFeatureFilter", value);
-            }
-        },
-        _search: {
-            get () {
-                return this.search;
-            },
-            set (value) {
-                this.$emit("setSearch", value);
             }
         }
     },

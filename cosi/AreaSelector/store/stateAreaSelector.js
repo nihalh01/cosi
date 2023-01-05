@@ -19,9 +19,7 @@ const state = {
     resizableWindow: false,
     isVisibleInMenu: true,
     deactivateGFI: false,
-    drawingLayer: null,
     geometry: null,
-    feature: null,
     readmeUrl: {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/cosi-prod/cosi/manuals/areaselector.en.md",
         "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/cosi-prod/cosi/manuals/areaselector.md"

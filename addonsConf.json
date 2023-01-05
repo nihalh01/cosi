@@ -180,13 +180,13 @@
     "path":"cosi/ExportPDF",
     "type": "tool"
     },
-  "obliqueViewer": {
+  "vcOblique": {
     "type": "tool"
   },
   "ToolBridge": {
     "path": "cosi/ToolBridge",
     "type": "tool"
-  }, 
+  },
   "ReportTemplates": {
     "path": "cosi/ReportTemplates",
     "type": "tool"

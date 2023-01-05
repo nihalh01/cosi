@@ -5,6 +5,7 @@
 
 ## Unreleased - in development
 ### __Breaking Changes__
+Addon `obliqueViewer` was renamed to `vcOblique`.
 
 ### Added
 

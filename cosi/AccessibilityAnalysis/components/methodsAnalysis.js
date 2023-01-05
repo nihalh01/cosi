@@ -1,7 +1,7 @@
 import * as Proj from "ol/proj.js";
 import * as Extent from "ol/extent";
 import GeometryCollection from "ol/geom/GeometryCollection";
-import setBBoxToGeom from "../../utils/setBBoxToGeom";
+import {setBBoxToGeom} from "../../utils/setBBoxToGeom";
 import
 {
     Fill,

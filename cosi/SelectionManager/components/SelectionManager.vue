@@ -6,7 +6,7 @@ import actions from "../store/actionsSelectionManager";
 import VectorLayer from "ol/layer/Vector.js";
 import VectorSource from "ol/source/Vector.js";
 import getBoundingGeometry from "../../utils/getBoundingGeometry.js";
-import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
+import {setBBoxToGeom} from "../../utils/setBBoxToGeom.js";
 import ToolInfo from "../../components/ToolInfo.vue";
 import {addModelsByAttributes, getModelByAttributes} from "../../utils/radioBridge.js";
 import Feature from "ol/Feature";

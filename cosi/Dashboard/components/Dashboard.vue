@@ -1,7 +1,6 @@
 <script>
 /* eslint-disable vue/multi-word-component-names */
 import Tool from "../../../../src/modules/tools/ToolTemplate.vue";
-import {getComponent} from "../../../../src/utils/getComponent";
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import getters from "../store/gettersDashboard";
 import mutations from "../store/mutationsDashboard";
@@ -249,12 +248,7 @@ export default {
          * @returns {void}
          */
         this.$on("close", () => {
-            const model = getComponent(this.id);
-
             this.setActive(false);
-            if (model) {
-                model.set("isActive", false);
-            }
         });
     },
 
@@ -538,14 +532,6 @@ export default {
         getCulmulativeTotal,
 
         /**
-         * @param {String} value -
-         * @returns {void}
-         */
-        setSearch (value) {
-            this.search = value;
-        },
-
-        /**
          * Sets the current (visible) items of the table.
          * @param {Object[]} items - The of the table.
          * @returns {void}
@@ -567,11 +553,14 @@ export default {
             if (evt) {
                 this.toolOffset = window.innerWidth - evt.targetElement.clientWidth;
             }
-            if (this.$el.querySelector("#dashboard-toolbar").clientHeight > 50) {
-                this.$el.querySelector(".dashboard-table-wrapper").style.height = "calc(100% - 116px)";
-            }
-            else {
-                this.$el.querySelector(".dashboard-table-wrapper").style.height = "calc(100% - 80px)";
+
+            if (typeof this.$el.querySelector === "function") {
+                if (this.$el.querySelector("#dashboard-toolbar").clientHeight > 50) {
+                    this.$el.querySelector(".dashboard-table-wrapper").style.height = "calc(100% - 116px)";
+                }
+                else {
+                    this.$el.querySelector(".dashboard-table-wrapper").style.height = "calc(100% - 80px)";
+                }
             }
         },
 
@@ -634,6 +623,21 @@ export default {
                 result = arr.map((item) => ({...def, ...item}));
 
             return result;
+        },
+
+        /**
+         *  This function collapses the results of dashboard to make it look more clean
+         */
+
+        collapseAllGroups () {
+            // The second half of the solution is not clear to me but found that it is one way to achieve
+            const groupStates = this.$refs["dashboard-table"]?.$vnode.componentInstance.openCache;
+
+            if (groupStates) {
+                for (const e in groupStates) {
+                    groupStates[e] = false;
+                }
+            }
         }
 
     }
@@ -667,14 +671,12 @@ export default {
                     <v-container fluid>
                         <DashboardToolbar
                             :stats-feature-filter="statsFeatureFilter"
-                            :search="search"
                             @setStatsFeatureFilter="setStatsFeatureFilter"
-                            @setSearch="setSearch"
                             @exportTable="exportTable"
                         />
                         <v-row class="dashboard-table-wrapper">
                             <v-data-table
-                                ref="dashbard-table"
+                                ref="dashboard-table"
                                 v-model="selectedItems"
                                 :headers="columns"
                                 :items="items"
@@ -689,6 +691,7 @@ export default {
                                 item-key="category"
                                 class="dashboard-table"
                                 @current-items="setCurrentItems"
+                                @hook:mounted="collapseAllGroups"
                             >
                                 <!-- Header for years selector -->
                                 <template #[`header.years`]>

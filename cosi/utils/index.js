@@ -3,7 +3,7 @@ import getRgbArray from "./getRgbArray";
 import getBoundingGeometry from "./getBoundingGeometry";
 import calculateExtent from "./features/calculateExtent";
 import calculateRatio from "./calculateRatio";
-import setBBoxToGeom, {setBboxGeometryToLayer} from "./setBBoxToGeom";
+import {setBBoxToGeom, setBboxGeometryToLayer} from "./setBBoxToGeom";
 import downloadBlobToFile from "./downloadBlobToFile";
 import exportXlsx from "./exportXlsx";
 import getAvailableYears, {getLastAvailableYear} from "./getAvailableYears";

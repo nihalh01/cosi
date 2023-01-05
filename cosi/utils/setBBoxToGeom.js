@@ -68,7 +68,7 @@ function updateSource (source, bboxGeometry, url, item, app) {
  * @param {module:ol/geom/GeometryCollection} bboxGeometry - the geometry to set the bounding box to
  * @returns {void}
  */
-export function setBBoxToGeom (bboxGeometry) {
+function setBBoxToGeom (bboxGeometry) {
     const
         app = this instanceof Vue ? this : undefined,
         layerlist = [
@@ -87,7 +87,7 @@ export function setBBoxToGeom (bboxGeometry) {
  * @param {Vue} [app] - the calling component
  * @returns {void}
  */
-export function setBboxGeometryToLayer (itemList, bboxGeometry, app) {
+function setBboxGeometryToLayer (itemList, bboxGeometry, app) {
     const
         modelList = getCollection(),
         crs = app?.$store.getters["Maps/projectionCode"] || "EPSG:25832";
@@ -113,4 +113,8 @@ export function setBboxGeometryToLayer (itemList, bboxGeometry, app) {
     });
 }
 
-export default setBBoxToGeom;
+module.exports = {
+    setBBoxToGeom,
+    setBboxGeometryToLayer
+};
+// export default setBBoxToGeom;

@@ -4,7 +4,7 @@ import {getComponent} from "../../../../src/utils/getComponent";
 import {prepareDistrictLevels} from "../utils/prepareDistrictLevels";
 import calculateExtent from "../../utils/features/calculateExtent.js";
 import getBoundingGeometry from "../../utils/getBoundingGeometry.js";
-import setBBoxToGeom from "../../utils/setBBoxToGeom.js";
+import {setBBoxToGeom} from "../../utils/setBBoxToGeom.js";
 import {mapGetters, mapActions, mapMutations, mapState} from "vuex";
 import getters from "../store/gettersDistrictSelector";
 import mutations from "../store/mutationsDistrictSelector";
