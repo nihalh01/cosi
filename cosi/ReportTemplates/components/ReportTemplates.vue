@@ -94,6 +94,7 @@ export default {
     },
     created () {
         this.$on("close", this.close);
+
     },
     mounted () {
         // ...
@@ -116,6 +117,33 @@ export default {
             this.templateItems[templateItemsIndex].settings = toolSettings; // update settings
             this.templateItems[templateItemsIndex].hasSettings = true; // now handled as UI checkbox
             this.clearTemplateItemOutput(templateItemsIndex); // delete any previous results that no longer match the new settings
+
+
+        },
+        async applyChapter (templateItemsIndex) {
+            const chapter = this.templateItems[templateItemsIndex];
+
+            if (!chapter.dataSelectionApplied) {
+                this.setCurrentDataSelection(chapter.dataSelection);
+            }
+            /**
+             * Wait for the data loaded event
+             * @param {*} promisedEvent event that should be await-ed
+             * @return {Promise} empty promise, resolved when promisedEvent is emitted
+             */
+            function promisedEvent (eventName) {
+                return new Promise((resolve) => {
+                    // eslint-disable-next-line require-jsdoc
+                    const listener = () => {
+                        this.$root.$off();
+                        resolve();
+                    };
+
+                    this.$root.$on(eventName, listener);
+                });
+            }
+            await promisedEvent("selection-manager-accept-selection-finished");
+            this.updateToolOutput(templateItemsIndex);
 
 
         },

@@ -60,9 +60,10 @@ export default {
     watch: {
         // other tools can commit to this store variable to add new selections
         // that pattern allows us to use data from external tools and apply internal methods to it.
-        acceptSelection (selection) {
+        async acceptSelection (selection) {
             if (selection) {
                 // check for stored vector layers to load
+                console.log("acceptSelection watcher start");
                 selection.storedLayers.forEach(layerName => {
                     if (!getModelByAttributes({type: "layer", name: layerName})) {
                         addModelsByAttributes({name: layerName});
@@ -75,6 +76,8 @@ export default {
                 selection.abv = this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? selection.id.match(/\b([A-Z0-9])/g).join("") + "-" + this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length : selection.id.match(/\b([A-Z0-9])/g).join("");
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
+                console.log("acceptSelection watcher end");
+                this.$root.$emit("selection-manager-accept-selection-finished"); // resolves promise returned by acceptSelection actions
             }
         },
         // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
@@ -181,6 +184,7 @@ export default {
             this.map.addLayer(layer);
 
             setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].selection, 0));
+            console.log("highlighted!");
         },
         /**
              * @description Creates VectorLayer for the chosen selection if there is a buffer value and overwrites standard selection.
@@ -269,7 +273,7 @@ export default {
              * @param {Array} storedLayers - The names of the stored layers inside the saved selection
              * @returns {void}
              */
-        async setStoredLayersActive (storedLayers) {
+        setStoredLayersActive (storedLayers) {
 
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
@@ -289,17 +293,16 @@ export default {
                     model.set("isSelected", true);
                 }
             });
-
             // a bug in the loaderOverlay.hide() is not working, even if it's fired with a timeOut
             // so here's a very! uncanny workaround to make it work in this case
-            await this.$nextTick();
+            // await this.$nextTick();
 
-            // setTimout because something triggers LoaderOverlay.show() after the last $nextTick() and I can't figure out what
-            setTimeout(()=> {
-                // remove the classes manually
-                document.getElementById("loader").classList.remove("loader-is-loading");
-                document.getElementById("masterportal-container").classList.remove("blurry");
-            }, 1500);
+            // // setTimout because something triggers LoaderOverlay.show() after the last $nextTick() and I can't figure out what
+            // setTimeout(()=> {
+            //     // remove the classes manually
+            //     document.getElementById("loader").classList.remove("loader-is-loading");
+            //     document.getElementById("masterportal-container").classList.remove("blurry");
+            // }, 1500);
         },
         /**
              * @description Adds index of selection to extendedOptions to extend to option menu in the frontend.
