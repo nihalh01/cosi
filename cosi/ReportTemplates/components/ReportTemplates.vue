@@ -123,15 +123,25 @@ export default {
         async applyChapter (templateItemsIndex) {
             const chapter = this.templateItems[templateItemsIndex];
 
+            console.log("applying chapter..", chapter);
             if (!chapter.dataSelectionApplied) {
+                console.log("setting data selection...", chapter.dataSelection);
                 this.setCurrentDataSelection(chapter.dataSelection);
             }
+            // To make sure the data is loaded first, and the analysis is applied after that, we create a promise that resolves on an event sent by the selectionmanager
+            // i promise that this solution is less terrible than most of the others I have considered
+            // ideally, setCurrentDataSelection would return a promise that we can await
+            // however that is in contradiction to the whole selectionmanager and data selection architecture
+            // everything would have to be turned into actions exposing the whole thing
+            // messing with the general pattern of interacting between tools by passing data through the store
             /**
              * Wait for the data loaded event
-             * @param {*} promisedEvent event that should be await-ed
+             * @param {*} eventName name of event that should be await-ed
              * @return {Promise} empty promise, resolved when promisedEvent is emitted
              */
-            function promisedEvent (eventName) {
+            // must be an arrow function so not sure how to adhere to func-style
+            // eslint-disable-next-line func-style
+            const promisedEvent = (eventName)=> {
                 return new Promise((resolve) => {
                     // eslint-disable-next-line require-jsdoc
                     const listener = () => {
@@ -141,9 +151,14 @@ export default {
 
                     this.$root.$on(eventName, listener);
                 });
-            }
+            };
+
+            console.log("done. waiting for promised event...");
             await promisedEvent("selection-manager-accept-selection-finished");
-            this.updateToolOutput(templateItemsIndex);
+            console.log("done. updating tool output...", this.templateItems[templateItemsIndex]);
+            this.hasOutputToggle(templateItemsIndex);
+            // this.updateToolOutput(templateItemsIndex);
+            console.log("done.");
 
 
         },
@@ -160,6 +175,7 @@ export default {
             }
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
+            console.log(this.templateItems[templateItemsIndex].settings);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
@@ -354,7 +370,7 @@ export default {
          * @return {void}
          */
         hasOutputToggle (index) {
-            // copy data selection if turned on:
+            // request output if turned on:
             if (this.templateItems[index].hasOutput) {
                 this.updateToolOutput(index);
             }
@@ -618,6 +634,15 @@ export default {
                                                     label="Ergebnisse"
                                                     @change="hasOutputToggle(index)"
                                                 /><br><br>
+                                            </v-row>
+                                            <v-row class="mb-2">
+                                                <v-btn
+
+                                                    :disabled="!templateItem.hasSettings"
+                                                    @click="applyChapter(index)"
+                                                >
+                                                    RUN
+                                                </v-btn><br><br>
                                             </v-row>
                                         </v-row>
                                         <!-- display raw settings -->
