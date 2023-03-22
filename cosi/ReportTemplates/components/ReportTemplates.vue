@@ -123,10 +123,10 @@ export default {
         async applyChapter (templateItemsIndex) {
             const chapter = this.templateItems[templateItemsIndex];
 
-            console.log("applying chapter..", chapter);
+            console.log("applying chapter #", templateItemsIndex, chapter);
             if (!chapter.dataSelectionApplied) {
                 console.log("setting data selection...", chapter.dataSelection);
-                this.setCurrentDataSelection(chapter.dataSelection);
+                // this.setCurrentDataSelection(chapter.dataSelection);
             }
             // To make sure the data is loaded first, and the analysis is applied after that, we create a promise that resolves on an event sent by the selectionmanager
             // i promise that this solution is less terrible than most of the others I have considered
@@ -145,7 +145,7 @@ export default {
                 return new Promise((resolve) => {
                     // eslint-disable-next-line require-jsdoc
                     const listener = () => {
-                        this.$root.$off();
+                        this.$root.$off(eventName);
                         resolve();
                     };
 
@@ -154,9 +154,13 @@ export default {
             };
 
             console.log("done. waiting for promised event...");
-            await promisedEvent("selection-manager-accept-selection-finished");
+            // await promisedEvent("selection-manager-accept-selection-finished");
+            console.log("done. clearing tool output...");
+            this.clearTemplateItemOutput(templateItemsIndex);
+            this.templateItems[templateItemsIndex].hasOutput = false;
             console.log("done. updating tool output...", this.templateItems[templateItemsIndex]);
-            this.hasOutputToggle(templateItemsIndex);
+            this.updateToolOutput(templateItemsIndex);
+            this.templateItems[templateItemsIndex].hasOutput = true;
             // this.updateToolOutput(templateItemsIndex);
             console.log("done.");
 
@@ -175,13 +179,14 @@ export default {
             }
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
-            console.log(this.templateItems[templateItemsIndex].settings);
+            console.log("toolbridge runTool with", this.templateItems[templateItemsIndex].settings);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
                 outputCallback: (output) => { // in the end, store result in `this.templateItems` and  display them.
                     const itemID = templateItemsIndex; // copy the item id into the function namespace
 
+                    console.log("outputs received, commiting from callback");
                     this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
 
                 }
@@ -370,8 +375,10 @@ export default {
          * @return {void}
          */
         hasOutputToggle (index) {
+            console.log("toggle has output ", index);
             // request output if turned on:
             if (this.templateItems[index].hasOutput) {
+                console.log("updateToolOutput called from hasoutputtoggle");
                 this.updateToolOutput(index);
             }
             // otherwise delete data selection

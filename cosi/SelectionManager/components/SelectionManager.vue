@@ -66,6 +66,7 @@ export default {
                 console.log("acceptSelection watcher start");
                 selection.storedLayers.forEach(layerName => {
                     if (!getModelByAttributes({type: "layer", name: layerName})) {
+                        console.log("adding models by attributes...");
                         addModelsByAttributes({name: layerName});
                     }
                 });
