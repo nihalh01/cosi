@@ -6,6 +6,9 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 import getters from "../store/gettersReportTemplates";
 import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
+import Vue from "vue";
+import {onFeaturesLoaded} from "../../utils/radioBridge.js";
+
 
 export default {
     name: "ReportTemplates",
@@ -97,7 +100,9 @@ export default {
 
     },
     mounted () {
-        // ...
+        onFeaturesLoaded((x)=>{
+            console.log("SOME FEATURES WERE LOADED!"); console.log(x);
+        });
     },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
@@ -126,7 +131,8 @@ export default {
             console.log("applying chapter #", templateItemsIndex, chapter);
             if (!chapter.dataSelectionApplied) {
                 console.log("setting data selection...", chapter.dataSelection);
-                // this.setCurrentDataSelection(chapter.dataSelection);
+                this.setCurrentDataSelection(chapter.dataSelection);
+
             }
             // To make sure the data is loaded first, and the analysis is applied after that, we create a promise that resolves on an event sent by the selectionmanager
             // i promise that this solution is less terrible than most of the others I have considered
@@ -154,7 +160,8 @@ export default {
             };
 
             console.log("done. waiting for promised event...");
-            // await promisedEvent("selection-manager-accept-selection-finished");
+            await promisedEvent("selection-manager-accept-selection-finished");
+            await Vue.nextTick();
             console.log("done. clearing tool output...");
             this.clearTemplateItemOutput(templateItemsIndex);
             this.templateItems[templateItemsIndex].hasOutput = false;
