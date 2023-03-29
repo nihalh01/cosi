@@ -63,11 +63,12 @@ export default {
         async acceptSelection (selection) {
             if (selection) {
                 // check for stored vector layers to load
-                console.log("acceptSelection watcher start");
+                // console.log("acceptSelection watcher start");
                 selection.storedLayers.forEach(layerName => {
                     if (!getModelByAttributes({type: "layer", name: layerName})) {
                         console.log("adding models by attributes...");
                         addModelsByAttributes({name: layerName});
+                        console.log("adding models by attributes...");
                     }
                 });
 
@@ -77,8 +78,14 @@ export default {
                 selection.abv = this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? selection.id.match(/\b([A-Z0-9])/g).join("") + "-" + this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length : selection.id.match(/\b([A-Z0-9])/g).join("");
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
-                console.log("acceptSelection watcher end");
+
+                // console.log("starting timeout...");
+                // setTimeout(()=>{
+                // console.log("dispatching event");
                 this.$root.$emit("selection-manager-accept-selection-finished"); // resolves promise returned by acceptSelection actions
+
+                // }, 5000);
+                console.log("acceptSelection watcher end");
             }
         },
         // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
@@ -125,8 +132,10 @@ export default {
                 }
             }
         },
+        // selections - indirectly watched through computed variable selectionsLength
         // Sets the all selections button active again if the this.selections array changes and updates the selection index
         selectionsLength (newValue, oldValue) {
+            console.log("selection length watcher");
             if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {
                 this.inputActiveSelection(newValue - 1);
             }
@@ -135,6 +144,12 @@ export default {
             }
 
             this.allSelectionsPossible = true;
+
+        },
+        selectionLoadEnd () {
+            console.log("SELECTION LOAD END WATCHER");
+            this.$root.$emit("selectionManager-load-end");
+
         }
     },
     created () {
@@ -150,12 +165,14 @@ export default {
              * @returns {void}
              */
         activateSelection (index) {
+            console.log("activateSelection!!!");
             if (this.selections[index].settings.bufferActive) {
                 this.rerenderSelection(index);
             }
             else {
                 this.highlightSelection(index);
             }
+            console.log("activateSelection  finished");
         },
         /**
              * @description Creates VectorLayer for the chosen selection
@@ -221,6 +238,7 @@ export default {
             this.map.addLayer(layer);
 
             setBBoxToGeom.call(this, getBoundingGeometry(this.selections[index].bufferedSelection));
+            console.log("rerenderSelection done");
         },
         /**
              * @description Creates VectorLayer for the chosen selection on hover in the selection menu.
@@ -275,7 +293,8 @@ export default {
              * @returns {void}
              */
         setStoredLayersActive (storedLayers) {
-
+            console.log("storedLayers >>> ", storedLayers);
+            console.log(this.activeVectorLayerList);
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,

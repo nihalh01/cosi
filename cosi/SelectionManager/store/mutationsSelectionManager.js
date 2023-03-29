@@ -1,3 +1,4 @@
+import Vue from "vue";
 import {generateSimpleMutations} from "../../../../src/app-store/utils/generators";
 import stateSelectionManager from "./stateSelectionManager";
 
@@ -31,7 +32,12 @@ const mutations = {
         }
         else {
             state.activeSelection = payload;
+
         }
+        state.selectionLoadEnd++;
+
+        //        state.setSelectionLoadEnd(this.selectionLoadEnd + 1);
+
     },
     /**
      * @param {object} state of this component

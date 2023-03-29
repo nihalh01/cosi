@@ -6,7 +6,6 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 import getters from "../store/gettersReportTemplates";
 import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
-import Vue from "vue";
 import {onFeaturesLoaded} from "../../utils/radioBridge.js";
 
 
@@ -101,7 +100,8 @@ export default {
     },
     mounted () {
         onFeaturesLoaded((x)=>{
-            console.log("SOME FEATURES WERE LOADED!"); console.log(x);
+            console.log("SOME FEATURES WERE LOADED!");
+            console.log(x);
         });
     },
     methods: {
@@ -149,8 +149,10 @@ export default {
             // eslint-disable-next-line func-style
             const promisedEvent = (eventName)=> {
                 return new Promise((resolve) => {
+
                     // eslint-disable-next-line require-jsdoc
                     const listener = () => {
+                        console.log("event heard, resolving promise");
                         this.$root.$off(eventName);
                         resolve();
                     };
@@ -160,8 +162,11 @@ export default {
             };
 
             console.log("done. waiting for promised event...");
-            await promisedEvent("selection-manager-accept-selection-finished");
-            await Vue.nextTick();
+            await promisedEvent("featureListUpdatedBy-setBBoxToGeom-updateSource"); //
+            // await promisedEvent("selection-manager-selections-length-watcher-finished");
+            // await promisedEvent("selection-manager-selections-input-activeSelection-finished");
+
+            console.log("...event heared! resuming...");
             console.log("done. clearing tool output...");
             this.clearTemplateItemOutput(templateItemsIndex);
             this.templateItems[templateItemsIndex].hasOutput = false;

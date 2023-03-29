@@ -22,6 +22,7 @@ const state = {
     isVisibleInMenu: false,
     deactivateGFI: false,
     selections: [],
+    selectionLoadEnd: 0, // increases by 1 whenever a new/activated selection has finished loading (watched)
     activeSelection: null,
     acceptSelection: null, // other tools can commit to this variable. Then, a new selection is added and set as active.
     readmeUrl: {

@@ -59,7 +59,7 @@ function updateSource (model, bboxGeometry, url, item, app) {
                 }
                 filterLayerSourceByBbox(evt.target, bboxGeometry);
                 if (app) {
-                    app.$root.$emit("updateFeaturesList");
+                    app.$root.$emit("updateFeaturesList", "setBBoxToGeom-updateSource");
                 }
             });
         }
@@ -70,7 +70,7 @@ function updateSource (model, bboxGeometry, url, item, app) {
         if (bboxGeometry) {
             filterLayerSourceByBbox(source, bboxGeometry);
             if (app) {
-                app.$root.$emit("updateFeaturesList");
+                app.$root.$emit("updateFeaturesList", "setBBoxToGeom-updateSource");
             }
         }
     }
