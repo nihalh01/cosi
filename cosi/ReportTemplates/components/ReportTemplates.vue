@@ -7,6 +7,7 @@ import getters from "../store/gettersReportTemplates";
 import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
 import {onFeaturesLoaded} from "../../utils/radioBridge.js";
+import {callbackify} from "util";
 
 
 export default {
@@ -99,10 +100,6 @@ export default {
 
     },
     mounted () {
-        onFeaturesLoaded((x)=>{
-            console.log("SOME FEATURES WERE LOADED!");
-            console.log(x);
-        });
     },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
@@ -125,12 +122,27 @@ export default {
 
 
         },
-        async applyChapter (templateItemsIndex) {
+        runTemplate (callback, startIndex = 0) {
+            console.log(startIndex);
+            // recursive function - exit with callback after all chapters finished
+            if (startIndex >= this.templateItems.length) {
+                // when finished, run callback
+                if (callback) {
+                    callback();
+                }
+                // then exit
+                return;
+            }
+            // run chapter, then restart this function with the next chapter
+            this.applyChapter(startIndex, ()=>{
+                this.runTemplate(callback, startIndex + 1);
+            });
+
+        },
+        async applyChapter (templateItemsIndex, callbackAfterOutputReceived) {
             const chapter = this.templateItems[templateItemsIndex];
 
-            console.log("applying chapter #", templateItemsIndex, chapter);
             if (!chapter.dataSelectionApplied) {
-                console.log("setting data selection...", chapter.dataSelection);
                 this.setCurrentDataSelection(chapter.dataSelection);
 
             }
@@ -146,13 +158,12 @@ export default {
              * @return {Promise} empty promise, resolved when promisedEvent is emitted
              */
             // must be an arrow function so not sure how to adhere to func-style
-            // eslint-disable-next-line func-style
+            // eslint-disable-next-line func-style, one-var, require-jsdoc
             const promisedEvent = (eventName)=> {
                 return new Promise((resolve) => {
 
                     // eslint-disable-next-line require-jsdoc
                     const listener = () => {
-                        console.log("event heard, resolving promise");
                         this.$root.$off(eventName);
                         resolve();
                     };
@@ -161,25 +172,21 @@ export default {
                 });
             };
 
-            console.log("done. waiting for promised event...");
-            await promisedEvent("featureListUpdatedBy-setBBoxToGeom-updateSource"); //
-            // await promisedEvent("selection-manager-selections-length-watcher-finished");
-            // await promisedEvent("selection-manager-selections-input-activeSelection-finished");
 
-            console.log("...event heared! resuming...");
-            console.log("done. clearing tool output...");
+            await promisedEvent("featureListUpdatedBy-setBBoxToGeom-updateSource"); // data loading is a deep asynchronous chain. this event is set off when the data is finsihed loading.
+            // reset the template results
             this.clearTemplateItemOutput(templateItemsIndex);
             this.templateItems[templateItemsIndex].hasOutput = false;
-            console.log("done. updating tool output...", this.templateItems[templateItemsIndex]);
-            this.updateToolOutput(templateItemsIndex);
+            // run the tool to update the results
+            this.updateToolOutput(templateItemsIndex, callbackAfterOutputReceived);
             this.templateItems[templateItemsIndex].hasOutput = true;
-            // this.updateToolOutput(templateItemsIndex);
-            console.log("done.");
 
 
         },
         // run a different addon based on templateItem, store results
-        updateToolOutput (templateItemsIndex) {
+        updateToolOutput (templateItemsIndex, callbackAfterOutputReceived) {
+
+
             // check if tool settings are stored
             if (!this.templateItems[templateItemsIndex].hasSettings) {
                 this.addSingleAlert({
@@ -187,21 +194,33 @@ export default {
                     category: "Fehler",
                     displayClass: "error"
                 });
+                if (callbackAfterOutputReceived) {
+                    callbackAfterOutputReceived(null);
+                }
                 return null; // if no tool settings, stop here
             }
+
+            // in the end...
+            // eslint-disable-next-line require-jsdoc
+            const outputCallback = (output)=>{
+                const itemID = templateItemsIndex;
+
+                // ..commit the result to the store variable..
+                this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
+                // then run the custom callback
+                if (callbackAfterOutputReceived) {
+                    callbackAfterOutputReceived(output);
+                }
+            };
+
+
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
             console.log("toolbridge runTool with", this.templateItems[templateItemsIndex].settings);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
-                outputCallback: (output) => { // in the end, store result in `this.templateItems` and  display them.
-                    const itemID = templateItemsIndex; // copy the item id into the function namespace
-
-                    console.log("outputs received, commiting from callback");
-                    this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
-
-                }
+                outputCallback: outputCallback
             });
             return null;
 
@@ -660,7 +679,7 @@ export default {
                                                     :disabled="!templateItem.hasSettings"
                                                     @click="applyChapter(index)"
                                                 >
-                                                    RUN
+                                                    Ausfuehren
                                                 </v-btn><br><br>
                                             </v-row>
                                         </v-row>
@@ -693,6 +712,14 @@ export default {
                                         </v-row>
                                     </v-container>
                                 </v-card>
+                                <v-row class="mb-2">
+                                    <v-btn
+                                        color="grey lighten-1"
+                                        @click="runTemplate()"
+                                    >
+                                        Alle Ausfuehren
+                                    </v-btn>
+                                </v-row>
                             </v-container>
                         </div>
                         <!-- tab: export -->

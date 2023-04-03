@@ -368,8 +368,8 @@ export default {
                 this.items = [];
             }
             console.log(senderName);
-            console.log("featureListUpdatedBy" + (senderName ? senderName : "Unknown"));
-            this.$root.$emit("featureListUpdatedBy" + (senderName ? senderName : "Unknown"));
+            console.log("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
+            this.$root.$emit("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
 
         },
 
