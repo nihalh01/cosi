@@ -57,6 +57,10 @@
     "path":"cosi/FeaturesList",
     "type": "tool"
   },
+  "PolygonStyler": {
+    "path":"cosi/PolygonStyler",
+    "type": "tool"
+  },
   "ScenarioBuilder": {
     "path": "cosi/ScenarioBuilder",
     "type": "tool"
