@@ -6,10 +6,7 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 import getters from "../store/gettersReportTemplates";
 import mutations from "../store/mutationsReportTemplates";
 import tableify from "tableify"; // generate html tables from js objects
-import {onFeaturesLoaded} from "../../utils/radioBridge.js";
-import {callbackify} from "util";
-
-
+import promisedEvent from "../utils/promisedEvent";
 export default {
     name: "ReportTemplates",
     components: {
@@ -97,14 +94,13 @@ export default {
     },
     created () {
         this.$on("close", this.close);
-
     },
     mounted () {
+        // ...
     },
     methods: {
         ...mapActions("Alerting", ["addSingleAlert", "cleanup"]),
         ...mapMutations("Tools/ReportTemplates", Object.keys(mutations)),
-        // ...mapActions("Tools/ReportTemplates", Object.keys(actions)),
         ...mapActions("Tools/ToolBridge", ["runTool"]),
         ...mapActions("Maps", ["zoomToExtent"]),
         ...mapActions("Tools/ExportPDF", ["reportTemplateToPDF"]),
@@ -114,20 +110,25 @@ export default {
             // get settings via ToolBridge currentSettings() method
             const toolSettings = this.currentSettings(this.templateItems[templateItemsIndex].tool);
 
-            this.addSingleAlert("test");
             // update array
             this.templateItems[templateItemsIndex].settings = toolSettings; // update settings
-            this.templateItems[templateItemsIndex].hasSettings = true; // now handled as UI checkbox
-            this.clearTemplateItemOutput(templateItemsIndex); // delete any previous results that no longer match the new settings
+            this.templateItems[templateItemsIndex].hasSettings = true; // handled as UI checkbox
+            this.clearTemplateItemOutput(templateItemsIndex); // delete any previous results - they may no longer match the settings
 
 
         },
+        /**
+         *
+         * @param {*} callback runs after all chapters were applied (no input and return value not returned)
+         * @param {*} startIndex from which chapter to start (parameter needed for recursion)
+         * @return {void}
+         */
         runTemplate (callback, startIndex = 0) {
-            console.log(startIndex);
             // recursive function - exit with callback after all chapters finished
             if (startIndex >= this.templateItems.length) {
                 // when finished, run callback
                 if (callback) {
+                    // eslint-disable-next-line callback-return
                     callback();
                 }
                 // then exit
@@ -139,52 +140,50 @@ export default {
             });
 
         },
-        async applyChapter (templateItemsIndex, callbackAfterOutputReceived) {
+        /**
+         * apply chapter data selection, wait for data, run analysis
+         * @param {*} templateItemsIndex index of chapter in templateItems
+         * @param {*} finallyDo what to do in the end, no matter if applying the chapter worked or not (no input expected)
+         * @return {void}
+         */
+        applyChapter (templateItemsIndex, finallyDo) {
             const chapter = this.templateItems[templateItemsIndex];
 
-            if (!chapter.dataSelectionApplied) {
-                this.setCurrentDataSelection(chapter.dataSelection);
+            // 1. set data selection
+            this.setCurrentDataSelection(chapter.dataSelection)
+            // 2. run analysis
+                .then(()=>{
+                    this.clearTemplateItemOutput(templateItemsIndex);
+                    this.templateItems[templateItemsIndex].hasOutput = false;
+                    return this.updateToolOutput(templateItemsIndex);
+                })
+                .then(()=>{
+                    this.templateItems[templateItemsIndex].hasOutput = true;
+                })
+            // 3. alert on failure
+                .catch(()=>{
 
-            }
-            // To make sure the data is loaded first, and the analysis is applied after that, we create a promise that resolves on an event sent by the selectionmanager
-            // i promise that this solution is less terrible than most of the others I have considered
-            // ideally, setCurrentDataSelection would return a promise that we can await
-            // however that is in contradiction to the whole selectionmanager and data selection architecture
-            // everything would have to be turned into actions exposing the whole thing
-            // messing with the general pattern of interacting between tools by passing data through the store
-            /**
-             * Wait for the data loaded event
-             * @param {*} eventName name of event that should be await-ed
-             * @return {Promise} empty promise, resolved when promisedEvent is emitted
-             */
-            // must be an arrow function so not sure how to adhere to func-style
-            // eslint-disable-next-line func-style, one-var, require-jsdoc
-            const promisedEvent = (eventName)=> {
-                return new Promise((resolve) => {
-
-                    // eslint-disable-next-line require-jsdoc
-                    const listener = () => {
-                        this.$root.$off(eventName);
-                        resolve();
-                    };
-
-                    this.$root.$on(eventName, listener);
+                    this.addSingleAlert({
+                        content: "Analyse Kapitel " + templateItemsIndex + " konnte eventuell nicht ausgefuehrt werden",
+                        category: "Fehler",
+                        displayClass: "error"
+                    });
+                })
+            // 4. run callback once all finished
+                .finally(()=>{
+                    console.log("continuing...");
+                    if (finallyDo) {
+                        finallyDo();
+                    }
                 });
-            };
-
-
-            await promisedEvent("featureListUpdatedBy-setBBoxToGeom-updateSource"); // data loading is a deep asynchronous chain. this event is set off when the data is finsihed loading.
-            // reset the template results
-            this.clearTemplateItemOutput(templateItemsIndex);
-            this.templateItems[templateItemsIndex].hasOutput = false;
-            // run the tool to update the results
-            this.updateToolOutput(templateItemsIndex, callbackAfterOutputReceived);
-            this.templateItems[templateItemsIndex].hasOutput = true;
-
-
         },
-        // run a different addon based on templateItem, store results
-        updateToolOutput (templateItemsIndex, callbackAfterOutputReceived) {
+        /**
+         * run a different addon based on templateItem, store results
+         * @param {integer} templateItemsIndex array index of the templateItem to run
+         * @param {*} callbackAfterOutputReceived what to do after the results are commited back from the external tool to the reportTemplate store (receives no input)
+         * @returns {Promise} a promise that resolves once the output is received, or is rejected after a timeOut
+         */
+        updateToolOutput (templateItemsIndex) {
 
 
             // check if tool settings are stored
@@ -194,10 +193,8 @@ export default {
                     category: "Fehler",
                     displayClass: "error"
                 });
-                if (callbackAfterOutputReceived) {
-                    callbackAfterOutputReceived(null);
-                }
-                return null; // if no tool settings, stop here
+                // since updateToolOutput failed, directly return a rejected promise
+                return Promise.reject(new Error("No toolBridge settings available for template item " + templateItemsIndex));
             }
 
             // in the end...
@@ -205,24 +202,24 @@ export default {
             const outputCallback = (output)=>{
                 const itemID = templateItemsIndex;
 
-                // ..commit the result to the store variable..
+                // ..commit the result to the store variable
                 this.$store.commit("Tools/ReportTemplates/templateItemOutput", {output, itemID});
-                // then run the custom callback
-                if (callbackAfterOutputReceived) {
-                    callbackAfterOutputReceived(output);
-                }
+                // emit event that resolves the promise returned from updateToolOutput function
+                this.$root.$emit("reportTemplates-received-output-" + templateItemsIndex);
             };
 
 
             // calls toolBridge to run the selected tool with the given settings
             // outputCallback then saves the results to this.templateItems
-            console.log("toolbridge runTool with", this.templateItems[templateItemsIndex].settings);
             this.runTool({
                 toolName: this.templateItems[templateItemsIndex].tool, // the selected tool
                 settings: this.templateItems[templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
                 outputCallback: outputCallback
             });
-            return null;
+            return promisedEvent.call(this,
+                "reportTemplates-received-output-" + templateItemsIndex,
+                5000);
+
 
         },
 
@@ -234,11 +231,8 @@ export default {
                 this.exportTemplateToHTML();
             }
             else if (this.selectedExportFormat === "PDF") {
-                this.exportTemplateToPdF();
+                this.reportTemplateToPDF(this.templateItems); // from ExportPDF addon
             }
-        },
-        exportTemplateToPdF () {
-            this.reportTemplateToPDF(this.templateItems); // using ExportPDF addon
         },
         exportTemplateToHTML () {
 
@@ -260,7 +254,6 @@ export default {
                     .replace(/'/g, "&#039;");
             }
             // manually assemble an html document.
-            // Hopefully to be deprecated - placeholder until exportPDF addons comes through
             const exportedHtml = this.templateItems.map((item) => {
 
                     // for each chapter...
@@ -356,6 +349,11 @@ export default {
 
         },
         // add stored selection to  SelectionManager
+        /**
+         *
+         * @param {*} dataSelection the data selection as retreived from selectionManager
+         * @return {Promise} a promise that resolves when data is loaded, or gets rejected after a timeout
+         */
         setCurrentDataSelection (dataSelection) {
             if (Object.keys(dataSelection).length === 0) {
                 this.addSingleAlert({
@@ -367,7 +365,11 @@ export default {
             }
             this.setAcceptSelection(null); // make sure watcher is triggered in next line
             this.setAcceptSelection(dataSelection); // commit to selectionManager
-            return null;
+            // returns a promise that resolves when data is loaded (or gets rejected after timeout)
+            return promisedEvent.call(
+                this,
+                "featureListUpdatedBy-setBBoxToGeom-updateSource",
+                5000);
 
         },
         /**
@@ -406,10 +408,8 @@ export default {
          * @return {void}
          */
         hasOutputToggle (index) {
-            console.log("toggle has output ", index);
             // request output if turned on:
             if (this.templateItems[index].hasOutput) {
-                console.log("updateToolOutput called from hasoutputtoggle");
                 this.updateToolOutput(index);
             }
             // otherwise delete data selection
@@ -454,6 +454,7 @@ export default {
 
             // must be an array
             if (!Array.isArray(reportTemplate)) {
+                console.warn("reportTemplate JSON is not an array");
                 return false;
             }
 
@@ -463,6 +464,7 @@ export default {
             for (const i in reportTemplate) {
                 for (const j in requiredKeys) {
                     if (!(requiredKeys[j] in reportTemplate[i])) {
+                        console.warn("reportTemplate JSON array item " + i + " does not contain key " + requiredKeys[j]);
                         return false;
                     }
 

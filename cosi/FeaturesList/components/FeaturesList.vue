@@ -367,8 +367,6 @@ export default {
             else {
                 this.items = [];
             }
-            console.log(senderName);
-            console.log("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
             this.$root.$emit("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
 
         },
