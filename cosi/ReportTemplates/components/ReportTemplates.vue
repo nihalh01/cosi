@@ -587,6 +587,8 @@ export default {
                                                             v-model="templateItem.tool"
                                                             label="Tool wählen"
                                                             :items="supportedTools"
+                                                            item-text="title"
+                                                            item-value="value"
                                                             @change="getSelectionAndSettings(index)"
                                                         />
                                                     </v-col>

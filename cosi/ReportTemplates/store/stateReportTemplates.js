@@ -24,9 +24,9 @@ export default {
     renderToWindow: false,
     resizableWindow: false,
     title: "Report Templates",
-    supportedTools: ["AccessibilityAnalysis", "Dashboard"], // to support additional tools, you need to hook them up to the toolBridge. Then simply add them in this array.
+    supportedTools: [{value: "AccessibilityAnalysis", title: "Erreichbarkeitsanalyse"}, {value: "Dashboard", title: "Dashboard"}], // to support additional tools, you need to hook them up to the toolBridge. Then simply add them in this array.
     templateItems: [ // the current template. It is always an array, each item a chapter with this general structure (see ../docs/ for details)
-        {title: "Titel...", description: "Beschreibung...", tool: "Wählen!", settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, hasDataSelection: false, dataSelectionApplied: false, id: 0}
+        {title: "Titel...", description: "Beschreibung...", tool: {title: "Wählen!", value: null}, settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, hasDataSelection: false, dataSelectionApplied: false, id: 0}
     ],
     readmeUrl: {
         "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/fileimport.md",
