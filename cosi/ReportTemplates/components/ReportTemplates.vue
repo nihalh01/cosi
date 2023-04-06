@@ -118,7 +118,7 @@ export default {
 
         },
         /**
-         *
+         * Apply all template chapters sequentially
          * @param {*} callback runs after all chapters were applied (no input and return value not returned)
          * @param {*} startIndex from which chapter to start (parameter needed for recursion)
          * @return {void}
@@ -126,12 +126,10 @@ export default {
         runTemplate (callback, startIndex = 0) {
             // recursive function - exit with callback after all chapters finished
             if (startIndex >= this.templateItems.length) {
-                // when finished, run callback
                 if (callback) {
                     // eslint-disable-next-line callback-return
                     callback();
                 }
-                // then exit
                 return;
             }
             // run chapter, then restart this function with the next chapter
@@ -318,7 +316,7 @@ export default {
         addEmptyTemplateItem () { // "+" button to add new chapters to the template
             const newID = 1 + Math.max(...this.templateItems.map(o => o.id)); // create an ID one larger than the highest id in array
 
-            this.templateItems.push({title: "", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, hasDataSelection: false, id: newID});
+            this.templateItems.push({title: "", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, dataSelectionApplied: false, hasDataSelection: false, id: newID});
 
         },
         deleteTemplateItem (id) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
