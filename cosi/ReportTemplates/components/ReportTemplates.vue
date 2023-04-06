@@ -169,7 +169,6 @@ export default {
                 })
             // 4. run callback once all finished
                 .finally(()=>{
-                    console.log("continuing...");
                     if (finallyDo) {
                         finallyDo();
                     }

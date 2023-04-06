@@ -60,7 +60,7 @@ export default {
     watch: {
         // other tools can commit to this store variable to add new selections
         // that pattern allows us to use data from external tools and apply internal methods to it.
-        async acceptSelection (selection) {
+        acceptSelection (selection) {
             if (selection) {
                 // check for stored vector layers to load
                 selection.storedLayers.forEach(layerName => {
@@ -76,8 +76,6 @@ export default {
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
 
-                // setTimeout(()=>{
-                // }, 5000);
             }
         },
         // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
@@ -135,10 +133,6 @@ export default {
             }
 
             this.allSelectionsPossible = true;
-
-        },
-        selectionLoadEnd () {
-            this.$root.$emit("selectionManager-load-end");
 
         }
     },
@@ -278,7 +272,7 @@ export default {
              * @param {Array} storedLayers - The names of the stored layers inside the saved selection
              * @returns {void}
              */
-        setStoredLayersActive (storedLayers) {
+        async setStoredLayersActive (storedLayers) {
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
@@ -299,14 +293,14 @@ export default {
             });
             // a bug in the loaderOverlay.hide() is not working, even if it's fired with a timeOut
             // so here's a very! uncanny workaround to make it work in this case
-            // await this.$nextTick();
+            await this.$nextTick();
 
-            // // setTimout because something triggers LoaderOverlay.show() after the last $nextTick() and I can't figure out what
-            // setTimeout(()=> {
-            //     // remove the classes manually
-            //     document.getElementById("loader").classList.remove("loader-is-loading");
-            //     document.getElementById("masterportal-container").classList.remove("blurry");
-            // }, 1500);
+            // setTimout because something triggers LoaderOverlay.show() after the last $nextTick() and I can't figure out what
+            setTimeout(()=> {
+                // remove the classes manually
+                document.getElementById("loader").classList.remove("loader-is-loading");
+                document.getElementById("masterportal-container").classList.remove("blurry");
+            }, 1500);
         },
         /**
              * @description Adds index of selection to extendedOptions to extend to option menu in the frontend.

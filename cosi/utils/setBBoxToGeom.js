@@ -59,6 +59,8 @@ function updateSource (model, bboxGeometry, url, item, app) {
                 }
                 filterLayerSourceByBbox(evt.target, bboxGeometry);
                 if (app) {
+                    // updateFeaturesList event is the best way I found to let app know when data has finished loading.
+                    // as updateFeaturesList may be triggered multiple times from different places as data loads, info where this event came from needs to be passed along
                     app.$root.$emit("updateFeaturesList", "setBBoxToGeom-updateSource");
                 }
             });
@@ -70,6 +72,9 @@ function updateSource (model, bboxGeometry, url, item, app) {
         if (bboxGeometry) {
             filterLayerSourceByBbox(source, bboxGeometry);
             if (app) {
+                // updateFeaturesList event is the best way I found to let app know when data has finished loading.
+                // as updateFeaturesList may be triggered multiple times from different places as data loads, info where this event came from needs to be passed along
+
                 app.$root.$emit("updateFeaturesList", "setBBoxToGeom-updateSource");
             }
         }

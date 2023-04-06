@@ -34,9 +34,6 @@ const mutations = {
             state.activeSelection = payload;
 
         }
-        state.selectionLoadEnd++;
-
-        //        state.setSelectionLoadEnd(this.selectionLoadEnd + 1);
 
     },
     /**
