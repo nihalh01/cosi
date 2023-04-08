@@ -90,6 +90,37 @@ export default {
             };
             // 4. use the reader on the file
             reader.readAsText(file); // read file (and inherently run callback which replaces the templateItems array)
+        },
+        editingTool (newValue, oldValue) {
+            const stopEditing = newValue.toolName === null,
+                startEditing = !stopEditing,
+                editsAccepted = newValue.accepted;
+
+            if (startEditing) {
+                console.log(this.templateItems[newValue.templateItemsIndex]);
+                // update tool interface based on stored settings via toolbridge (without actually applying the tool)
+                this.runTool({
+                    toolName: this.templateItems[newValue.templateItemsIndex].tool, // the selected tool
+                    settings: this.templateItems[newValue.templateItemsIndex].settings, // the settings stored previously via the `updateToolSeetings()` method
+                    // eslint-disable-next-line no-empty-function
+                    outputCallback: ()=>{},
+                    updateInterfaceOnly: true
+                });
+            }
+            if (stopEditing & editsAccepted) {
+                // copy settings from tool
+                this.updateToolSettings(oldValue.templateItemsIndex);
+
+            }
+            // if we were editing before, and the update to the editing mode says the edits should be accepted,
+            // then copy the tool settings to the relevant chapter
+            if (newValue.accepted && newValue.accepted === true && oldValue.toolName && oldValue.templateItemsIndex) {
+                console.log("before ", this.templateItems[oldValue.templateItemsIndex].settings);
+                this.templateItems[oldValue.templateItemsIndex].hasSettings = true;
+                console.log("after ", this.templateItems[oldValue.templateItemsIndex].settings);
+            }
+
+
         }
     },
     created () {
@@ -471,6 +502,9 @@ export default {
             return true;
 
         },
+        openToolInterface (toolName) {
+            this.$store.commit("Tools/" + toolName + "/setActive", true);
+        },
         close () {
             this.setActive(false);
             const model = getComponent(this.id);
@@ -494,7 +528,17 @@ export default {
         :deactivate-gfi="deactivateGFI"
     >
         <template #toolBody>
+            <v-row v-if="editingTool.toolName">
+                Hallo!
+                <v-btn @click="abortEditingToolSettings()">
+                    Abbrechen
+                </v-btn>
+                <v-btn @click="finishEditingToolSettings()">
+                    übernehmen
+                </v-btn>
+            </v-row>
             <v-app
+                v-else
                 id="ReportTemplates-wrapper"
                 absolute
             >
@@ -607,6 +651,17 @@ export default {
                                                         @change="hasSettingsToggle(index)"
                                                     />
                                                 </v-row>
+                                                <v-row class="mb-2">
+                                                    <v-btn
+                                                        dense
+                                                        @click="startEditingToolSettings({toolName: templateItem.tool,templateItemsIndex: index})"
+                                                    >
+                                                        <!-- <v-icon>
+                                                            mdi-map-marker-right
+                                                        </v-icon> -->
+                                                        Tool Einstellungen Bearbeiten
+                                                    </v-btn><br><br>
+                                                </v-row>
                                             </v-container>
                                         </v-card>
                                     </v-col>
@@ -648,7 +703,6 @@ export default {
                                                     label="Datenauswahl Anwendung"
                                                     @change="dataSelectionAppliedToggle(index)"
                                                 /><br><br> -->
-
                                                 <!-- set data selection -->
                                                 <v-row class="mb-2">
                                                     <v-btn
