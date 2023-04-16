@@ -16,7 +16,7 @@ import mapCanvasToImage, {exportMapView} from "../../utils/mapCanvasToImage";
 import AccessibilityAnalysisLegend from "./AccessibilityAnalysisLegend.vue";
 import AccessibilityAnalysisTrafficFlow from "./AccessibilityAnalysisTrafficFlow.vue";
 import {unpackCluster} from "../../utils/features/unpackCluster.js";
-
+import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
 export default {
     name: "AccessibilityAnalysis",
     components: {
@@ -24,7 +24,8 @@ export default {
         ToolInfo,
         AnalysisPagination,
         AccessibilityAnalysisLegend,
-        AccessibilityAnalysisTrafficFlow
+        AccessibilityAnalysisTrafficFlow,
+        EditForReportTemplate
     },
     data () {
         this.availableModes = [
@@ -645,7 +646,10 @@ export default {
                         :url="readmeUrl"
                         :locale="currentLocale"
                     />
-                    {{ reportTemplateMode }}
+                    <EditForReportTemplate
+                        report-template-mode="reportTemplateMode"
+                        tool-name="AccessibilityAnalysis"
+                    />
                     <v-card
                         v-if="!(reportTemplateMode===null)"
                         variant="tonal"

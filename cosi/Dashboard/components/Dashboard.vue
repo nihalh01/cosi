@@ -9,6 +9,8 @@ import {getTimestamps} from "../../utils/timeline";
 import beautifyKey from "../../../../src/utils/beautifyKey";
 import groupMapping from "../../utils/groupMapping";
 import TableRowMenu from "./TableRowMenu.vue";
+import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
+
 import {
     addCalculation,
     addDivideSelectedCalculations,
@@ -39,7 +41,8 @@ export default {
         ToolInfo,
         TableRowMenu,
         DashboardToolbar,
-        TableCell
+        TableCell,
+        EditForReportTemplate
     },
     data () {
         return {
@@ -668,6 +671,10 @@ export default {
                     <ToolInfo
                         :url="readmeUrl"
                         :locale="currentLocale"
+                    />
+                    <EditForReportTemplate
+                        report-template-mode="reportTemplateMode"
+                        tool-name="Dashboard"
                     />
                     <v-container fluid>
                         <DashboardToolbar
