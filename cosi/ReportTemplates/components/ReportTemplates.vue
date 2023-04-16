@@ -151,7 +151,7 @@ export default {
 
             // update array
             this.templateItems[templateItemsIndex].settings = toolSettings; // update settings
-            this.templateItems[templateItemsIndex].hasSettings = true; // handled as UI checkbox
+            this.templateItems[templateItemsIndex].hasSettings = true;
             this.clearTemplateItemOutput(templateItemsIndex); // delete any previous results - they may no longer match the settings
 
 
@@ -196,12 +196,8 @@ export default {
             // 2. run analysis
             dataSelected.then(()=>{
                 this.clearTemplateItemOutput(templateItemsIndex);
-                this.templateItems[templateItemsIndex].hasOutput = false;
                 return this.updateToolOutput(templateItemsIndex);
             })
-                .then(()=>{
-                    this.templateItems[templateItemsIndex].hasOutput = true;
-                })
             // 3. alert on failure
                 .catch(()=>{
 
@@ -374,7 +370,7 @@ export default {
         addEmptyTemplateItem () { // "+" button to add new chapters to the template
             const newID = 1 + Math.max(...this.templateItems.map(o => o.id)); // create an ID one larger than the highest id in array
 
-            this.templateItems.push({title: "Neues Kapitel...", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, dataSelectionApplied: false, hasDataSelection: false, id: newID});
+            this.templateItems.push({title: "Neues Kapitel...", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: newID});
 
         },
         deleteTemplateItem (id) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
@@ -382,7 +378,6 @@ export default {
         },
         clearTemplateItemDataSelection (index) {
             this.templateItems[index].dataSelection = {};
-            this.templateItems[index].hasDataSelection = false;
 
         },
         clearTemplateItemSettings (index) {
@@ -392,15 +387,12 @@ export default {
         },
         clearTemplateItemOutput (index) {
             this.templateItems[index].output = {};
-            this.templateItems[index].hasOutput = false;
-
         },
 
         // copy data selection from SelectionManager
         copyCurrentDataSelection (index) {
 
             this.templateItems[index].dataSelection = this.lastSelectionWithCurrentDataLayers;
-            this.templateItems[index].hasDataSelection = true;
 
 
         },
@@ -438,51 +430,6 @@ export default {
             // apply it
             return this.setCurrentDataSelection(newSelection);
 
-        },
-        /**
-         * either delete or copy data selection depending on which way the check box was toggled
-         * @param {integer} index the array item index of the templateItem
-         * @return {void}
-         */
-        hasDataToggle (index) {
-            // copy data selection if turned on:
-            if (this.templateItems[index].hasDataSelection) {
-                this.copyCurrentDataSelection(index);
-            }
-            // otherwise delete data selection
-            if (!this.templateItems[index].hasDataSelection) {
-                this.clearTemplateItemDataSelection(index);
-            }
-        },
-        /**
-         * either delete or copy tool settings depending on which way the check box was toggled
-         * @param {integer} index the array item index of the templateItem
-         * @return {void}
-         */
-        hasSettingsToggle (index) {
-            // copy data selection if turned on:
-            if (this.templateItems[index].hasSettings) {
-                this.updateToolSettings(index);
-            }
-            // otherwise delete data selection
-            if (!this.templateItems[index].hasSettings) {
-                this.clearTemplateItemSettings(index);
-            }
-        },
-        /**
-         * either delete or copy tool settings depending on which way the check box was toggled
-         * @param {integer} index the array item index of the templateItem
-         * @return {void}
-         */
-        hasOutputToggle (index) {
-            // request output if turned on:
-            if (this.templateItems[index].hasOutput) {
-                this.updateToolOutput(index);
-            }
-            // otherwise delete data selection
-            if (!this.templateItems[index].hasOutput) {
-                this.clearTemplateItemOutput(index);
-            }
         },
         /**
          * apply data selection and track which one is selected
@@ -526,7 +473,7 @@ export default {
             }
 
             // each item must have the required keys (if not, return false)
-            const requiredKeys = ["title", "description", "tool", "settings", "hasSettings", "output", "hasOutput", "dataSelection", "hasDataSelection", "dataSelectionApplied", "id"];
+            const requiredKeys = ["title", "description", "tool", "settings", "hasSettings", "output", "dataSelection", "dataSelectionApplied", "id"];
 
             for (const i in reportTemplate) {
                 for (const j in requiredKeys) {

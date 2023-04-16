@@ -4,8 +4,6 @@ const mutations = {
     ...generateSimpleMutations(ReportTemplatesState),
     templateItemOutput (state, {output, itemID}) { // to overwrite a specific key of a specific array item
         state.templateItems[itemID].output = output;
-        state.templateItems[itemID].hasOutput = true;
-
     },
     // open tool window in template mode (let it know which chapter is being edited)
     startEditingToolSettings (state, payload) {
