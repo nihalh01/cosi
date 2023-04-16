@@ -1,12 +1,11 @@
 <script>
 import {mapMutations} from "vuex";
+
 export default {
     name: "EditForReportTemplate",
+    props: {"reportTemplateMode": {type: Number, required: false, default: null}, "toolName": {type: String, required: false, default: ""}},
     data () {
-        return {
-            count: 0,
-            props: ["reportTemplateMode", "toolName"]
-        };
+        return {};
     },
     methods: {
         ...mapMutations("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"])
@@ -28,26 +27,23 @@ export default {
         </v-card-text>
         <v-card-actions>
             <v-btn
-                id="reporttemplate-editing-done"
+                id="reporttemplate-editing-done-finish"
                 dense
                 small
                 tile
                 color="grey lighten-1"
                 @click="abortEditingToolSettings(toolName)"
             >
-                <!-- abortEditingToolSettings: mutation imported from reportTemplate by parent component -->
                 abbrechen
             </v-btn>
             <v-btn
-                id="reporttemplate-editing-done"
+                id="reporttemplate-editing-done-abort"
                 dense
                 small
                 tile
                 color="light green"
                 @click="finishEditingToolSettings(toolName)"
             >
-                <!-- finishEditingToolSettings: mutation imported from reportTemplate by parent component -->
-
                 übernehmen
             </v-btn>
         </v-card-actions>

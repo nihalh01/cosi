@@ -177,12 +177,14 @@ export default {
         calculations: "calculateAll",
 
         toolBridgeIn (newRequest) {
+            console.log("running dashboard..");
+            console.log(newRequest);
             /** 0. Check if request is valid */
             const requestSettingsValid = ("statsFeatureFilter" in newRequest.settings) & ("calculations" in newRequest.settings),
                 /**
              * 1. update the interface based on the settings received from toolBridge
              * @param {Object} request the toolBridge request {id:..., settings:{...}}
-             * @returns {Object} (run for side effects only, passes along the request)
+             * @returns {void} (run for side effects only, passes along the request)
              */
                 updateInterface = (request) => {
                     this.$store.commit("Tools/Dashboard/setStatsFeatureFilter", request.settings.statsFeatureFilter); // not sure why simple this.
@@ -673,7 +675,7 @@ export default {
                         :locale="currentLocale"
                     />
                     <EditForReportTemplate
-                        report-template-mode="reportTemplateMode"
+                        :report-template-mode="reportTemplateMode"
                         tool-name="Dashboard"
                     />
                     <v-container fluid>

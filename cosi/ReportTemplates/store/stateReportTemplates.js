@@ -26,7 +26,7 @@ export default {
     title: "Report Templates",
     supportedTools: [{value: "AccessibilityAnalysis", title: "Erreichbarkeitsanalyse"}, {value: "Dashboard", title: "Dashboard"}], // to support additional tools, you need to hook them up to the toolBridge. Then simply add them in this array.
     templateItems: [ // the current template. It is always an array, each item a chapter with this general structure (see ../docs/ for details)
-        // {title: "Titel...", description: "Beschreibung...", tool: {title: "Wählen!", value: null}, settings: {}, hasSettings: false, output: {}, hasOutput: false, dataSelection: {}, dataSelectionApplied: false, id: 0}
+        // {title: "Titel...", description: "Beschreibung...", tool: {title: "Wählen!", value: null}, settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: 0}
     ],
     editingTool: {toolName: null, templateItemsIndex: null, aborted: false}, // when user edits settings in another tool, need to remember which chapter is being edited
     readmeUrl: {

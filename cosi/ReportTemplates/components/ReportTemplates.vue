@@ -301,17 +301,18 @@ export default {
                     .replace(/'/g, "&#039;");
             }
             // manually assemble an html document.
-            const exportedHtml = this.templateItems.map((item) => {
+            const tips = "<span style='color:orange;'>Weiterverarbeitung in Word: <ul><li>Neues Word Dokument öffnen</li><li>In Word Querformat einstellen</li><li>Inhalt dieser seite markieren (Strg+A) und in Word kopieren</li><li>Alles markieren und Schriftgröße verkleinern</li><li>Zeilenumbrüche in Kopfzeilen von Tabellen einfügen</li><li>Sollten Tabellen nach wie vor zu breit sein, Anzahl der Spalten bzw. ausgewählten Gebiete begrenzen</li><li>Spaltenbreite anpassen</li></ul></span>",
+
+                exportedHtml = tips + this.templateItems.map((item) => {
 
                     // for each chapter...
                     // set defaults
                     let resulthtml = "",
                         sourceInfo = "Quelleninformation fehlt.";// defaults
-                    const tips = "<span style='color:orange;'>Weiterverarbeitung in Word: <ul><li>Neues Word Dokument öffnen</li><li>In Word Querformat einstellen</li><li>Inhalt dieser seite markieren (Strg+A) und in Word kopieren</li><li>Alles markieren und Schriftgröße verkleinern</li><li>Zeilenumbrüche in Kopfzeilen von Tabellen einfügen</li><li>Sollten Tabellen nach wie vor zu breit sein, Anzahl der Spalten bzw. ausgewählten Gebiete begrenzen</li><li>Spaltenbreite anpassen</li></ul></span>";
 
                     // make table or image html..
                     if (item.output.type === "table") {
-                        resulthtml = tips + "<br>" + tableify(item.output.result); // tableify converts an js object to a (string) html table
+                        resulthtml = "<br>" + tableify(item.output.result); // tableify converts an js object to a (string) html table
                     }
                     if (item.output.type === "image") {
                         resulthtml = "<img src='" + item.output.result + "'>";
@@ -550,7 +551,9 @@ export default {
                         </v-col>
                     </v-row>
                     <!-- EDITING -->
-                    <v-row v-if="uiModes.startingTemplateSelected">
+                    <v-row
+                        v-if="templateItems.length>0"
+                    >
                         <v-col>
                             <v-row>
                                 <h4>Template Bearbeiten</h4>
@@ -648,7 +651,9 @@ export default {
                             </v-row>
                             <v-row>
                                 <v-btn
+                                    v-if="templateItems.length>0"
                                     color="grey lighten-1"
+                                    class="ml-5"
                                     dense
                                     small
                                     tile
@@ -661,7 +666,7 @@ export default {
                     </v-row>
                     <!-- EXPORT -->
                     <v-row
-                        v-if="uiModes.startingTemplateSelected"
+                        v-if="templateItems.length>0"
                         class="mt-4"
                     >
                         <v-col>
