@@ -21,17 +21,17 @@ const mutations = {
         // remember which tool we are editing for which chapter
         state.editingTool = {toolName: payload.toolName, templateItemsIndex: payload.templateItemsIndex};
         // close report templates window
-        // state.active = false;
+        state.active = false;
     },
     closeToolsInTemplateMode (state) {
         // close all tools and stop their editing mode
         for (const i in state.supportedTools) {
-            this.commit("Tools/" + state.supportedTools[i].value + "/setReportTemplateMode", false);
+            this.commit("Tools/" + state.supportedTools[i].value + "/setReportTemplateMode", null);
             this.commit("Tools/" + state.supportedTools[i].value + "/setActive", false);
         }
         // remember that we are not editing any tool for any chapter right now
         // return to reporttemplates window
-        // state.active = true;
+        state.active = true;
     },
     abortEditingToolSettings (state) {
         // stop editing mode

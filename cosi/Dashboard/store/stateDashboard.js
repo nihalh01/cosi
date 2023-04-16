@@ -27,6 +27,7 @@ const state = {
     },
     statsFeatureFilter: [],
     calculations: [],
+    ReportTemplateMode: false,
     // these two variables are required to make this addon compatible with the toolBridge addon (for details see toolBridge documentation)
     toolBridgeIn: {settings: {}, type: "", outputCallback: null}, // accepts settings from toolBridge - must have a *watcher*
     toolBridgeOut: {} // pass current settings to toolBridge - must have a *getter*
