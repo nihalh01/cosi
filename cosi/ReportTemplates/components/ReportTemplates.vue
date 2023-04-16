@@ -373,8 +373,8 @@ export default {
             this.templateItems.push({title: "Neues Kapitel...", description: "", tool: "Dashboard", settings: {}, hasSettings: false, output: {}, dataSelection: {}, dataSelectionApplied: false, id: newID});
 
         },
-        deleteTemplateItem (id) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
-            this.$store.state.Tools.ReportTemplates.templateItems = this.templateItems.filter(x => x.id !== id);
+        deleteTemplateItem (index) { // id is the value for key "id" in the templateItem (stable & unique), not the array index (unstable)
+            this.templateItems.splice(index, 1);
         },
         clearTemplateItemDataSelection (index) {
             this.templateItems[index].dataSelection = {};
@@ -562,7 +562,7 @@ export default {
                                         v-for="(templateItem,index) in templateItems"
                                         :key="index"
                                         class="mt-5 mb-8 ml-5"
-                                        color="light gray"
+                                        color="grey lighten-3"
                                         tile
                                     >
                                         <v-card-title>Kapitel {{ index+1 }}</v-card-title>
@@ -577,7 +577,7 @@ export default {
                                                     #{{ index+1 }}
                                                     <v-icon
                                                         small
-                                                        @click="deleteTemplateItem(templateItem.id)"
+                                                        @click="deleteTemplateItem(index)"
                                                     >
                                                         mdi-trash-can
                                                     </v-icon>
