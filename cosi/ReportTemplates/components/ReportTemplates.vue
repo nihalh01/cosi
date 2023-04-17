@@ -202,7 +202,7 @@ export default {
                 .catch(()=>{
 
                     this.addSingleAlert({
-                        content: "Analyse Kapitel " + (templateItemsIndex + 1) + " dauert mehr als 15 Sekunden und konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
+                        content: "Analyse Kapitel " + (templateItemsIndex + 1) + " konnte eventuell nicht ausgefuehrt werden. Bitte überprüfen Sie die Tool Einstellungen.",
                         category: "Fehler",
                         displayClass: "error"
                     });
@@ -518,19 +518,51 @@ export default {
         :deactivate-gfi="deactivateGFI"
     >
         <template #toolBody>
-            <v-app>
+            <v-app id="reporttemplates">
+                <ToolInfo
+                    :url="readmeUrl"
+                    :locale="currentLocale"
+                />
                 <v-container class="main_container">
                     <!-- IMPORT / START NEW -->
-
                     <v-row>
+                        "Report Templates" sind Dokumente mit voreingestellten Analysen, die sich dann auf Gebiete anwenden lassen. Jedes Report Template besteht aus Kapiteln. Jedes Kapitel enthält:<br><br>
+                    </v-row>
+                    <v-row>
+                        <ul>
+                            <li>Einen Titel</li>
+                            <li>Eine Beschreibung</li>
+                            <li>Das Anlayse Tool, das für das Kapitel verwendet wird</li>
+                            <li>Intern, die gewählten Einstellungen des Tools sowie die zugehörigen Datenlayer</li>
+                        </ul><br><br>
+                    </v-row>
+                    <v-row>
+                        Verwenden Sie das Report Templates Tool wie folgt:<br><br>
+                    </v-row>
+                    <v-row>
+                        <ol>
+                            <li>
+                                Laden Sie ein bestehendes Template hoch oder erstellen sie ein Neues.
+                            </li>
+                            <li>Bearbeiten Sie bei Bedarf dann die Kapitel und die Einstellungen der gewählten Analyse Tools. Mit dem "speichern" knopf können sie das Template als Datei herunterladen, mit der das aktuelle Template später wieder geladen werden kann.</li>
+                            <li>Wählen Sie das Gebiet, auf das das Template angewendet werden soll in der Gebietsauswahl aus. </li>
+                            <li>Entscheiden Sie sich für ein Exportforrmat</li>
+                            <li>Klicken Sie dann auf "Anwenden", um das Template auszuführen und den Report im gewählten Format zu öffnen bzw. herunterzuladen</li>
+                        </ol>
+                    </v-row>
+
+                    <v-row class="mt-5">
                         <v-col>
+                            <v-row>
+                                <v-divider />
+                            </v-row>
                             <v-row>
                                 <h4>Template wählen</h4>
                             </v-row>
-                            <v-row class="ml-5">
+                            <v-row class="">
                                 Sie können entweder ein bestehendes Report Template hochladen, oder ein neues Template erstellen.
                             </v-row>
-                            <v-row class="ml-5">
+                            <v-row class="">
                                 <v-file-input
                                     v-model="uploadedTemplate"
                                     accept="application/JSON"
@@ -547,16 +579,22 @@ export default {
                                     <v-icon>mdi-plus</v-icon>
                                 </v-btn>
                             </v-row>
-                            <v-divider />
                         </v-col>
                     </v-row>
                     <!-- EDITING -->
                     <v-row
                         v-if="templateItems.length>0"
+                        class="mb-4"
                     >
                         <v-col>
                             <v-row>
+                                <v-divider />
+                            </v-row>
+                            <v-row>
                                 <h4>Template Bearbeiten</h4>
+                            </v-row>
+                            <v-row class="ml-5">
+                                Hier können Sie die Kapitel des Templates bearbeiten. Geben Sie für jedes Kapitel einen Titel und eine Beschreibung ein. Wählen Sie dann ein Analyse Tool für das Kapitel. Klicken Sie dann auf den Stift. Dann öffnet sich das Tool. Wählen Sie die relevanten Datenlayer aus dem Themenbaum, und geben Sie die gewünschten Einstellungen im Tool ein.
                             </v-row>
                             <v-row>
                                 <v-col cols="12">
@@ -627,7 +665,7 @@ export default {
                                             <v-row v-if="!templateItem.hasToolSettings & templateItem.tool">
                                                 <v-card
                                                     color="orange"
-                                                    class="m-3 p-3"
+                                                    class="m-3 p-3  ml-5"
                                                 >
                                                     <v-card-text>Keine Tool Einstellungen gewählt. Bitte klicken Sie auf den Stift, und stellen Sie das Tool ein</v-card-text>
                                                 </v-card>
@@ -677,9 +715,8 @@ export default {
                             <v-row height="5px" />
                             <v-row v-if="selectedDistrictNames.length===0">
                                 <v-card
-                                    class=""
-                                    color="orange"
-                                    width="400px"
+                                    color="orange lighten-1"
+                                    class="ml-5"
                                 >
                                     <v-card-text>Keine Gebiete gewählt. Öffnen Sie die Gebietsauswahl, und wählen Sie die Gebiete, auf die Sie das Report Template anwenden wollen. Kehren Sie dann zum Report Template tool zurück, um es auf die gewählten Gebiete anzuwenden.</v-card-text>
                                     <v-card-actions>
@@ -709,6 +746,10 @@ export default {
                                 class="mb-2"
                             >
                                 <v-btn
+                                    dense
+                                    small
+                                    tile
+                                    width="100px"
                                     color="light green"
                                     @click="exportTemplate"
                                 >
@@ -732,6 +773,7 @@ export default {
 
 #reportTemplates{
     overflow-y: auto;
+    width:500px;
     height:100%;
 }
     .textfieldtitle {

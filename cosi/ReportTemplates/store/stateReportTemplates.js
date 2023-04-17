@@ -30,7 +30,7 @@ export default {
     ],
     editingTool: {toolName: null, templateItemsIndex: null, aborted: false}, // when user edits settings in another tool, need to remember which chapter is being edited
     readmeUrl: {
-        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/fileimport.md",
-        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/geodatenimportieren.md"
+        "en-US": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/reporttemplates.md",
+        "de-DE": "https://bitbucket.org/geowerkstatt-hamburg/addons/src/dev/cosi/manuals/reporttemplates.md"
     }
 };
