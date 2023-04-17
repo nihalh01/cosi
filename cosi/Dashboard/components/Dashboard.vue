@@ -9,6 +9,8 @@ import {getTimestamps} from "../../utils/timeline";
 import beautifyKey from "../../../../src/utils/beautifyKey";
 import groupMapping from "../../utils/groupMapping";
 import TableRowMenu from "./TableRowMenu.vue";
+import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
+
 import {
     addCalculation,
     addDivideSelectedCalculations,
@@ -39,7 +41,8 @@ export default {
         ToolInfo,
         TableRowMenu,
         DashboardToolbar,
-        TableCell
+        TableCell,
+        EditForReportTemplate
     },
     data () {
         return {
@@ -174,12 +177,14 @@ export default {
         calculations: "calculateAll",
 
         toolBridgeIn (newRequest) {
+            console.log("running dashboard..");
+            console.log(newRequest);
             /** 0. Check if request is valid */
             const requestSettingsValid = ("statsFeatureFilter" in newRequest.settings) & ("calculations" in newRequest.settings),
                 /**
              * 1. update the interface based on the settings received from toolBridge
              * @param {Object} request the toolBridge request {id:..., settings:{...}}
-             * @returns {Object} (run for side effects only, passes along the request)
+             * @returns {void} (run for side effects only, passes along the request)
              */
                 updateInterface = (request) => {
                     this.$store.commit("Tools/Dashboard/setStatsFeatureFilter", request.settings.statsFeatureFilter); // not sure why simple this.
@@ -668,6 +673,10 @@ export default {
                     <ToolInfo
                         :url="readmeUrl"
                         :locale="currentLocale"
+                    />
+                    <EditForReportTemplate
+                        :report-template-mode="reportTemplateMode"
+                        tool-name="Dashboard"
                     />
                     <v-container fluid>
                         <DashboardToolbar

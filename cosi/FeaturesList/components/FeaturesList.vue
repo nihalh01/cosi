@@ -318,7 +318,7 @@ export default {
          * @todo connect to other features and statistics to build location score
          * @returns {void}
          */
-        updateFeaturesList () {
+        updateFeaturesList (senderName) {
             if (this.groupActiveLayer.length > 0) {
                 this.items = this.activeVectorLayerList.reduce((list, vectorLayer) => {
 
@@ -358,6 +358,8 @@ export default {
             else {
                 this.items = [];
             }
+            this.$root.$emit("featureListUpdatedBy-" + (senderName ? senderName : "Unknown"));
+
         },
 
         checkDisabledFeatures (layer) {

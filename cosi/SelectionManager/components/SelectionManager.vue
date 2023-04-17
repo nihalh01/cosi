@@ -75,6 +75,7 @@ export default {
                 selection.abv = this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length > 0 ? selection.id.match(/\b([A-Z0-9])/g).join("") + "-" + this.selections.filter(sel => sel.abv === selection.id.match(/\b([A-Z0-9])/g).join("")).length : selection.id.match(/\b([A-Z0-9])/g).join("");
                 this.addSelection(selection);
                 this.highlightSelection(this.selections.length - 1);
+
             }
         },
         // watcher on activeSet so that the active selection can be changed via the inputActiveSelection mutation from outside of the component
@@ -121,6 +122,7 @@ export default {
                 }
             }
         },
+        // selections - indirectly watched through computed variable selectionsLength
         // Sets the all selections button active again if the this.selections array changes and updates the selection index
         selectionsLength (newValue, oldValue) {
             if ((oldValue && newValue && oldValue < newValue) || (!oldValue && newValue)) {
@@ -131,6 +133,7 @@ export default {
             }
 
             this.allSelectionsPossible = true;
+
         }
     },
     created () {
@@ -270,7 +273,6 @@ export default {
              * @returns {void}
              */
         async setStoredLayersActive (storedLayers) {
-
             //  hide all active layers
             this.activeVectorLayerList.forEach(layer => {
                 const layerId = layer.getProperties().id,
@@ -289,7 +291,6 @@ export default {
                     model.set("isSelected", true);
                 }
             });
-
             // a bug in the loaderOverlay.hide() is not working, even if it's fired with a timeOut
             // so here's a very! uncanny workaround to make it work in this case
             await this.$nextTick();

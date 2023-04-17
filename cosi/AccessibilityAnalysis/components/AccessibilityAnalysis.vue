@@ -16,7 +16,7 @@ import mapCanvasToImage, {exportMapView} from "../../utils/mapCanvasToImage";
 import AccessibilityAnalysisLegend from "./AccessibilityAnalysisLegend.vue";
 import AccessibilityAnalysisTrafficFlow from "./AccessibilityAnalysisTrafficFlow.vue";
 import {unpackCluster} from "../../utils/features/unpackCluster.js";
-
+import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
 export default {
     name: "AccessibilityAnalysis",
     components: {
@@ -24,7 +24,8 @@ export default {
         ToolInfo,
         AnalysisPagination,
         AccessibilityAnalysisLegend,
-        AccessibilityAnalysisTrafficFlow
+        AccessibilityAnalysisTrafficFlow,
+        EditForReportTemplate
     },
     data () {
         this.availableModes = [
@@ -362,6 +363,9 @@ export default {
 
             // Run the three steps, making sure they happen synchronously (so we don't try to return results before analysis is finished)
             updateInterface(newRequest);
+            if (newRequest.updateInterfaceOnly) {
+                return null;
+            }
             runTool().then(returnResults);
             return null; // we care about the side effects only.
         },
@@ -409,6 +413,7 @@ export default {
         ...mapActions("Tools/SelectionManager", ["addNewSelection"]),
         ...mapActions("Maps", ["setCenter", "removeInteraction", "addInteraction", "addLayer", "registerListener", "unregisterListener"]),
         ...mapMutations("Maps", ["removeLayerFromMap"]),
+        ...mapMutations("Tools/ReportTemplates", ["finishEditingToolSettings", "abortEditingToolSettings"]),
         ...mapActions("MapMarker", ["placingPointMarker", "removePointMarker"]),
         ...mapActions("GraphicalSelect", ["featureToGeoJson"]),
         ...mapActions("Maps", ["addNewLayerIfNotExists"]),
@@ -542,19 +547,20 @@ export default {
             await this.createIsochrones();
 
             analysisSet.results = this._isochroneFeatures;
+
             analysisSet.inputs = {
-                _mode: JSON.parse(JSON.stringify(this._mode)),
-                _coordinate: JSON.parse(JSON.stringify(this._coordinate)),
-                _selectedFacilityNames: JSON.parse(JSON.stringify(this._selectedFacilityNames)),
-                _selectedDirections: JSON.parse(JSON.stringify(this._selectedDirections)),
-                _transportType: JSON.parse(JSON.stringify(this._transportType)),
-                _scaleUnit: JSON.parse(JSON.stringify(this._scaleUnit)),
-                _distance: JSON.parse(JSON.stringify(this._distance)),
-                _time: JSON.parse(JSON.stringify(this._time)),
-                _useTravelTimeIndex: JSON.parse(JSON.stringify(this.useTravelTimeIndex)),
-                _setByFeature: JSON.parse(JSON.stringify(this._setByFeature)),
-                _steps: JSON.parse(JSON.stringify(this.steps)),
-                _selectedFacility: this.selectedFacility
+                _mode: this._mode ? JSON.parse(JSON.stringify(this._mode)) : undefined,
+                _coordinate: this._coordinate ? JSON.parse(JSON.stringify(this._coordinate)) : undefined,
+                _selectedFacilityNames: this._selectedFacilityNames ? JSON.parse(JSON.stringify(this._selectedFacilityNames)) : undefined,
+                _selectedDirections: this._selectedDirections ? JSON.parse(JSON.stringify(this._selectedDirections)) : undefined,
+                _transportType: this._transportType ? JSON.parse(JSON.stringify(this._transportType)) : undefined,
+                _scaleUnit: this._scaleUnit ? JSON.parse(JSON.stringify(this._scaleUnit)) : undefined,
+                _distance: this._distance ? JSON.parse(JSON.stringify(this._distance)) : undefined,
+                _time: this._time ? JSON.parse(JSON.stringify(this._time)) : undefined,
+                _useTravelTimeIndex: this.useTravelTimeIndex ? JSON.parse(JSON.stringify(this.useTravelTimeIndex)) : undefined,
+                _setByFeature: this._setByFeature ? JSON.parse(JSON.stringify(this._setByFeature)) : undefined,
+                _steps: this.steps ? JSON.parse(JSON.stringify(this.steps)) : undefined,
+                _selectedFacility: this.selectedFacility ? this.selectedFacility : undefined
             };
             this.dataSets.push(analysisSet);
 
@@ -565,7 +571,9 @@ export default {
             }
 
             this.dataSets[this.activeSet].geojson = this.exportAsGeoJson(this.mapLayer);
-            this.addNewSelection({selection: analysisSet.results, source: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.title"), id: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.transportTypes." + this._transportType) + ", " + this.$t("additional:modules.tools.cosi.accessibilityAnalysis.scaleUnits." + this._scaleUnit) + ", [...]"});
+            // this line adds the accessibility analysis data selection to the selection manger
+            // this does not seem to make much sense: the only reason to reproduce this would be to reproduce the accessibility analysis. However, since the accessibility analysis creates this selection on the fly, we need the previous selection for reproduction, not this one. this one is then recreated on the fly everytime the analysis is run. Leaving this in in case we want this for some reason down the line.
+            // this.addNewSelection({selection: analysisSet.results, source: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.title"), id: this.$t("additional:modules.tools.cosi.accessibilityAnalysis.transportTypes." + this._transportType) + ", " + this.$t("additional:modules.tools.cosi.accessibilityAnalysis.scaleUnits." + this._scaleUnit) + ", [...]"});
         },
         exportAsGeoJson,
         // pagination features
@@ -665,6 +673,10 @@ export default {
                     <ToolInfo
                         :url="readmeUrl"
                         :locale="currentLocale"
+                    />
+                    <EditForReportTemplate
+                        :report-template-mode="reportTemplateMode"
+                        tool-name="AccessibilityAnalysis"
                     />
                     <div
                         v-if="active"
