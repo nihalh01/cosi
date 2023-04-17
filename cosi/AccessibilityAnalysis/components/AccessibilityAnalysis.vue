@@ -16,7 +16,7 @@ import mapCanvasToImage, {exportMapView} from "../../utils/mapCanvasToImage";
 import AccessibilityAnalysisLegend from "./AccessibilityAnalysisLegend.vue";
 import AccessibilityAnalysisTrafficFlow from "./AccessibilityAnalysisTrafficFlow.vue";
 import {unpackCluster} from "../../utils/features/unpackCluster.js";
-import EditForReportTemplate from "../../ReportTemplates/components/editForReportTemplate.vue";
+import EditForReportTemplate from "../../ReportTemplates/components/EditForReportTemplate.vue";
 export default {
     name: "AccessibilityAnalysis",
     components: {
