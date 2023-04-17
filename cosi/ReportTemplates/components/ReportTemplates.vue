@@ -1,6 +1,7 @@
 <script>
 // Documentation in ./doc/ReportTemplates.md
 import Tool from "../../../../src/modules/tools/ToolTemplate.vue";
+import ToolInfo from "../../components/ToolInfo.vue";
 import {getComponent} from "../../../../src/utils/getComponent";
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import getters from "../store/gettersReportTemplates";
@@ -10,7 +11,8 @@ import promisedEvent from "../utils/promisedEvent";
 export default {
     name: "ReportTemplates",
     components: {
-        Tool
+        Tool,
+        ToolInfo
     },
     data () {
         return {
