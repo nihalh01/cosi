@@ -4,6 +4,7 @@ Beim Starten von CoSI wird zunächst ein Bezugsrahmen festgelegt sowie ein Planu
 
 ![Abbildung 1: Gebietsauswahl](https://user-images.githubusercontent.com/43250699/142933538-fd2e1dbc-8bef-444a-bc7f-66d0066a457e.png)
 
+
 *Abbildung 1: Das Werkzeug "Gebiet auswählen"*  
 
 1. **Bezugsrahmen wählen**
