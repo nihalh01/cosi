@@ -24,3 +24,5 @@
    > Wenn kein Bezugrahmen/Gebiete definiert sind, können diese händisch im Vorfeld oder nach dem Laden ausgewählt werden. Die Inhalte werden dann für die aktive Gebietsauswahl geladen.
 4. **Vorlage laden**
    > Die ausgewählte Vorlage laden.
+
+![Abbildung 1: Vorlagen](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/Vorlagen2.png)
