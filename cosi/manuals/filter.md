@@ -16,3 +16,5 @@ Die aktiven, ausgewählten Themen können durch Klick auf den Reiter "Filter" na
     - Im Ergebnisfeld der Suche werden Namen der Gebiete / Einrichtungen angezeigt. Durch Anklicken der Namen wird die Auswahl in der Karte markiert. 
 4. **Filter löschen:** 
    > Einzelne Auswahl durch Anklicken des roten "X" oder gesamte Auswahl löschen durch Anklicken des Buttons "Alle löschen”.
+
+
