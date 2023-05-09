@@ -1,5 +1,5 @@
 ### Vorlagen
-![Abbildung 1: Vorlagen](../utils/assets/screenshots/vorlagen.png)
+![Abbildung 1: Vorlagen](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/Vorlagen1.png)
 
 *Abbildung 1: Vorlagen*
 
