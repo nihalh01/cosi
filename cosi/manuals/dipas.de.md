@@ -9,9 +9,9 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 1. **Beteiligungsverfahren auswählen**
    > Für jedes Verfahren aus der DIPAS-Datenbank wird automatisch eine Registerkarte angelegt, welche durchs Anklicken aufgeklappt werden kann. Ein aufgeklapptes Verfahren zeigt dessen Beschreibungstext und die Kontrollfelder für die Visualisierung. Jedem Verfahren wid dabei eine zufällige Farbe zugewiesen.
 2. **Indikator**
-   > Das Icon in dem Indikator zeigt zum einen die Farbe an, in dem der jeweilige Datensatz visualiert wird. Zum Anderen zeigt es, ob der Datensatz gerade auf der Karte angezeigt wird.
+   > Das Icon in dem Indikator zeigt zum einen die Farbe an, in dem der jeweilige Datensatz visualisiert wird. Zum Anderen zeigt es, ob der Datensatz gerade auf der Karte angezeigt wird.
 3. **Legende**
-   > Die Legende zeigt an, welche Farbe den Eintragstypen in der Visualierung zugeordnet wird.
+   > Die Legende zeigt an, welche Farbe den Eintragstypen in der Visualisierung zugeordnet wird.
 4. **Verfahren in der Karte anzeigen**
    > Zeigt das Verfahrensgebiet als Polygon in der Karte in der jeweiligen Farbe des Verfahrens.
    - **4.1 Auf der Karte anzeigen**
@@ -21,6 +21,7 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 6. **Heatmap in der Karte anzeigen** 
    > Zeigt eine Heatmap der Beiträge in der Karte. Das Gewicht eines Punktes richtet sich dabei nach der Gesamtzahl der Bewertungen des Beitrags, also der Stärke der Resonanz auf ihn.
 7. **Styling der Beiträge wählen**
+   * *Die Inhalte können nach verschiedenen Schwerpunkten dargestellt werden:*
    > - nach Projekt: Alle Beiträge werden gleichmäßig in der Projektfarbe dargestellt.
    > - nach Kategorien im Projektfarbraum: Jede Kategorie wird in einer Schattierung der Projektfarbe dargestellt.
    > - nach Kategorien im Regenbogenspektrum: Jeder Kategorie wird eine zufällig Farbe zugewiesen.
@@ -30,4 +31,4 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 9. **Automatisches Update**
    > Wenn diese Checkbox aktiviert ist, werden die DIPAS Daten ggf. live aktualisiert.
 10. **Beiträge in der Karte**
-      > Alle Beiträge werden mit ihrer ID (einer fortlaufenden Nummer) in der Karte dargestellt.
+      > Alle Beiträge werden mit Ihrer ID (einer fortlaufenden Nummer) in der Karte dargestellt.
