@@ -1,13 +1,16 @@
 ### Statistische Datenübersicht
-![Abbildung 27: Statistische Datenübersicht](../utils/assets/screenshots/statdashboard.png)
+
+In der statistischen Datenübersicht können tabellarisch Informationen zu den statistischen Daten der ausgewählten Gebiete ([Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)) angezeigt, ausgewertet und exportiert werden.
+
+  > Um zur statistischen Datenübersicht zu gelangenn, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
+  
+![Abbildung 27: Statistische Datenübersicht](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/statistische%20datenu%CC%88bersciht1.png)
 *Abbildung 27: Statistische Datenübersichtm 1*
 
 ![Abbildung 29: Statistische Datenübersicht](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/statistischedatenu%CC%88bersicht2.png)
 *Abbildung 29: Statistische Datenübersicht 2*
 
-In der statistischen Datenübersicht können tabellarisch Informationen zu den statistischen Daten der ausgewählten Gebiete ([Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)) angezeigt, ausgewertet und exportiert werden.
 
-Um zur statistischen Datenübersicht zu gelangenn, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
 
 1. **Gruppen ein-/ausklappen**
    > Thematische Gruppen (vgl. [Regionalstatistische Daten](./kartenvisualisierung.md)) über das **+** ein- und ausklappen.
