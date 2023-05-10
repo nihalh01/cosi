@@ -1,6 +1,9 @@
 ### Statistische Datenübersicht
 ![Abbildung 27: Statistische Datenübersicht](../utils/assets/screenshots/statdashboard.png)
-*Abbildung 27: Statistische Datenübersicht*
+*Abbildung 27: Statistische Datenübersichtm 1*
+
+![Abbildung 29: Statistische Datenübersicht](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/statistischedatenu%CC%88bersicht2.png)
+*Abbildung 29: Statistische Datenübersicht 2*
 
 In der statistischen Datenübersicht können tabellarisch Informationen zu den statistischen Daten der ausgewählten Gebiete ([Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)) angezeigt, ausgewertet und exportiert werden.
 
