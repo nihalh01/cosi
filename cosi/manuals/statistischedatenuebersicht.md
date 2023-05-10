@@ -4,6 +4,8 @@
 
 In der statistischen Datenübersicht können tabellarisch Informationen zu den statistischen Daten der ausgewählten Gebiete ([Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)) angezeigt, ausgewertet und exportiert werden.
 
+Um zur statistischen Datenübersicht zu gelangenn, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
+
 1. **Gruppen ein-/ausklappen**
    > Thematische Gruppen (vgl. [Regionalstatistische Daten](./kartenvisualisierung.md)) über das **+** ein- und ausklappen.
 2. **Aktionen**
