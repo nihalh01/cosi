@@ -6,7 +6,7 @@ Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informatione
 
 - Die ausgewählte Verwaltungsebene und ausgewählte Gebiete
 - Aktive Fachdatenthemen 
-- Mit den [Simulationswerkzeugen](./simulation.md) erstellte Szenarien
+- Mit den [Simulationswerkzeugen](./einrichtungenanlegen.md) erstellte Szenarien 
 - Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](./erreichbarkeitsanalyse.md) und [Versorgungsanalyse](./versorgungsanalyse.md)
 
 1. **Schnell speichern**
