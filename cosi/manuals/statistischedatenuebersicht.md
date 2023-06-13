@@ -1,13 +1,21 @@
 ### Statistische Datenübersicht
-![Abbildung 27: Statistische Datenübersicht](../utils/assets/screenshots/statdashboard.png)
-*Abbildung 27: Statistische Datenübersicht*
 
 In der statistischen Datenübersicht können tabellarisch Informationen zu den statistischen Daten der ausgewählten Gebiete ([Statistische Datenübersicht](#markdown-header-statistische-datenübersicht)) angezeigt, ausgewertet und exportiert werden.
+
+  > Um zur statistischen Datenübersicht zu gelangenn, wählen Sie im Dashboard den Punkt "statistische Datenübersicht" aus. 
+  
+![Abbildung 27: Statistische Datenübersicht](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/statistische%20datenu%CC%88bersciht1.png)
+*Abbildung 27: Statistische Datenübersichtm 1*
+
+![Abbildung 29: Statistische Datenübersicht](https://github.com/AlexandraKanapki/cosi/blob/COSI-handbuch/cosi/manuals/statistischedatenu%CC%88bersicht2.png)
+*Abbildung 29: Statistische Datenübersicht 2*
+
+
 
 1. **Gruppen ein-/ausklappen**
    > Thematische Gruppen (vgl. [Regionalstatistische Daten](./kartenvisualisierung.md)) über das **+** ein- und ausklappen.
 2. **Aktionen**
-   > - s. [Burger-Menü](#markdown-header-burgermenü)
+   > - s. [Bürger-Menü](#markdown-header-burgermenü)
    > - Visualisierung ein- / ausschalten: Schaltet die Visualisierung des ausgewählten Indikators zum aktuell gewählten Jahr in der Karte ein/aus
    > - Jahre ein- / ausklappen: Klappt die Tabellenzeile auf um alle Jahre der Zeitreihe darzustellen.
 3. **Jahr auswählen**
@@ -31,8 +39,8 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 12. **Kartenvisualisierung**
       > Die Darstellung in der Karte entspricht der des Kontrollfeldes [Kartenanalyse regionalstatistischer Daten](./kartenvisualisierung.md).
 
-#### Burgermenü
-![Abbildung 28: Statistische Datenübersicht - Burgermenü](../utils/assets/screenshots/statdashboard_burgermenu.png)
+#### Bürgermenü
+![Abbildung 28: Statistische Datenübersicht - Bürgermenü](../utils/assets/screenshots/statdashboard_burgermenu.png)
 *Abbildung 28: Statistische Datenübersicht*
 
 1. **Visualisierung ein-/ausschalten**

@@ -2,6 +2,8 @@
 ___
 Beim Starten von CoSI wird zunächst ein Bezugsrahmen festgelegt sowie ein Planungsgebiet zusammengestellt und bestätigt.
 
+Wenn Sie Ihren Bezugsrahmen ändern möchten, könnten Sie dies unter "Gebiete auswählen" tun.
+
 ![Abbildung 1: Gebietsauswahl](https://user-images.githubusercontent.com/43250699/142933538-fd2e1dbc-8bef-444a-bc7f-66d0066a457e.png)
 
 
