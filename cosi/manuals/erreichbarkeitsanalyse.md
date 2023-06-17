@@ -1,9 +1,10 @@
 ### Erreichbarkeitsanalyse
 Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
 Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
-1. [Ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-Referenzpunkt)  
-2. [Im Planungsgebiet](#markdown-header-erreichbarkeit-im-gebiet) 
-3. [Entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
+1. [Ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-Referenzpunkt)
+2. [Ab einer ausgewählten Einrichtung] (#markdown-header-erreichbrkeit-ab-einer-ausgewählten-Einrichtung)
+3. [Im Planungsgebiet](#markdown-header-erreichbarkeit-im-gebiet) 
+4. [Entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
 
 Der Modus der Analyse kann im Dropdown Menü ausgewählt werden.
 
@@ -53,6 +54,9 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 
 *Für **Tageszeit**, **Verkehrsfluss berücksichtigen**, und **Von Flächenaußengrenzen berechnen** siehe im folgenden "Erreichbarkeit im Gebiet"*
 
+#### Erreichbarkeit ab einer ausgewählten Einrichtung
+
+Diese Analyse wird genauso hergestellt, wie ab einem Referenzpunkt. Nur wird hier statt einem Referenzpunkt auf der Karte eine Einrichtung auf der Karte angeklickt.
 
 #### Erreichbarkeit im Gebiet
 Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (z.B. Kindergärten) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann angegeben werden in Zeit oder in Metern. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
