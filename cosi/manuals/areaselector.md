@@ -7,9 +7,9 @@ Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, inne
 *Abbildung 4: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
-   > Klicken Sie auf diesesn Button, um ein neues Polygon auf der Karte zu zeichnen.
+   > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
 2. **Eingabe löschen**
-   > Löschte die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
+   > Löscht die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
 3. **Einwohnerabfrage**
    > Für die aktuelle Flächenauswahl eine [Einwohnerabfrage](./einwohnerabfrage.md) durchführen.  
 4. **Ergebnisdarstellung auf der Karte**
