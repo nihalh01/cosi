@@ -40,12 +40,14 @@ Szenarios.
 7. **Erforderliche Spalten**
    > Notwendige Bedingung zur Erstellung einer simulierten Einrichtung.
 8. **Kapitelbezeichnung**
-9. **Name**
-10. **Optionale Spalten**
+   > Art der ausgewählten Einrichtung.
+10. **Name**
+   > Bezeichnung der jeweiligen Einrichtung, die erstellt werden soll.
+11. **Optionale Spalten**
    > Können bei Bedarf ergänzt werden.
-11. **Anlegen**
+12. **Anlegen**
    > Erstellt die simulierte Einrichtung
-12. **Zurücksetzen**
+13. **Zurücksetzen**
    > Setzt das Szenario zurück.
 
 #### Schrittweises Vorgehen
