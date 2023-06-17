@@ -39,15 +39,15 @@ Szenarios.
    > Entfernt vorhandene Geometrie.
 7. **Erforderliche Spalten**
    > Notwendige Bedingung zur Erstellung einer simulierten Einrichtung.
-8. **Kapitelbezeichnung**
-   > Art der ausgewählten Einrichtung.
-10. **Name**
-   > Bezeichnung der jeweiligen Einrichtung, die erstellt werden soll.
-11. **Optionale Spalten**
+   7.1 **Kapitelbezeichnung**
+      > Art der ausgewählten Einrichtung.
+   7.2 **Name**
+      > Bezeichnung der jeweiligen Einrichtung, die erstellt werden soll.
+8. **Optionale Spalten**
    > Können bei Bedarf ergänzt werden.
-12. **Anlegen**
+9. **Anlegen**
    > Erstellt die simulierte Einrichtung
-13. **Zurücksetzen**
+10. **Zurücksetzen**
    > Setzt das Szenario zurück.
 
 #### Schrittweises Vorgehen
