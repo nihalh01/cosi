@@ -2,7 +2,7 @@
 Die "Erreichbarkeitsanalyse" erreichen Sie über den Bereich "Analyse". 
 Eine Erreichbarkeitsanalyse kann auf drei Arten durchgeführt werden:  
 1. [Ab einem Referenzpunkt](#markdown-header-erreichbarkeit-ab-einem-Referenzpunkt)
-2. [Ab einer ausgewählten Einrichtung] (#markdown-header-erreichbrkeit-ab-einer-ausgewählten-Einrichtung)
+2. [Ab einer ausgewählten Einrichtung] #### Erreichbarkeit ab einer ausgewählten Einrichtung
 3. [Im Planungsgebiet](#markdown-header-erreichbarkeit-im-gebiet) 
 4. [Entlang einer Route](#markdown-header-erreichbarkeit-entlang-einer-route)
 
