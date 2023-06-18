@@ -1,6 +1,6 @@
 ## Geodaten Importieren
 ___
-Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochladen und als Themenlayer einfügen, der anschließnend visualisiert werden kann und dem alle weiteren Analysefunktionen von CoSI zur Verfügung stehen.   
+Mit diesem Werkzeug können Sie eigene Datensätze in Form von GeoJSONs hochladen und als Themenlayer einfügen, der anschließend visualisiert werden kann und dem alle weiteren Analysefunktionen von CoSI zur Verfügung stehen.   
 
 ![Abbildung 1: Dateien importieren](https://user-images.githubusercontent.com/43250699/142930620-f556b3bb-a098-4deb-8394-2b5db6963c94.jpg)  
 *Abbildung 1: Dateien importieren*   
