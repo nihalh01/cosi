@@ -39,7 +39,7 @@ In der statistischen Datenübersicht können tabellarisch Informationen zu den s
 12. **Kartenvisualisierung**
       > Die Darstellung in der Karte entspricht der des Kontrollfeldes [Kartenanalyse regionalstatistischer Daten](./kartenvisualisierung.md).
 
-#### Burgermenu
+#### Dreipunkt Menü
 ![Abbildung 28: Statistische Datenübersicht - Burgermenu](../utils/assets/screenshots/statdashboard_burgermenu.PNG)
 *Abbildung 28: Statistische Datenübersicht*
 
