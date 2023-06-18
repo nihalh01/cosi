@@ -3,14 +3,14 @@
 *Abbildung 1: Sitzung speichern / laden*
 
 
-Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst
+Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst:
 
 - Die ausgewählte Verwaltungsebene und ausgewählte Gebiete
 - Aktive Fachdatenthemen 
 - Mit den [Simulationswerkzeugen](./einrichtungenanlegen.md) erstellte Szenarien 
 - Ergebnisse und Konfigurationen der Werkzeuge [Erreichbarkeitsanalyse](./erreichbarkeitsanalyse.md) und [Versorgungsanalyse](./versorgungsanalyse.md)
 
-und sind unter "Dienste", "Sitzung speichern/laden" zu finden.
+Die Funktion ist unter "Dienste", "Sitzung speichern/laden" zu finden.
 
 
 1. **Schnell speichern**
