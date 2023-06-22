@@ -91,7 +91,7 @@ const mutations = {
      * @param {Object} payload data from WhatALocation endpoint
      * @returns {void}
      */
-    setIndividualVisitorsPerYear (state, payload) {
+    setActivitiesPerYear (state, payload) {
         const
             data = payload.data,
             aggregated = {},
@@ -117,7 +117,7 @@ const mutations = {
             });
         });
 
-        state.individualVisitorsPerYear = result;
+        state.activitiesPerYear = result;
     },
     /**
      * Generate a GeoJson for all WhatALocation Locations.

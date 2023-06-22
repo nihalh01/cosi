@@ -152,7 +152,7 @@ h3 {
 .cards {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
     margin: 0 auto 1rem auto;

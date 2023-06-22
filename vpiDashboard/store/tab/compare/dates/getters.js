@@ -2,19 +2,19 @@ import getCompareData from "../../../../utils/getCompareData";
 const getters = {
     /**
      * Generates the data array for the bar chart for lcoation a and data a
-     * @param {Object} individualVisitorsDateA individualVisitorsDateA state
+     * @param {Object} activitiesDateA activitiesDateA state
      * @return {Object} data Object for bar chart
      */
-    getInvididualVisitorsDateA: ({individualVisitorsDateA}) => {
-        return getCompareData.getCompareData(individualVisitorsDateA, "Individual Vistors Date A", "#FD763B", "activities");
+    getActivitiesDateA: ({activitiesDateA}) => {
+        return getCompareData.getCompareData(activitiesDateA, "#FD763B", "activities");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
-     * @param {Object} individualVisitorsDateA individualVisitorsDateA state
+     * @param {Object} activitiesDateB activitiesDateB state
      * @return {Object} data Object for bar chart
      */
-    getInvididualVisitorsDateB: ({individualVisitorsDateB}) => {
-        return getCompareData.getCompareData(individualVisitorsDateB, "Individual Vistors Date B", "#0335FC", "activities");
+    getActivitiesDateB: ({activitiesDateB}) => {
+        return getCompareData.getCompareData(activitiesDateB, "#0335FC", "activities");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
@@ -22,7 +22,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getDwellTimeDateA: ({dwellTimeDateA}) => {
-        return getCompareData.getCompareData(dwellTimeDateA, "Dwell Time Date A", "#FD763B", "Verweildauer");
+        return getCompareData.getCompareData(dwellTimeDateA, "#FD763B", "dwellTime");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
@@ -30,7 +30,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getDwellTimeDateB: ({dwellTimeDateB}) => {
-        return getCompareData.getCompareData(dwellTimeDateB, "Dwell Time Date B", "#0335FC", "Verweildauer");
+        return getCompareData.getCompareData(dwellTimeDateB, "#0335FC", "dwellTime");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
@@ -38,7 +38,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getAgeGroupsDateA: ({ageGroupsDateA}) => {
-        return getCompareData.getCompareData(ageGroupsDateA, "Age Group Date A", "#FD763B", "Altersgruppen");
+        return getCompareData.getCompareData(ageGroupsDateA, "#FD763B", "ageGroup");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
@@ -46,23 +46,23 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getAgeGroupsDateB: ({ageGroupsDateB}) => {
-        return getCompareData.getCompareData(ageGroupsDateB, "Age Group Date B", "#0335FC", "Altersgruppen");
+        return getCompareData.getCompareData(ageGroupsDateB, "#0335FC", "ageGroup");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date a
-     * @param {Object} visitorTypesDateA ageGroupsDateA state
+     * @param {Object} visitorTypesDateA visitorTypesDateA state
      * @return {Object} data Object for bar chart
      */
     getVisitorTypesDateA: ({visitorTypesDateA}) => {
-        return getCompareData.getCompareData(visitorTypesDateA, "Visitor Type Date A", "#FD763B", "Besuchergruppen");
+        return getCompareData.getCompareData(visitorTypesDateA, "#FD763B", "visitorTypes");
     },
     /**
      * Generates the data array for the bar chart for lcoation a and date b
-     * @param {Object} visitorTypesDateA ageGroupsDateA state
+     * @param {Object} visitorTypesDateB visitorTypesDateB state
      * @return {Object} data Object for bar chart
      */
     getVisitorTypesDateB: ({visitorTypesDateB}) => {
-        return getCompareData.getCompareData(visitorTypesDateB, "Visitor Type Date B", "#0335FC", "Besuchergruppen");
+        return getCompareData.getCompareData(visitorTypesDateB, "#0335FC", "visitorTypes");
     }
 };
 

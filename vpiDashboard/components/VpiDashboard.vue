@@ -6,7 +6,7 @@ import actions from "../store/actionsVpiDashboard";
 import {mapState, mapGetters, mapActions, mapMutations} from "vuex";
 import {getComponent} from "../../../src/utils/getComponent";
 import Tabs from "./DashboardTabs.vue";
-import TabIndividualBesucher from "./Tabs/TabIndividualBesucher.vue";
+import TabActivities from "./Tabs/TabActivities.vue";
 import TabCompareDashboard from "./Tabs/TabCompareDashboard.vue";
 import TabDwellTime from "./Tabs/TabDwellTime.vue";
 import TabInfo from "./Tabs/TabInfo.vue";
@@ -23,7 +23,7 @@ export default {
     components: {
         ToolTemplate,
         Tabs,
-        TabIndividualBesucher,
+        TabActivities,
         TabCompareDashboard,
         TabDwellTime,
         TabInfo,
@@ -203,8 +203,7 @@ export default {
             this.setActive(false);
             const model = getComponent(this.$store.state.Tools.VpiDashboard.id);
 
-            // ensures that the individual visitors tabs is active after reopening
-            // the tool
+            // ensures that the activities tab is active after reopening the tool
             this.TabItems.forEach((tabItem) => {
                 if (tabItem.index === 0) {
                     tabItem.selected = true;
@@ -222,7 +221,7 @@ export default {
             this.$store.state.Tools.Gfi.gfiFeatures = [];
         },
         /**
-         * initiates the asynchronous request for individual visitors from WhatALocation
+         * initiates the asynchronous request for activities from WhatALocation
          * @param {String} locationId id of the location that its data going to be downloaded.
          * @returns {void}
          */
@@ -280,7 +279,7 @@ export default {
                                         v-if="renderTab"
                                         slot="tab-content-0"
                                     >
-                                        <TabIndividualBesucher />
+                                        <TabActivities />
                                     </div>
                                     <div slot="tab-content-1">
                                         <TabAgeGroups />

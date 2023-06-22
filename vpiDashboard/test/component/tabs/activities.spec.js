@@ -1,4 +1,4 @@
-import TabIndividualBesucherComponent from "../../../components/Tabs/TabIndividualBesucher.vue";
+import TabActivitiesComponent from "../../../components/Tabs/TabActivities.vue";
 import {config, shallowMount, createLocalVue} from "@vue/test-utils";
 import {expect} from "chai";
 import Vuex from "vuex";
@@ -11,9 +11,9 @@ config.mocks.$t = key => key;
 
 /**
  * Run only these tests via command:
- * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ individual visitor tab component"
+ * npm run test:vue:watch -- --grep="addons/vpiDashboard/test/ activities tab component"
  */
-describe("addons/vpiDashboard/test/ individual visitor tab component", () => {
+describe("addons/vpiDashboard/test/ activities tab component", () => {
     let wrapper = null;
 
     before(() => {
@@ -36,27 +36,27 @@ describe("addons/vpiDashboard/test/ individual visitor tab component", () => {
         });
 
         wrapper = shallowMount(
-            TabIndividualBesucherComponent, {
+            TabActivitiesComponent, {
                 localVue,
                 store}
         );
     });
 
-    it("renders the individual besucher component", () => {
+    it("renders the activities component", () => {
         expect(wrapper.find(".chartDataSelection").exists()).to.be.true;
     });
 
     it("recognizes the selectedChartData that needs user interaction", () => {
         wrapper.vm.selectedChartData = "hourly";
-        expect(wrapper.vm.isIndividualChartType).to.be.true;
+        expect(wrapper.vm.isActivitiesChartType).to.be.true;
         wrapper.vm.selectedChartData = "timeRange";
-        expect(wrapper.vm.isIndividualChartType).to.be.true;
+        expect(wrapper.vm.isActivitiesChartType).to.be.true;
         wrapper.vm.selectedChartData = "overview";
-        expect(wrapper.vm.isIndividualChartType).to.be.false;
+        expect(wrapper.vm.isActivitiesChartType).to.be.false;
         wrapper.vm.selectedChartData = "dailyoverview";
-        expect(wrapper.vm.isIndividualChartType).to.be.false;
+        expect(wrapper.vm.isActivitiesChartType).to.be.false;
         wrapper.vm.selectedChartData = "monthlyoverview";
-        expect(wrapper.vm.isIndividualChartType).to.be.false;
+        expect(wrapper.vm.isActivitiesChartType).to.be.false;
     });
 
     it("sets the correct date picker title", () => {

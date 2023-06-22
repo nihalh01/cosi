@@ -41,10 +41,10 @@ describe("addons/vpiDashboard/test/ compare date dashboard tab component", () =>
                         getVisitorTypesDateB () {
                             return {};
                         },
-                        getIndividualVisitorsDateA () {
+                        getActivitiesDateA () {
                             return {};
                         },
-                        getIndividualVisitorsDateB () {
+                        getActivitiesDateB () {
                             return {};
                         },
                         getAllLocationsArray () {

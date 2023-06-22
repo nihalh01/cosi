@@ -7,7 +7,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getDwellTimeLocationA: ({dwellTimeLocationA}) => {
-        return getCompareData.getCompareData(dwellTimeLocationA, "Dwell Time Location A", "#FD763B", "Verweildauer");
+        return getCompareData.getCompareData(dwellTimeLocationA, "#FD763B", "dwellTime");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
@@ -15,7 +15,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getDwellTimeLocationB: ({dwellTimeLocationB}) => {
-        return getCompareData.getCompareData(dwellTimeLocationB, "Dwell Time Location B", "#0335FC", "Verweildauer");
+        return getCompareData.getCompareData(dwellTimeLocationB, "#0335FC", "dwellTime");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
@@ -23,7 +23,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getAgeGroupsLocationA: ({ageGroupsLocationA}) => {
-        return getCompareData.getCompareData(ageGroupsLocationA, "Age Group Location A", "#FD763B", "Altersgruppen");
+        return getCompareData.getCompareData(ageGroupsLocationA, "#FD763B", "ageGroup");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
@@ -31,7 +31,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getAgeGroupsLocationB: ({ageGroupsLocationB}) => {
-        return getCompareData.getCompareData(ageGroupsLocationB, "Age Group Location B", "#0335FC", "Altersgruppen");
+        return getCompareData.getCompareData(ageGroupsLocationB, "#0335FC", "ageGroup");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
@@ -39,7 +39,7 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getVisitorTypesLocationA: ({visitorTypesLocationA}) => {
-        return getCompareData.getCompareData(visitorTypesLocationA, "Visitor Types Location A", "#FD763B", "Besuchergruppen");
+        return getCompareData.getCompareData(visitorTypesLocationA, "#FD763B", "visitorTypes");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
@@ -47,23 +47,23 @@ const getters = {
      * @return {Object} data Object for bar chart
      */
     getVisitorTypesLocationB: ({visitorTypesLocationB}) => {
-        return getCompareData.getCompareData(visitorTypesLocationB, "Visitor Types Location B", "#0335FC", "Besuchergruppen");
+        return getCompareData.getCompareData(visitorTypesLocationB, "#0335FC", "visitorTypes");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
-     * @param {Object} individualVisitorsLocationA individualVisitorsLocationA state
+     * @param {Object} activitiesLocationA activitiesLocationA state
      * @return {Object} data Object for bar chart
      */
-    getIndividualVisitorsLocationA: ({individualVisitorsLocationA}) => {
-        return getCompareData.getCompareData(individualVisitorsLocationA, "Visitor Types Location A", "#FD763B", "activities");
+    getActivitiesLocationA: ({activitiesLocationA}) => {
+        return getCompareData.getCompareData(activitiesLocationA, "#FD763B", "activities");
     },
     /**
      * Generates the data array for the bar chart for location a and date a
-     * @param {Object} individualVisitorsLocationB individualVisitorsLocationB state
+     * @param {Object} activitiesLocationB activitiesLocationB state
      * @return {Object} data Object for bar chart
      */
-    getIndividualVisitorsLocationB: ({individualVisitorsLocationB}) => {
-        return getCompareData.getCompareData(individualVisitorsLocationB, "Visitor Types Location B", "#0335FC", "activities");
+    getActivitiesLocationB: ({activitiesLocationB}) => {
+        return getCompareData.getCompareData(activitiesLocationB, "#0335FC", "activities");
     }
 };
 

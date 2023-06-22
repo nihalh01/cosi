@@ -1,6 +1,6 @@
 const state = {
-    individualVisitorsDateA: undefined,
-    individualVisitorsDateB: undefined,
+    activitiesDateA: undefined,
+    activitiesDateB: undefined,
     ageGroupsDateA: undefined,
     ageGroupsDateB: undefined,
     dwellTimeDateA: undefined,

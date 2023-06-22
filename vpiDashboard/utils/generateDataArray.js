@@ -4,13 +4,12 @@ const generateDataArray = {
     /**
      * Generates an array that the chartjs library can consume
      * @param {Object} dataFromEndpoint The data from the endpoint respectivly from the state
-     * @param {String} label The label for the data.
      * @param {String} backgroundColor The background color for the bars
      * @param {String} endpoint The endpoint flag
      * @return {{datasets: [{backgroundColor, data: *[], hoverOffset: number, label}], labels: *[]}} dataset that can
      * be consumed by the chart.js library
      */
-    generateDataArray (dataFromEndpoint, label, backgroundColor, endpoint) {
+    generateDataArray (dataFromEndpoint, backgroundColor, endpoint) {
         let
             groupByProperty = "",
             dataKey = "";
@@ -20,15 +19,15 @@ const generateDataArray = {
             groupByProperty = "date";
             dataKey = "sum_num_visitors";
         }
-        if (endpoint === "Altersgruppen") {
+        if (endpoint === "ageGroup") {
             groupByProperty = "age_group";
             dataKey = "sum_num_visitors";
         }
-        if (endpoint === "Besuchergruppen") {
+        if (endpoint === "visitorTypes") {
             groupByProperty = "VisitorType";
             dataKey = "sum_num_visitors";
         }
-        if (endpoint === "Verweildauer") {
+        if (endpoint === "dwellTime") {
             groupByProperty = "DwellTime";
             dataKey = "sum_num_visitors";
         }
@@ -49,10 +48,10 @@ const generateDataArray = {
             }
         });
 
-        if (endpoint === "Verweildauer") {
+        if (endpoint === "dwellTime") {
             labels = sortArrays.sortDwellTimeArray(labels);
         }
-        if (endpoint === "Altersgruppen") {
+        if (endpoint === "ageGroup") {
             labels = sortArrays.sortAgeGroupsArray(labels);
             // since we do not want the u data
             // and it is the last item in the array
@@ -75,9 +74,7 @@ const generateDataArray = {
         const data = {
             labels: labels,
             datasets: [{
-                label: label,
                 data: sum_num_visitors,
-
                 hoverOffset: 4,
                 backgroundColor: backgroundColor
             }]

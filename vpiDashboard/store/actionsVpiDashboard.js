@@ -13,7 +13,6 @@ const actions = {
      * @returns {Object} data returned by the endpoint
      **/
     getAllLocations: async ({commit}) => {
-
         commit("setLoader", true);
 
         const
@@ -43,7 +42,7 @@ const actions = {
             commit("setAverageVisitorsPerDay", response.data);
 
             // Tab "Activities", Card: "unique weekly visitors in the year"
-            commit("setIndividualVisitorsPerYear", response.data);
+            commit("setActivitiesPerYear", response.data);
 
             // Tab "Activities", Dropdown: "Activities"
             commit("setBarChartData", response.data);
@@ -74,14 +73,13 @@ const actions = {
             responseA = await apiEndpointService.receiveActivities(compareData.location_id_a, compareData.date),
             responseB = await apiEndpointService.receiveActivities(compareData.location_id_b, compareData.date);
 
-        commit("setIndividualVisitorsLocationA", responseA.data);
-        commit("setIndividualVisitorsLocationB", responseB.data);
+        commit("setActivitiesLocationA", responseA.data);
+        commit("setActivitiesLocationB", responseB.data);
         commit("setLoader", false);
     },
     /**
      * Addresses the WhatALocation dwell time endpoint to get the dwell times for the complete time range
-     * @param {Object} state the store's state object
-     * @param {Object} commit actions commit object.
+     * @param {Object} state the store's state and commit object.
      * @returns {void}
      **/
     getDwellTimes: async ({state, commit}) => {
@@ -94,7 +92,7 @@ const actions = {
         commit("setLoader", false);
     },
     /**
-     * Adresses the WhatALocation dwell time endpoint with 2
+     * Addresses the WhatALocation dwell time endpoint with 2
      * request to compare data
      * @param {Object} commit Commit Object
      * @param {Object} compareData Object which holds the data to compare
@@ -109,13 +107,11 @@ const actions = {
 
         commit("setDwellTimeLocationA", responseA.data);
         commit("setDwellTimeLocationB", responseB.data);
-
         commit("setLoader", false);
     },
     /**
      * Get all data by age group
-     * @param {Object} state the store's state object
-     * @param {Object } commit Commit Object
+     * @param {Object} state the store's state and commit object.
      * @returns {Promise<void>} sets the data in store
      */
     getAllAgeGroupsData: async ({state, commit}) => {
@@ -124,12 +120,12 @@ const actions = {
         const
             response = await apiEndpointService.receiveAgeGroups(state.selectedLocationId);
 
-        await commit("setAllAgeGroupsData", response.data);
-        await commit("setAllAgeGroupsMonthlyData");
+        commit("setAllAgeGroupsData", response.data);
+        commit("setAllAgeGroupsMonthlyData");
         commit("setLoader", false);
     },
     /**
-     * Adresses the WhatALocation age group endpoint with 2
+     * Addresses the WhatALocation age group endpoint with 2
      * request to compare data
      * @param {Object } commit Commit Object
      * @param {Object } compareData Object which holds the data to compare
@@ -144,7 +140,6 @@ const actions = {
 
         commit("setAgeGroupsLocationA", responseA.data);
         commit("setAgeGroupsLocationB", responseB.data);
-
         commit("setLoader", false);
     },
     /**
@@ -153,7 +148,7 @@ const actions = {
      * @param {String} date contains the date to be requested
      * @returns {Object} response object from WhatALocation endpoint
      **/
-    getIndividualVisitorsForDay: async ({state, commit}, date) => {
+    getActivitiesForDay: async ({state, commit}, date) => {
         commit("setLoader", true);
 
         const
@@ -163,7 +158,7 @@ const actions = {
         return response.data;
     },
     /**
-     * changes the selected chart data base
+     * changes the selected chart data key
      * @param {Object} commit actions commit object.
      * @param {String} chartname contains dateFrom and dateTo to define daterange to be requested
      * @returns {void}

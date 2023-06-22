@@ -67,36 +67,28 @@ export default {
             return true;
         },
         dwellTime () {
-            const dwellTimes = {
+            return {
                 dwellTimeLocationA: this.getDwellTimeLocationA,
                 dwellTimeLocationB: this.getDwellTimeLocationB
             };
-
-            return dwellTimes;
         },
         ageGroups () {
-            const ageGroups = {
+            return {
                 ageGroupsLocationA: this.getAgeGroupsLocationA,
                 ageGroupsLocationB: this.getAgeGroupsLocationB
             };
-
-            return ageGroups;
         },
         visitorTypes () {
-            const visitorTypes = {
+            return {
                 visitorTypesLocationA: this.getVisitorTypesLocationA,
                 visitorTypesLocationB: this.getVisitorTypesLocationB
             };
-
-            return visitorTypes;
         },
         invidualVisitors () {
-            const individualVisitors = {
-                individualVisitorsLocationA: this.getIndividualVisitorsLocationA,
-                individualVisitorsLocationB: this.getIndividualVisitorsLocationB
+            return {
+                activitiesLocationA: this.getActivitiesLocationA,
+                activitiesLocationB: this.getActivitiesLocationB
             };
-
-            return individualVisitors;
         },
         showCompareButton () {
             if (this.location_a !== "" && this.location_b !== "" && this.character !== "" && this.date !== null) {
@@ -222,7 +214,7 @@ export default {
             }
             if (this.character === "activities") {
                 await this.getActivitiesToCompare(compareData);
-                this.setBarCharDataForIndividualVisitors();
+                this.setBarCharDataForActivities();
             }
             this.showCompareChart = true;
         },
@@ -263,12 +255,12 @@ export default {
          * sets the bar chart data to compare invidual visitors
          * @return {void}
          */
-        setBarCharDataForIndividualVisitors () {
-            this.chartdata.bar.datasets[0] = this.invidualVisitors.individualVisitorsLocationA.datasets[0];
-            this.chartdata.bar.datasets[1] = this.invidualVisitors.individualVisitorsLocationB.datasets[0];
+        setBarCharDataForActivities () {
+            this.chartdata.bar.datasets[0] = this.invidualVisitors.activitiesLocationA.datasets[0];
+            this.chartdata.bar.datasets[1] = this.invidualVisitors.activitiesLocationB.datasets[0];
             this.chartdata.bar.datasets[0].label = this.location_a.street;
             this.chartdata.bar.datasets[1].label = this.location_b.street;
-            this.chartdata.bar.labels = this.invidualVisitors.individualVisitorsLocationA.labels;
+            this.chartdata.bar.labels = this.invidualVisitors.activitiesLocationA.labels;
         },
         /**
          * sets the disabled dates for the datepicker

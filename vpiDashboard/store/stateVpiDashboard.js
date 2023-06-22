@@ -15,7 +15,7 @@ const state = {
     allDataClicked: true,
     averageVisitorsPerMonth: [],
     averageVisitorsPerDay: [],
-    individualVisitorsPerYear: "",
+    activitiesPerYear: "",
     allLocationsGeoJson: undefined,
     allLocationsArray: [],
     barChartDailyData: [],

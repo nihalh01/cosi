@@ -24,8 +24,8 @@ const getters = {
      * @param {Object} state the stores state object
      * @returns {Array} array of yearly data average, rounded
      */
-    getIndividualVisitorsPerYear (state) {
-        return state.individualVisitorsPerYear;
+    getActivitiesPerYear (state) {
+        return state.activitiesPerYear;
     },
 
     /**

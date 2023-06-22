@@ -5,8 +5,8 @@ const state = {
     ageGroupsLocationB: undefined,
     visitorTypesLocationA: undefined,
     visitorTypesLocationB: undefined,
-    individualVisitorsLocationA: undefined,
-    individualVisitorsLocationB: undefined,
+    activitiesLocationA: undefined,
+    activitiesLocationB: undefined,
     selectLocationBInMap: false,
     selectedLocationB: undefined
 };

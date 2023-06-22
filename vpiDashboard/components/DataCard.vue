@@ -48,7 +48,7 @@ export default {
             [
                 "averageVisitorsPerMonth",
                 "averageVisitorsPerDay",
-                "individualVisitorsPerYear",
+                "activitiesPerYear",
                 "visitorTypesByTypeAndYear"
             ]),
         /**
@@ -62,8 +62,8 @@ export default {
             if (this.detail === "daily" && this.averageVisitorsPerDay.length > 0) {
                 return this.averageVisitorsPerDay[this.currentDayIndex].avg.toLocaleString(this.currentLocale);
             }
-            if (this.detail === "individualVisitors" && this.individualVisitorsPerYear !== "") {
-                const selectedYearData = this.individualVisitorsPerYear.filter((element) => {
+            if (this.detail === "activities" && this.activitiesPerYear !== "") {
+                const selectedYearData = this.activitiesPerYear.filter((element) => {
                     return Number(element.date__year) === this.currentYearIndex + 2019;
                 });
 
@@ -94,7 +94,7 @@ export default {
             if (this.detail === "daily") {
                 return this.translate("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
             }
-            if (this.detail === "individualVisitors") {
+            if (this.detail === "activities") {
                 return [2019, 2020, 2021, 2022, 2023];
             }
 
@@ -126,7 +126,7 @@ export default {
             if (this.detail === "daily") {
                 this.currentDayIndex = index;
             }
-            if (this.detail === "individualVisitors") {
+            if (this.detail === "activities") {
                 this.currentYearIndex = index;
             }
 

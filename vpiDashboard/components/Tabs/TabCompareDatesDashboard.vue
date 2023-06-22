@@ -58,36 +58,28 @@ export default {
             return false;
         },
         dwellTime () {
-            const dwellTimes = {
+            return {
                 dwellTimeDateA: this.getDwellTimeDateA,
                 dwellTimeDateB: this.getDwellTimeDateB
             };
-
-            return dwellTimes;
         },
-        individualVisitors () {
-            const individualVisitors = {
-                individualVisitorsDateA: this.getInvididualVisitorsDateA,
-                individualVisitorsDateB: this.getInvididualVisitorsDateB
+        activities () {
+            return {
+                activitiesDateA: this.getActivitiesDateA,
+                activitiesDateB: this.getActivitiesDateB
             };
-
-            return individualVisitors;
         },
         ageGroups () {
-            const ageGroups = {
+            return {
                 ageGroupsDateA: this.getAgeGroupsDateA,
                 ageGroupsDateB: this.getAgeGroupsDateB
             };
-
-            return ageGroups;
         },
         visitorTypes () {
-            const visitorTypes = {
+            return {
                 visitorTypesDateA: this.getVisitorTypesDateA,
                 visitorTypesDateB: this.getVisitorTypesDateB
             };
-
-            return visitorTypes;
         }
     },
     watch: {
@@ -163,7 +155,7 @@ export default {
             if (this.character === "activities") {
                 this.characterName = this.translate("additional:modules.tools.vpidashboard.tab.compareDates.dropdown.activities");
                 await this.getDataToCompare(compareData);
-                this.setBarChartDataForInvidiualVisitors();
+                this.setBarChartDataForActivities();
             }
             if (this.character === "ageGroup") {
                 this.characterName = this.translate("additional:modules.tools.vpidashboard.tab.compareDates.dropdown.ageGroup");
@@ -196,15 +188,15 @@ export default {
             this.chartdata.bar.labels = this.dwellTime.dwellTimeDateA.labels;
         },
         /**
-         * sets the bar chart data to compare individual visitors
+         * sets the bar chart data to compare activities
          * @return {void}
          */
-        setBarChartDataForInvidiualVisitors () {
-            this.chartdata.bar.datasets[0] = this.individualVisitors.individualVisitorsDateA.datasets[0];
-            this.chartdata.bar.datasets[1] = this.individualVisitors.individualVisitorsDateB.datasets[0];
+        setBarChartDataForActivities () {
+            this.chartdata.bar.datasets[0] = this.activities.activitiesDateA.datasets[0];
+            this.chartdata.bar.datasets[1] = this.activities.activitiesDateB.datasets[0];
             this.chartdata.bar.datasets[0].label = dayjs(this.date_a).format("DD.MM.YYYY");
             this.chartdata.bar.datasets[1].label = dayjs(this.date_b).format("DD.MM.YYYY");
-            this.chartdata.bar.labels = this.individualVisitors.individualVisitorsDateA.labels;
+            this.chartdata.bar.labels = this.activities.activitiesDateA.labels;
         },
         /**
          * sets the bar chart data to compare age groups

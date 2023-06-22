@@ -29,8 +29,8 @@ const actions = {
                 responseA = await apiEndpointService.receiveActivities(compareData.location_id, compareData.dates[0].date),
                 responseB = await apiEndpointService.receiveActivities(compareData.location_id, compareData.dates[1].date);
 
-            commit(`setIndividualVisitors${compareData.dates[0].dateName}`, responseA.data);
-            commit(`setIndividualVisitors${compareData.dates[1].dateName}`, responseB.data);
+            commit(`setActivities${compareData.dates[0].dateName}`, responseA.data);
+            commit(`setActivities${compareData.dates[1].dateName}`, responseB.data);
             commit("setLoader", false);
         }
 

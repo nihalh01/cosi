@@ -41,10 +41,10 @@ describe("addons/vpiDashboard/test/ compare dashboard tab component", () => {
                         getVisitorTypesLocationB () {
                             return {};
                         },
-                        getIndividualVisitorsLocationA () {
+                        getActivitiesLocationA () {
                             return {};
                         },
-                        getIndividualVisitorsLocationB () {
+                        getActivitiesLocationB () {
                             return {};
                         },
                         getAllLocationsArray () {

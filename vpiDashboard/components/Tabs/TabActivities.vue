@@ -14,7 +14,7 @@ import ChangeChartTypeButtons from "../ChangeChartTypeButtons.vue";
 import apiEndpointService from "../../store/apiEndpointService";
 
 export default {
-    name: "TabIndividualBesucher",
+    name: "TabActivities",
     components: {
         DataCard,
         LinechartItem,
@@ -111,12 +111,10 @@ export default {
         },
         /**
          * will check if a user interaction is neccessary for this chart type (request of date value will be initiated based on this value)
-         * @returns {Boolean} isIndividualChartType
+         * @returns {Boolean} is activities chart type
         */
-        isIndividualChartType () {
-            const individualChartTypes = ["hourly", "timeRange"];
-
-            return individualChartTypes.indexOf(this.selectedChartData) !== -1;
+        isActivitiesChartType () {
+            return ["hourly", "timeRange"].indexOf(this.selectedChartData) !== -1;
         },
         /**
          * switches the datepicker title based on the requested user interaction (choose a single date or a date range)
@@ -171,13 +169,13 @@ export default {
         },
         /**
          * prepares the change of the data base of the shown chart
-         * if an individual chart type (urges the user to pick a date / daterange before) is selected, the date picker is prepared
+         * if an activities chart type (urges the user to pick a date / daterange before) is selected, the date picker is prepared
          * otherwise the data are selected and the chart change is started
          * @returns {void}
         */
         switchChart () {
             this.showDatepicker = false;
-            if (this.isIndividualChartType) {
+            if (this.isActivitiesChartType) {
                 // erst Datum und dann Daten abfragen, dann das Chart generieren
                 this.resetDates();
             }
@@ -227,7 +225,7 @@ export default {
                         dateValue: dayjs(values).format("DD.MM.YYYY")
                     });
 
-                    await this.getIndividualVisitorsForDay(dayjs(values).format("YYYY-MM-DD")).then((data) => {
+                    await this.getActivitiesForDay(dayjs(values).format("YYYY-MM-DD")).then((data) => {
                         this.chartdata.bar = this.createChartData(data.data, "bar", "hourly");
                         this.chartdata.line = this.createChartData(data.data, "line", "hourly");
                     });
@@ -339,7 +337,7 @@ export default {
                 <div class="row cards">
                     <DataCard
                         :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsYear')"
-                        detail="individualVisitors"
+                        detail="activities"
                         :navigation="true"
                     />
                     <DataCard
@@ -392,13 +390,13 @@ export default {
                     class="charts"
                 >
                     <span
-                        v-if="isIndividualChartType"
+                        v-if="isActivitiesChartType"
                         class="chartsubtitle"
                     >
                         {{ chartSubTitle }}
                     </span>
                     <button
-                        v-if="!showDatepicker && isIndividualChartType"
+                        v-if="!showDatepicker && isActivitiesChartType"
                         type="button"
                         class="resetDateButton"
                         @click="resetDates()"
