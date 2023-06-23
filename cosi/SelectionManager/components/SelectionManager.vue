@@ -170,7 +170,7 @@ export default {
             const vectorSource = new VectorSource({
                     features: this.selections[index].selection
                 }),
-                style = this.openAddon ? new Style({fill: new Fill({color: "rgba(214, 96, 93, 0.35)"}), stroke: new Stroke({color: "#D6605D", width: 1})}) : new Style({stroke: new Stroke({color: "#A8404E", width: 3})}),
+                style = this.openAddon ? new Style({fill: new Fill({color: "rgba(214, 96, 93, 0.35)"}), stroke: new Stroke({color: "#D6605D", width: 1})}) : new Style({fill: new Fill({color: "rgba(255, 255, 255, 0)"}), stroke: new Stroke({color: "#A8404E", width: 3})}),
                 layer = new VectorLayer({
                     name: "selection_manager",
                     source: vectorSource,
