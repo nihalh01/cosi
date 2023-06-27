@@ -8,13 +8,6 @@ import {asArray} from "ol/color";
 import {getModelByAttributes} from "../../utils/radioBridge.js";
 import PolygonStylerSettings from "./PolygonStylerSettings.vue";
 
-function packColor(color) {
-    const array = asArray(color);
-    const r = array[0] * 256 * 256;
-    const g = array[1] * 256;
-    const b = array[2];
-    return r + g + b;
-  }
 
 export default {
     name: "PolygonStyler",
@@ -134,6 +127,20 @@ export default {
         ...mapMutations("Tools/PolygonStyler", Object.keys(mutations)),
 
         /**
+         * Packs the color.
+         * @param {Array} color - The color to pack.
+         * @returns {Number} The packed color.
+         */
+        packColor (color) {
+            const array = asArray(color),
+                r = array[0] * 256 * 256,
+                g = array[1] * 256,
+                b = array[2];
+
+            return r + g + b;
+        },
+
+        /**
          * Adds a table item by the given layer name.
          * @param {Object[]} tableItems - The table items.
          * @param {String} name - The name of the layer to add.
@@ -177,7 +184,7 @@ export default {
                         color: (feature) => {
                             const style = styleList.find(color => color.attribute === feature.get(attribute));
 
-                            return packColor(style.fill.color);
+                            return this.packColor(style.fill.color);
                         },
                         opacity: (feature) => {
                             const style = styleList.find(color => color.attribute === feature.get(attribute));
@@ -191,7 +198,7 @@ export default {
                         color: (feature) => {
                             const style = styleList.find(color => color.attribute === feature.get(attribute));
 
-                            return packColor(style.stroke.color);
+                            return this.packColor(style.stroke.color);
                         },
                         width: () => {
                             return 1;
