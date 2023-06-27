@@ -4,9 +4,17 @@ import {mapGetters, mapMutations} from "vuex";
 import mutations from "../store/mutationsPolygonStyler";
 import getters from "../store/gettersPolygonStyler";
 import WebGLVectorLayerRenderer from "ol/renderer/webgl/VectorLayer.js";
-import {packColor} from "ol/renderer/webgl/shaders";
+import {asArray} from "ol/color";
 import {getModelByAttributes} from "../../utils/radioBridge.js";
 import PolygonStylerSettings from "./PolygonStylerSettings.vue";
+
+function packColor(color) {
+    const array = asArray(color);
+    const r = array[0] * 256 * 256;
+    const g = array[1] * 256;
+    const b = array[2];
+    return r + g + b;
+  }
 
 export default {
     name: "PolygonStyler",
