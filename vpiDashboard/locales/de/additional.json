@@ -43,8 +43,8 @@
         "unique": {
           "allData": "Aktivitäten",
           "uniqueVisitors": "Aktivitäten",
-          "dailyOverview": "Durchschnittliche tägliche Aktivitäten",
-          "monthlyOverview": "Durchschnittliche monatliche Aktivitäten",
+          "dailyOverview": "Durchschnittliche tägliche Aktivitäten im {{ month }} im Jahr {{ year }}",
+          "monthlyOverview": "Anzahl der monatlichen Besucher im Jahr {{ year }}",
           "hourly": "Besucher eines bestimmten Tages (stündlich)",
           "timeRange": "Besucher einer bestimmten Zeitspanne (täglich)",
           "selectDate": "Bitte ein Datum wählen:",
@@ -55,11 +55,12 @@
           "chartTitleDay": "Daten vom {{dateValue}}",
           "chartTitleDayRange": "Daten vom {{dateValueFrom}} bis zum {{dateValueTo}}",
           "avgVisitorsYear": "Besucher pro Jahr",
-          "avgVisitorsDay": "Ø tägliche Besucher an einem",
-          "avgVisitorsMonth": "Ø tägliche Besucher pro Monat",
+          "avgVisitorsDay": "Ø Besucher im {{ month }} {{ year }} an einem",
+          "avgVisitorsMonth": "Anzahl der Besucher pro Monat im Jahr {{ year }}",
           "selectDataBase": "Datengrundlage für Grafik auswählen:",
           "date": "Datum",
-          "resetDate": "anderes Datum wählen"
+          "resetDate": "anderes Datum wählen",
+          "noData": "(keine Daten verfügbar)"
         },
         "gfi": {
           "street": "Standort",

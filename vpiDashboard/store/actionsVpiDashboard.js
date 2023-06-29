@@ -36,7 +36,7 @@ const actions = {
                 response = await apiEndpointService.receiveActivities(state.selectedLocationId);
 
             // Tab "Activities", Card: "unique daily visitors per month"
-            commit("setAverageVisitorsPerMonth", response.data);
+            commit("setSumVisitorsPerMonth", response.data);
 
             // Tab "Activities", Card: "unique daily visitors on a"
             commit("setAverageVisitorsPerDay", response.data);
@@ -49,12 +49,12 @@ const actions = {
             commit("setLineChartData", response.data);
 
             // Tab "Activities", Dropdown: "Average of daily activities"
-            commit("setBarChartDailyData", response.data);
-            commit("setLineChartDailyData", response.data);
+            commit("setBarChartDailyData");
+            commit("setLineChartDailyData");
 
             // Tab "Activities", Dropdown: "Average of monthly activities"
-            commit("setBarChartMonthlyData", response.data);
-            commit("setLineChartMonthlyData", response.data);
+            commit("setBarChartMonthlyData");
+            commit("setLineChartMonthlyData");
 
             commit("setLoader", false);
         }

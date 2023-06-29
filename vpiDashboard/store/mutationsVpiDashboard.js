@@ -14,37 +14,56 @@ const mutations = {
      * @param {Object} payload data from WhatALocation endpoint
      * @returns {void}
      */
-    setAverageVisitorsPerMonth (state, payload) {
+    setSumVisitorsPerMonth (state, payload) {
         const
             data = payload.data,
             aggregated = {},
-            result = [];
+            result = {};
 
         Object.keys(data).forEach(key => {
             const
                 item = data[key],
                 date = new Date(item.date),
-                label = date.getMonth();
+                label = date.getMonth(),
+                year = date.getFullYear();
 
-            if (!aggregated[label]) {
-                aggregated[label] = {
+            if (!aggregated[year]) {
+                aggregated[year] = [];
+            }
+
+            if (!aggregated[year][label]) {
+                aggregated[year][label] = {
                     sum: 0,
                     totalNumberOfDaysInMonthsOverYears: 0
                 };
             }
-            aggregated[label].sum = item.sum_num_visitors + aggregated[label].sum;
-            aggregated[label].totalNumberOfDaysInMonthsOverYears++;
+            aggregated[year][label].sum = item.sum_num_visitors + aggregated[year][label].sum;
+            aggregated[year][label].totalNumberOfDaysInMonthsOverYears++;
         });
 
         // Ceil up to 100, e.g. 18318 becomes 18400
-        Object.keys(aggregated).forEach(key => {
-            result.push({
-                index: key,
-                avg: Math.ceil(aggregated[key].sum / 100 / aggregated[key].totalNumberOfDaysInMonthsOverYears) * 100
+        Object.keys(aggregated).forEach(year => {
+            result[year] = [
+                {index: "0", avg: "n/a", sum: "n/a"},
+                {index: "1", avg: "n/a", sum: "n/a"},
+                {index: "2", avg: "n/a", sum: "n/a"},
+                {index: "3", avg: "n/a", sum: "n/a"},
+                {index: "4", avg: "n/a", sum: "n/a"},
+                {index: "5", avg: "n/a", sum: "n/a"},
+                {index: "6", avg: "n/a", sum: "n/a"},
+                {index: "7", avg: "n/a", sum: "n/a"},
+                {index: "8", avg: "n/a", sum: "n/a"},
+                {index: "9", avg: "n/a", sum: "n/a"},
+                {index: "10", avg: "n/a", sum: "n/a"},
+                {index: "11", avg: "n/a", sum: "n/a"}
+            ];
+            Object.keys(aggregated[year]).forEach(key => {
+                result[year].find(x=> x.index === key).avg = Math.ceil(aggregated[year][key].sum / 100 / aggregated[year][key].totalNumberOfDaysInMonthsOverYears) * 100;
+                result[year].find(x=> x.index === key).sum = Math.ceil(aggregated[year][key].sum / 100) * 100;
             });
         });
 
-        state.averageVisitorsPerMonth = result;
+        state.sumVisitorsPerMonth = result;
     },
     /**
      * Sets the rounded daily data for unique visitors to the state, selected from WhatALocation data.
@@ -56,31 +75,69 @@ const mutations = {
         const
             data = payload.data,
             aggregated = {},
-            result = [];
+            result = {};
 
         Object.keys(data).forEach(key => {
             const
                 item = data[key],
                 date = new Date(item.date),
-                label = date.getDay() - 1;
+                //  getDay() gives 0-6, where 0 = Sonntag, 1 = Montag, ... and 6 = Samstag, I prefer 0 = Montag, 1= Dienstag and 6 = Sonntag
+                label = date.getDay() === 0 ? 6 : date.getDay() - 1,
+                month = date.getMonth(),
+                year = date.getFullYear();
 
-            if (!aggregated[label]) {
-                aggregated[label] = {
+            if (!aggregated[year]) {
+                aggregated[year] = [];
+            }
+
+            if (!aggregated[year][month]) {
+                aggregated[year][month] = [];
+            }
+
+            if (!aggregated[year][month][label]) {
+                aggregated[year][month][label] = {
                     sum: 0,
                     totalNumberOfWeekdaysInMonthsOverYears: 0
                 };
             }
-            aggregated[label].sum = item.sum_num_visitors + aggregated[label].sum;
-            aggregated[label].totalNumberOfWeekdaysInMonthsOverYears++;
+            aggregated[year][month][label].sum = item.sum_num_visitors + aggregated[year][month][label].sum;
+            aggregated[year][month][label].totalNumberOfWeekdaysInMonthsOverYears++;
 
         });
 
         // Ceil up to 100, e.g. 18318 becomes 18400
-        Object.keys(aggregated).forEach(key => {
-            result.push({
-                index: key,
-                avg: Math.ceil(aggregated[key].sum / 100 / aggregated[key].totalNumberOfWeekdaysInMonthsOverYears) * 100
+        Object.keys(aggregated).forEach(year => {
+            result[year] = [];
+            Object.keys(aggregated[year]).forEach(month => {
+                result[year][month] = [
+                    {index: "0", avg: "n/a"},
+                    {index: "1", avg: "n/a"},
+                    {index: "2", avg: "n/a"},
+                    {index: "3", avg: "n/a"},
+                    {index: "4", avg: "n/a"},
+                    {index: "5", avg: "n/a"},
+                    {index: "6", avg: "n/a"}
+                ];
+                Object.keys(aggregated[year][month]).forEach(key => {
+                    result[year][month].find(x=> x.index === key).avg = Math.ceil(aggregated[year][month][key].sum / 100 / aggregated[year][month][key].totalNumberOfWeekdaysInMonthsOverYears) * 100;
+
+                });
             });
+
+            // check if there are data available for all months, fill up with "not available" otherwise
+            for (let i = 0; i < 12; i++) {
+                if (!result[year][i]) {
+                    result[year][i] = [
+                        {index: "0", avg: "n/a"},
+                        {index: "1", avg: "n/a"},
+                        {index: "2", avg: "n/a"},
+                        {index: "3", avg: "n/a"},
+                        {index: "4", avg: "n/a"},
+                        {index: "5", avg: "n/a"},
+                        {index: "6", avg: "n/a"}
+                    ];
+                }
+            }
         });
 
         state.averageVisitorsPerDay = result;
@@ -245,16 +302,23 @@ const mutations = {
     /**
      * Generates Bar Chart Daily Data and saves it to state.
      * @param {Object} state the store's state object
+     * @param {Object} dates the year and the month's index, the data shall be generated for
      * @returns {void}
      */
-    setBarChartDailyData (state) {
-        const daily = state.averageVisitorsPerDay,
+    setBarChartDailyData (state, dates = {year: 2019, month: 0}) {
+        const daily = state.averageVisitorsPerDay[dates.year][dates.month],
             labels = [],
             day_data = [],
             translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
 
         daily.forEach((element, index) => {
-            labels.push(translatedLabelList[index]);
+            let label_text = translatedLabelList[index];
+
+            if (element.avg === "n/a") {
+                label_text = [label_text, i18next.t("additional:modules.tools.vpidashboard.unique.noData")];
+            }
+
+            labels.push(label_text);
             day_data.push(element.avg);
         });
 
@@ -262,7 +326,7 @@ const mutations = {
         const data = {
             labels: labels,
             datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview"),
+                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview", {year: dates.year, month: i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true})[dates.month]}),
                 data: day_data,
                 hoverOffset: 4,
                 backgroundColor: "#FD763B"
@@ -276,23 +340,30 @@ const mutations = {
     /**
      * Generates Bar Chart Daily Data and saves it to state.
      * @param {Object} state the store's state object
+     * @param {Object} dates the year and the month's index, the data shall be generated for
      * @returns {void}
      */
-    setLineChartDailyData (state) {
-        const daily = state.averageVisitorsPerDay,
+    setLineChartDailyData (state, dates = {year: 2019, month: 0}) {
+        const daily = state.averageVisitorsPerDay[dates.year][dates.month],
             labels = [],
             day_data = [],
             translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.days", {returnObjects: true});
 
         daily.forEach((element, index) => {
-            labels.push(translatedLabelList[index]);
+            let label_text = translatedLabelList[index];
+
+            if (element.avg === "n/a") {
+                label_text = [label_text, i18next.t("additional:modules.tools.vpidashboard.unique.noData")];
+            }
+
+            labels.push(label_text);
             day_data.push(element.avg);
         });
         // eslint-disable-next-line
         const data = {
             labels: labels,
             datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview"),
+                label: i18next.t("additional:modules.tools.vpidashboard.unique.dailyOverview", {year: dates.year, month: i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true})[dates.month]}),
                 data: day_data,
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",
@@ -306,24 +377,25 @@ const mutations = {
     /**
      * Generates Bar Chart Monthly Data and saves it to state.
      * @param {Object} state the store's state object
+     * @param {Number} year the year, the data shall be generated for
      * @returns {void}
      */
-    setBarChartMonthlyData (state) {
-        const monthly = state.averageVisitorsPerMonth,
+    setBarChartMonthlyData (state, year = 2019) {
+        const monthly = state.sumVisitorsPerMonth[year],
             labels = [],
             month_data = [],
             translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true});
 
         monthly.forEach((element) => {
             labels.push(translatedLabelList[element.index]);
-            month_data.push(element.avg);
+            month_data.push(element.sum);
         });
 
         // eslint-disable-next-line
         const data = {
             labels: labels,
             datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview"),
+                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview", {year: year}),
                 data: month_data,
                 hoverOffset: 4,
                 backgroundColor: "#FD763B"
@@ -337,24 +409,25 @@ const mutations = {
     /**
      * Generates Line Chart Monthly Data and saves it to state.
      * @param {Object} state the store's state object
+     * @param {Number} year the year, the data shall be generated for
      * @returns {void}
      */
-    setLineChartMonthlyData (state) {
-        const monthly = state.averageVisitorsPerMonth,
+    setLineChartMonthlyData (state, year = 2019) {
+        const monthly = state.sumVisitorsPerMonth[year],
             labels = [],
             month_data = [],
             translatedLabelList = i18next.t("additional:modules.tools.vpidashboard.time.months", {returnObjects: true});
 
         monthly.forEach((element) => {
             labels.push(translatedLabelList[element.index]);
-            month_data.push(element.avg);
+            month_data.push(element.sum);
         });
 
         // eslint-disable-next-line
         const data = {
             labels: labels,
             datasets: [{
-                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview"),
+                label: i18next.t("additional:modules.tools.vpidashboard.unique.monthlyOverview", {year: year}),
                 data: month_data,
                 fill: false,
                 borderColor: "rgb(75, 192, 192)",

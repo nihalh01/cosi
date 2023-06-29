@@ -74,7 +74,9 @@ export default {
             ],
             selectedChartData: "overview",
             chartSubTitle: "",
-            renderKey: 0
+            renderKey: 0,
+            currentlySelectedYear: 2019,
+            currentlySelectedMonth: 0
         };
     },
     computed: {
@@ -129,6 +131,22 @@ export default {
                 default:
                     return "";
             }
+        },
+        /**
+         * creates an array of years, starting from 2019 (first available year in data from WhatALocation) till current year
+         * @returns {Array} list of years available in the dashboard
+        */
+        yearList () {
+            const thisYear = new Date().getFullYear(),
+                list = [];
+            let firstYear = 2019;
+
+            while (firstYear <= thisYear) {
+                list.push(firstYear);
+                firstYear++;
+            }
+
+            return list;
         }
     },
     watch: {
@@ -140,6 +158,10 @@ export default {
         async selectedLocationId () {
             await this.getActivities();
             await this.fillInitialChartData();
+
+            // re-fill the charts with correct data for currently selected year and month after switch of location
+            this.yearHasChanged(this.yearList.indexOf(this.currentlySelectedYear));
+            this.monthHasChanged(this.currentlySelectedMonth);
         }
     },
     async created () {
@@ -321,6 +343,32 @@ export default {
             this.chartdata.bar = {};
             this.chartdata.line = {};
             this.dates = "";
+        },
+        /**
+         * reacts on a change of year in first data card, changes data basis for monthly and daily charts
+         * @param {Number} newYear index of new year
+         * @returns {void}
+         */
+        yearHasChanged (newYear) {
+            if (this.yearList.length > newYear) {
+                this.currentlySelectedYear = this.yearList[newYear];
+                this.$store.commit("Tools/VpiDashboard/setBarChartMonthlyData", this.currentlySelectedYear);
+                this.$store.commit("Tools/VpiDashboard/setLineChartMonthlyData", this.currentlySelectedYear);
+                this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
+                this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: this.currentlySelectedMonth});
+                this.getCurrentBarChartData();
+            }
+        },
+        /**
+         * reacts on a change of month in second data card, changes data basis for daily charts
+         * @param {Number} newMonth index of new month
+         * @returns {void}
+         */
+        monthHasChanged (newMonth) {
+            this.currentlySelectedMonth = newMonth;
+            this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
+            this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
+            this.getCurrentBarChartData();
         }
 
     }
@@ -339,15 +387,20 @@ export default {
                         :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsYear')"
                         detail="activities"
                         :navigation="true"
+                        @indexChanged="yearHasChanged"
                     />
                     <DataCard
-                        :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsMonth')"
+                        :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsMonth', { year: currentlySelectedYear })"
                         :navigation="true"
                         detail="monthly"
+                        :subset-year="currentlySelectedYear"
+                        @indexChanged="monthHasChanged"
                     />
                     <DataCard
-                        :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsDay')"
+                        :title="translate('additional:modules.tools.vpidashboard.unique.avgVisitorsDay', { year: currentlySelectedYear, month: translate('additional:modules.tools.vpidashboard.time.months', {returnObjects: true})[currentlySelectedMonth] })"
                         :navigation="true"
+                        :subset-year="currentlySelectedYear"
+                        :subset-month="currentlySelectedMonth"
                         detail="daily"
                     />
                 </div>
@@ -364,7 +417,7 @@ export default {
                             :key="index"
                             :value="model.chart"
                         >
-                            {{ translate(model.name) }}
+                            {{ translate(model.name, {year: currentlySelectedYear, month: translate('additional:modules.tools.vpidashboard.time.months', {returnObjects: true})[currentlySelectedMonth]}) }}
                         </option>
                     </select>
                     <div
@@ -382,6 +435,7 @@ export default {
                             :multiple="false"
                             :show-week-number="true"
                             title-format="DD.MM.YYYY"
+                            :lang="translate('common:libraries.vue2-datepicker.lang', {returnObjects: true})"
                         />
                     </div>
                 </div>

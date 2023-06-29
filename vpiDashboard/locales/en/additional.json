@@ -43,8 +43,8 @@
         "unique": {
           "allData": "Activities",
           "uniqueVisitors": "Activities",
-          "dailyOverview": "Average of daily activities",
-          "monthlyOverview": "Average of monthly activities",
+          "dailyOverview": "Average of daily activities in {{ month }} in {{ year }}",
+          "monthlyOverview": "Number of monthly activities in {{ year }}",
           "hourly": "Visitors on a defined day (hourly)",
           "timeRange": "Visitors on a defined day range (daily)",
           "selectDate": "Please choose a date:",
@@ -55,11 +55,12 @@
           "chartTitleDay": "Data from {{dateValue}}",
           "chartTitleDayRange": "Data from {{dateValueFrom}} to {{dateValueTo}}",
           "avgVisitorsYear": "Total visits per year",
-          "avgVisitorsDay": "Ø daily visitors on a",
-          "avgVisitorsMonth": "Ø daily visitors per month",
+          "avgVisitorsDay": "Ø visitors in {{ month }} {{ year }} on a",
+          "avgVisitorsMonth": "Number of visitors per month in {{ year }}",
           "selectDataBase": "Choose base data for the graphic:",
           "date": "Date",
-          "resetDate": "choose another date"
+          "resetDate": "choose another date",
+          "noData": "(no data available)"
         },
         "gfi": {
           "street": "Location",

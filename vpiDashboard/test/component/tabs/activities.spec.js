@@ -30,6 +30,20 @@ describe("addons/vpiDashboard/test/ activities tab component", () => {
                         getActivities () {
                             return {};
                         }
+                    },
+                    mutations: {
+                        setBarChartMonthlyData () {
+                            return "";
+                        },
+                        setLineChartMonthlyData () {
+                            return "";
+                        },
+                        setBarChartDailyData () {
+                            return "";
+                        },
+                        setLineChartDailyData () {
+                            return "";
+                        }
                     }
                 }
             }
@@ -116,5 +130,33 @@ describe("addons/vpiDashboard/test/ activities tab component", () => {
         expect(testvalue.datasets[0]).to.have.property("data");
         expect(testvalue.datasets[0].data).to.be.an("array");
         expect(testvalue.datasets[0].data).to.have.members([42, 50]);
+    });
+
+    it("reset dates", () => {
+        wrapper.vm.chartSubTitle = "ChartSubtitle";
+        wrapper.vm.showDatepicker = false;
+        wrapper.vm.dates = ["2022-09-13"];
+
+        wrapper.vm.resetDates();
+
+        expect(wrapper.vm.chartSubTitle).to.equal("");
+        expect(wrapper.vm.showDatepicker).to.be.true;
+        expect(wrapper.vm.dates).to.equal("");
+    });
+
+    it("change year in data card", () => {
+        // do not change anything for wrong index
+        wrapper.vm.yearHasChanged(7);
+        expect(wrapper.vm.currentlySelectedYear).to.equal(2019);
+
+        // change the year for correct index
+        wrapper.vm.yearHasChanged(2);
+        expect(wrapper.vm.currentlySelectedYear).to.equal(2021);
+    });
+
+    it("change month in data card", () => {
+        wrapper.vm.monthHasChanged(2);
+
+        expect(wrapper.vm.currentlySelectedMonth).to.equal(2);
     });
 });

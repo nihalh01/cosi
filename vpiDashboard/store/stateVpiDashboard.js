@@ -13,7 +13,7 @@ const state = {
     deactivateGFI: false,
     chartData: "overview",
     allDataClicked: true,
-    averageVisitorsPerMonth: [],
+    sumVisitorsPerMonth: [],
     averageVisitorsPerDay: [],
     activitiesPerYear: "",
     allLocationsGeoJson: undefined,
