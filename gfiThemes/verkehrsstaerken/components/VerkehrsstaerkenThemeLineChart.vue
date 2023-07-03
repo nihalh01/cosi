@@ -109,31 +109,37 @@ export default {
          * @returns {Object} The chart data.
          */
         createChartData: function (dataset, category) {
-            const preparedDataset = this.prepareDataset(dataset, category);
-
-            return {
+          const preparedDataset = this.prepareDataset(dataset, category),
+              hasConstructionSiteInfluence = dataset.filter(data => Object.prototype.hasOwnProperty.call(data, "Baustelleneinfluss")).length > 0,
+              chartData = {
                 labels: preparedDataset.labels,
                 datasets: [{
-                    borderColor: this.chartColorCircle,
-                    fill: false,
-                    lineTension: 0,
-                    label: this.createDatasetLabel(category),
-                    data: preparedDataset.data,
-                    pointBorderColor: preparedDataset.color,
-                    pointBackgroundColor: preparedDataset.color,
-                    pointRadius: preparedDataset.radius,
-                    pointStyle: preparedDataset.pointStyle
-                },
-                {
-                    borderColor: this.chartColorRect,
-                    fill: false,
-                    label: this.$t("additional:modules.tools.gfi.themes.verkehrsstaerken.withConstructionSiteInfluence"),
-                    pointBorderColor: this.chartColorRect,
-                    pointBackgroundColor: this.chartColorRect,
-                    pointRadius: this.chartRadiusRect,
-                    pointStyle: this.chartPointStyleRect
+                  borderColor: this.chartColorCircle,
+                  fill: false,
+                  lineTension: 0,
+                  label: this.createDatasetLabel(category),
+                  data: preparedDataset.data,
+                  pointBorderColor: preparedDataset.color,
+                  pointBackgroundColor: preparedDataset.color,
+                  pointRadius: preparedDataset.radius,
+                  pointStyle: preparedDataset.pointStyle
                 }]
-            };
+              };
+
+          if (hasConstructionSiteInfluence) {
+            chartData.datasets.push(
+                {
+                  borderColor: this.chartColorRect,
+                  fill: false,
+                  label: this.$t("additional:modules.tools.gfi.themes.verkehrsstaerken.withConstructionSiteInfluence"),
+                  pointBorderColor: this.chartColorRect,
+                  pointBackgroundColor: this.chartColorRect,
+                  pointRadius: this.chartRadiusRect,
+                  pointStyle: this.chartPointStyleRect
+                });
+          }
+
+          return chartData;
         },
 
         /**
