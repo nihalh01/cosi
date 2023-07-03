@@ -31,6 +31,11 @@ export default {
             scaleGridLinesColor: "rgba(0, 0, 0, 1)"
         };
     },
+  computed: {
+    hasHGVsPerWeek: function () {
+      return this.dataset.filter(data => Object.prototype.hasOwnProperty.call(data, "Schwerverkehrsanteil am DTVw")).length > 0;
+    }
+  },
     watch: {
         dataset () {
             this.drawChart();
@@ -332,6 +337,7 @@ export default {
                 {{ $t("additional:modules.tools.gfi.themes.verkehrsstaerken.DTVw") }}
             </button>
             <button
+                v-if="hasHGVsPerWeek"
                 id="Schwerverkehrsanteil am DTVw"
                 type="button"
                 class="btn btn-outline-secondary"
