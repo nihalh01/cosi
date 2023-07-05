@@ -181,13 +181,6 @@ export default {
         },
 
         setLayerOptions: function () {
-            const urls = this.selectedDistrictLevel.stats.baseUrl,
-                layers = [];
-
-            urls.forEach(url => {
-                layers.push(...this.getLayerList().filter(layer=> layer.url === url));
-            });
-
             this.allLayerOptions = [];
 
             // facility data first
@@ -203,7 +196,7 @@ export default {
 
             // statistical data second
             for (const m of this.mapping) {
-                const layer = layers.find(l=>l.id && l.id === m[this.keyOfAttrNameStats]);
+                const layer = this.selectedDistrictLevel.stats.layers.find(l=>l.id && l.id === m[this.keyOfAttrNameStats]);
 
                 if (layer) {
                     this.allLayerOptions.push({
