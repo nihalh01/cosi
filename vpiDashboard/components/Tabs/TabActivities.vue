@@ -369,6 +369,17 @@ export default {
             this.$store.commit("Tools/VpiDashboard/setBarChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
             this.$store.commit("Tools/VpiDashboard/setLineChartDailyData", {year: this.currentlySelectedYear, month: newMonth});
             this.getCurrentBarChartData();
+        },
+        /**
+         * sets the disabled dates for the datepicker
+         * only allow past dates, at least 3 days ago but not longer than 01.01.2019
+         * @param {Object} val date that shall be checked if it is disabled in the datepicker
+         * @return {Boolean} tells if the date shall be disabled or not
+         */
+        disabledDates (val) {
+            const threeDaysInMilliseconds = 3 * 24 * 60 * 60 * 1000;
+
+            return new Date(val).getTime() >= (new Date().getTime() - threeDaysInMilliseconds) || new Date(val).getTime() < new Date("2019-01-01T00:00:00").getTime();
         }
 
     }
@@ -431,6 +442,7 @@ export default {
                             :placeholder="translate('additional:modules.tools.vpidashboard.unique.date')"
                             type="date"
                             format="DD.MM.YYYY"
+                            :disabled-date="disabledDates"
                             :range="selectedChartData === 'timeRange'"
                             :multiple="false"
                             :show-week-number="true"

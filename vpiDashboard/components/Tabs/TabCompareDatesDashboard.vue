@@ -96,6 +96,13 @@ export default {
         character (newValue, oldValue) {
             if (oldValue !== newValue) {
                 this.showCompareChart = false;
+
+                // reset date picker, if switched from 'activities' to other character,
+                // as 'activities' allow every date and other characters allow only first day of month
+                if (oldValue === "activities") {
+                    this.date_a = null;
+                    this.date_b = null;
+                }
             }
         },
         selectedLocationId (newValue, oldValue) {
@@ -222,12 +229,23 @@ export default {
         },
         /**
          * sets the disabled dates for the datepicker
+         * only allow past dates, at least 3 days ago for activities or 2 months ago for other characters but not longer than 01.01.2019
          * for every endpoint except of "Activities" only the first day in month may be selected
          * @param {Object} val date that shall be checked if it is disabled in the datepicker
          * @return {Boolean} tells if the date shall be disabled or not
          */
         disabledDates (val) {
+            const threeDaysInMilliseconds = 3 * 24 * 60 * 60 * 1000,
+                twoMonthsInMilliseconds = 60 * 24 * 60 * 60 * 1000;
+
+            if (new Date(val).getTime() >= (new Date().getTime() - threeDaysInMilliseconds) || new Date(val).getTime() < new Date("2019-01-01T00:00:00").getTime()) {
+                return true;
+            }
+
             if (this.character !== "activities") {
+                if (new Date(val).getTime() >= (new Date().getTime() - twoMonthsInMilliseconds)) {
+                    return true;
+                }
                 return new Date(val).getDate() !== 1;
             }
             return false;
