@@ -11,7 +11,8 @@ const mutations = {
         const
             visitorTypesByTypeAndYearComplete = {},
             visitorTypesByTypeAndYear = {},
-            visitorTypesByDate = {};
+            visitorTypesByDate = {},
+            visitorTypesByYearAndTypeComplete = {};
 
         // Group by date
         payload.forEach(item => {
@@ -47,6 +48,17 @@ const mutations = {
 
             visitorTypesByTypeAndYearComplete[type][year].push(item);
 
+            // here we group by year and month (date) to allow the grafic be switched from year to year
+            if (!visitorTypesByYearAndTypeComplete[year]) {
+                visitorTypesByYearAndTypeComplete[year] = {};
+            }
+
+            if (!visitorTypesByYearAndTypeComplete[year][item.date]) {
+                visitorTypesByYearAndTypeComplete[year][item.date] = [];
+            }
+
+            visitorTypesByYearAndTypeComplete[year][item.date].push(item);
+
         });
 
         // Sum "grouped by visitor type and year" (daily)
@@ -61,14 +73,24 @@ const mutations = {
                     visitorTypesByTypeAndYear[type][year] = 0;
                 }
                 const sum = visitorTypesByTypeAndYearComplete[type][year].reduce((acc, value) => {
-                    return acc + value.sum_num_visitors_origin;
-                }, 0);
+                        return acc + value.sum_num_visitors_origin;
+                    }, 0),
+                    uniqueDates = visitorTypesByTypeAndYearComplete[type][year].reduce((acc, value) => {
+                        // this is important because we merge "Tagestouristen" and "Übernachtungstouristen" in the forEach above to "Touristen" in one Object
+                        // now all months are doubled in this array but shall only be counted once
+                        if (!acc[value.date]) {
+                            acc[value.date] = value;
+                        }
+                        return acc;
+                    }, {}),
+                    numberOfDatasets = Object.keys(uniqueDates).length * 7;
 
-                visitorTypesByTypeAndYear[type][year] = Math.ceil(sum / 7);
+                visitorTypesByTypeAndYear[type][year] = Math.ceil(sum / numberOfDatasets);
             });
         });
 
         state.visitorTypesByDate = visitorTypesByDate;
+        state.visitorTypesByYearAndTypeComplete = visitorTypesByYearAndTypeComplete;
         state.visitorTypesByTypeAndYear = visitorTypesByTypeAndYear;
     }
 

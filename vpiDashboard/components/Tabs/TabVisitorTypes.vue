@@ -5,12 +5,14 @@ import actions from "../../store/actionsVpiDashboard";
 import LinechartItem from "../../../../src/share-components/charts/components/LinechartItem.vue";
 import BarchartItem from "../../utils/BarchartItem.vue";
 import DataCard from "../DataCard.vue";
+import DataCardPaginator from "../DataCardPaginator.vue";
 import ChangeChartTypeButtons from "../ChangeChartTypeButtons.vue";
 
 export default {
     name: "TabVisitorTypes",
     components: {
         DataCard,
+        DataCardPaginator,
         LinechartItem,
         BarchartItem,
         ChangeChartTypeButtons
@@ -21,7 +23,8 @@ export default {
             chartdata: {
                 bar: {},
                 line: {}
-            }
+            },
+            dataCardIndex: 0
         };
     },
     computed: {
@@ -32,6 +35,22 @@ export default {
                 return true;
             }
             return false;
+        },
+        /**
+         * creates an array of years, starting from 2019 (first available year in data from WhatALocation) till current year
+         * @returns {Array} list of years available in the dashboard
+        */
+        yearList () {
+            const thisYear = new Date().getFullYear(),
+                list = [];
+            let firstYear = 2019;
+
+            while (firstYear <= thisYear) {
+                list.push(firstYear);
+                firstYear++;
+            }
+
+            return list;
         }
     },
     watch: {
@@ -64,9 +83,13 @@ export default {
          * requests the data from the store for those chart data that are static
          * @returns {void}
          */
-        getCurrentChartData () {
-            this.chartdata.bar = this.getVisitorTypesChartJsData("bar");
-            this.chartdata.line = this.getVisitorTypesChartJsData("line");
+        async getCurrentChartData () {
+            this.chartdata.bar = this.getVisitorTypesChartJsData("bar", this.yearList[this.dataCardIndex]);
+            this.chartdata.line = this.getVisitorTypesChartJsData("line", this.yearList[this.dataCardIndex]);
+        },
+        changeIndex (index) {
+            this.dataCardIndex = index;
+            this.getCurrentChartData();
         }
     }
 };
@@ -78,7 +101,12 @@ export default {
             class="tab-panel h-100"
             role="tabpanel"
         >
-            <div class="tab-content h100">
+            <div class="tab-content h100 visitortypestab">
+                <DataCardPaginator
+                    v-if="hasEntry"
+                    :paginator-data="yearList"
+                    @pager="changeIndex"
+                />
                 <div
                     v-if="hasEntry"
                     class="row cards"
@@ -86,17 +114,17 @@ export default {
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.residentsPerDay')"
                         detail="visitorTypeResidentsPerDay"
-                        :navigation="true"
+                        :update-index="dataCardIndex"
                     />
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.commutersPerDay')"
                         detail="visitorTypeCommutersPerDay"
-                        :navigation="true"
+                        :update-index="dataCardIndex"
                     />
                     <DataCard
                         :title="$t('additional:modules.tools.vpidashboard.tab.visitorTypes.cardLabels.touristsPerDay')"
                         detail="visitorTypeTouristsPerDay"
-                        :navigation="true"
+                        :update-index="dataCardIndex"
                     />
                 </div>
                 <h2>
@@ -105,7 +133,7 @@ export default {
                 <div class="charts">
                     <!-- Bar Chart-->
                     <div v-if="chartType === 'bar'">
-                        <div class="row">
+                        <div class="row bar">
                             <BarchartItem
                                 :data="chartdata.bar"
                                 :given-scales="{
@@ -126,7 +154,7 @@ export default {
                     </div>
                     <!-- Line Chart -->
                     <div v-if="chartType === 'line'">
-                        <div class="row">
+                        <div class="row line">
                             <LinechartItem :data="chartdata.line" />
                         </div>
                     </div>

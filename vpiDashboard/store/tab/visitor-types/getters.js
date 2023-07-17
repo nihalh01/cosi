@@ -5,15 +5,15 @@ const getters = {
      * @param {Object} state of this component
      * @returns {Object} ChartJS data for given chartType
      */
-    getVisitorTypesChartJsData: (state) => (chartType) => {
+    getVisitorTypesChartJsData: (state) => (chartType, year) => {
         const labels = [],
             data_residents = [],
             data_commuter = [],
             data_tourists_day = [],
             data_tourists_overnight = [];
 
-        Object.keys(state.visitorTypesByDate).forEach(date => {
-            const items = state.visitorTypesByDate[date];
+        Object.keys(state.visitorTypesByYearAndTypeComplete[year]).forEach(date => {
+            const items = state.visitorTypesByYearAndTypeComplete[year][date];
 
             // Set label from date, e.g. 2023-01-01 becomes 2023-01
             labels.push(changeDateFormat(date));

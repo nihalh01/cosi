@@ -41,6 +41,11 @@ export default {
             type: Number,
             required: false,
             default: 0
+        },
+        updateIndex: {
+            type: Number,
+            required: false,
+            default: 0
         }
     },
     data () {
@@ -129,6 +134,20 @@ export default {
             }
 
             return null;
+        }
+    },
+    watch: {
+        updateIndex (newValue, oldValue) {
+            if (newValue !== oldValue) {
+                if (
+                    (this.detail === "visitorTypeCommutersPerDay" ||
+                    this.detail === "visitorTypeResidentsPerDay" ||
+                    this.detail === "visitorTypeTouristsPerDay") &&
+                    this.newValue !== this.currentYearIndex
+                ) {
+                    this.changeIndex(newValue);
+                }
+            }
         }
     },
     methods: {
