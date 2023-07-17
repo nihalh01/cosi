@@ -15,7 +15,6 @@ import FeaturesListToolbar from "./FeaturesListToolbar.vue";
 import {prepareTableExport, prepareDetailsExport, composeFilename} from "../utils/prepareExport";
 import exportXlsx from "../../utils/exportXlsx";
 import {isEqual} from "../../utils/array/isEqual";
-import rawLayerList from "@masterportal/masterportalapi/src/rawLayerList";
 import getColorFromNumber from "../../utils/getColorFromNumber";
 import chartMethods from "../utils/charts";
 import FeaturesScore from "./FeaturesListScore.vue";
@@ -618,10 +617,10 @@ export default {
         },
 
         showDistanceScoreFeatures () {
-            if (this.distScoreLayer === null || this.selected.length === 0) {
-                return;
-            }
-            if (!this.selected[0].score) {
+            if (this.distScoreLayer === null || this.selected.length === 0 || !this.selected[0].score) {
+                if (this.distScoreLayer) {
+                    this.distScoreLayer.getSource().clear();
+                }
                 return;
             }
 
@@ -629,10 +628,9 @@ export default {
                 colorMap = test.reduce((acc, layerId, index) => (
                     {...acc, [layerId]: getColorFromNumber(index, test.length)}), {});
 
-            this.distScoreLayer.getSource().clear();
             this.selected.forEach(item => {
                 if (item.score.distance) {
-                    for (const [layerId, entry] of Object.entries(item.score.distance)) {
+                    for (const [layerId, entry] of Object.entries(item.score.distance.facilities)) {
                         if (entry.feature) {
                             const feature = new Feature({geometry: entry.feature.getGeometry()});
 
@@ -643,7 +641,7 @@ export default {
                                     fill: new Fill({color: colorMap[layerId]})
                                 }),
                                 text: new Text({
-                                    text: rawLayerList.getLayerWhere({id: layerId})?.name,
+                                    text: entry.layerName,
                                     placement: "point",
                                     offsetY: -10,
                                     offsetX: 10,
