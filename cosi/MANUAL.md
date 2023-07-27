@@ -537,12 +537,33 @@ Mit dem DIPAS Werkzeug können alle Beiträge aus laufenden DIPAS Verfahren in d
 
 <div style="page-break-after: always;"></div>
 
-### Datenvisualierung
+### Graphenvisualierung
 ___
-Das Datenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwaltet diese. Darüberhinaus ermöglicht es Ihnen den Export dieser Graphen als PNG.
+Das Graphenvisualisierungswerkzeug erstellt Graphen aus Datensätzen und verwaltet diese. Darüberhinaus ermöglicht es Ihnen den Export dieser Graphen als PNG.
 
-![Abbildung 14: Datenvisualisierung](https://user-images.githubusercontent.com/43250699/157070471-84b8aca7-44f9-47cb-9de2-2284a43062f4.png)  
-*Abbildung 14: Datenvisualisierung*
+ > Nach dem Sie Ihre gewünschten Gebiete und Fachdaten ausgewählt haben, können Sie unter Analyse - Graphenvisualisierung, Ihre Ergebnisse visuell darstellen lassen.
+
+ > **Hinweis**: Wenn Sie die Graphenvisualisierung direkt aus dem Analyse Menü öffnen, bitte unten in der Kartenvisualisierung auf das Graph Symbol klicken.
+
+
+![Abbildung_14.1: Graphenvisualisierung](https://github.com/citysciencelab/cosi/assets/140716054/4b079653-f480-4794-beca-840fea337517)
+
+*Abbildung 14.1: Graphenvisualisierung*
+
+
+   > Sie finden dieses Symbol auch im gesamten CoSI wie z.B.
+
+
+  **Dashboard --> Einrichtungsübersicht**
+
+
+  **Dashboard --> Statistische Datenübersicht --> wählen Sie hier eine Kategorie & klicken 3 punkte menü --> Diagramme**
+
+  
+
+![Abbildung 14.2: Graphenvisualisierung](https://user-images.githubusercontent.com/43250699/157070471-84b8aca7-44f9-47cb-9de2-2284a43062f4.png)  
+
+*Abbildung 14.2: Graphenvisualisierung aktuell*
 
 1. **Diagrammtyp auswählen**
    > Häufig werden gleich unterschiedliche Graphen erstellt. Hier können Sie zwischen den verfügbaren Diagrammen für den ausgewählten Datensatz umschalten.
