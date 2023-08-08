@@ -91,6 +91,7 @@ ___
     - [Gebietsauswahl](##markdown-header-gebietsauswahl)
     - [Kartenanalyse regionalstatistischer Daten](#markdown-header-kartenanalyse-regionalstatistischer-daten)
     - [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis)
+    - [Routing](#markdown-header-routing)
 
 <div style="page-break-after: always;"></div>
 
@@ -1119,3 +1120,152 @@ Die Ergebnisverzeichnis unterstützt in einigen Werkzeugen die Verwaltung mehrer
    > Mit diesem Button löschen Sie einen Datensatz und alle dazugehörigen Ergebnisse.
 7. **Alle entfernen**
    > Mit diesem Button entfernen Sie alle Datensätze und setzen das Werkzeug zurück.
+
+
+### Routing
+
+Mit dem Werkzeug "Routing" kann die kürzeste oder schnellste Route zwischen beliebig vielen Wegpunkten berechnet werden. Zudem ist die Analyse der Erreichbarkeit von einem bestimmten Startpunkt innerhalb einer vorgegebenen Zeit oder Fahrstrecke möglich. Es können hierbei verschiedene Fortbewegungsmittel wie PKW, LKW, Fußgänger, Fahrrad oder Rollstuhl berücksichtigt werden. Durch Klick auf die Tabulatoren (Tab) Routenplanung (1) und Erreichbarkeit (2) kann in die verschiedenen Bereiche gewechselt werden.
+
+![routing_1.png](https://geodienste.hamburg.de/lgv-config/img/routing_1.png)
+
+### Routenplanung
+
+In dem Tab "Routenplanung" können Routen berechnet werden. Zudem ist auch eine massenhafte Berechnung von Routen über eine integrierte Stapelverarbeitung möglich. Zur Routenplanung stehen folgende Eingabemöglichkeiten zur Auswahl:
+
+#### Auswahl Fortbewegungsmittel
+
+![routing_2.png](https://geodienste.hamburg.de/lgv-config/img/routing_2.png)
+
+Es kann zwischen verschiedenen Fortbewegungsmitteln (PKW, LKW etc.) gewählt werden. Das aktive Fortbewegungsmittel ist rot markiert.
+
+#### Hinzufügen von Wegpunkten
+
+Start-, Ziel- und Wegpunkte der Route können über die Eingabe von Orten, Adressen oder Koordinaten in die Suchfelder (1) oder durch Klick in die Karte hinzugefügt werden. Die Erzeugung der Route erfolgt automatisch, sobald mind. zwei Wegpunkte vorhanden sind.
+
+![routing_3.png](https://geodienste.hamburg.de/lgv-config/img/routing_3.png)
+
+Neben der Eingabe von Adressen und Orten (1) ist es auch möglich, direkt geographische Koordinaten (WGS-84) als Wegpunkte in die Suchfelder einzugeben. Hierzu sind die Koordinaten in Dezimalgrad (Länge/Breite) getrennt durch ein Komma und ein Leerzeichen einzugeben. Beispieleingaben:
+
+-   8, 52
+-   8.48552, 50.5448
+-   8.999, 48.6
+
+#### Sperrflächen
+
+Es besteht die Möglichkeit Sperrflächen (3) zu definieren, welche bei der Routenplanung entsprechend "umfahren" werden. Unter (2) kann der Modus zum Zeichnen und Löschen von Sperrflächen in der Karte aktiviert werden. Der aktivierte Modus wird jeweils rot markiert.
+
+![routing_4.png](https://geodienste.hamburg.de/lgv-config/img/routing_4.png)
+
+#### Routenpräferenz/Verkehrswege vermeiden
+
+Unter (1) kann ausgewählt werden, ob die schnellste oder kürzeste Route berechnet werden soll. Des Weiteren können unter (2) bestimmte Verkehrswege von der Routenberechnung ausgeschlossen werden.
+
+![routing_5.png](https://geodienste.hamburg.de/lgv-config/img/routing_5.png)
+
+#### Wegbeschreibung
+
+Nach der Erzeugung der Route wird eine textuelle Wegbeschreibung (1) (inkl. Entfernung und Fahrzeit) angezeigt. Beim Klick auf einzelne Beschreibungen (2) wird in der Kartenansicht automatisch auf das dazugehörige Routensegment (3) gezoomt.
+
+![routing_6.png](https://geodienste.hamburg.de/lgv-config/img/routing_6.png)
+
+#### Routen - Export
+
+Es ist auch möglich erzeugte Routen für weitere Bearbeitungen (z.B. im GIS oder in Navigationsgeräten) zu exportieren. Hierzu stehen die Formate GEOJSON, KML und GPX zur Verfügung.
+
+![routing_7.png](https://geodienste.hamburg.de/lgv-config/img/routing_7.png)
+
+### Stapelverarbeitung Routing
+
+Unter dem Tab "Routenplanung" ist es auch möglich massenhafte Berechnungen von Fahrzeiten und Distanzen zu Routen durchzuführen. Hierzu muss die Checkbox "Stapelverarbeitung" (1) aktiviert werden. Hiernach kann eine CSV-Datei mit Start- und Endpunkten per Drag and Drop (2) oder über eine Dateiauswahl (3) in die Applikation geladen werden. Die CSV-Datei muss dabei folgende Formatierung und Struktur aufweisen:
+
+![routing_8.png](https://geodienste.hamburg.de/lgv-config/img/routing_8.png)
+
+- CSV-Format / UTF8 Encoding
+
+- Koordinaten der Start- und Endpunkte in WGS84 (EPSG:4326)
+
+- Separierung der Werte durch Semikolon ";" und Dezimaltrenner ist der Punkt "."
+
+- Struktur: ID;lon(Startpunkt);lat(Startpunkt);lon(Endpunkt);lat(Endpunkt)
+
+- Beispiel: 1;8.12;50.67;9.12;51.67
+
+* * * * *
+
+Nach dem erfolgreichen Upload der Datei beginnt automatisch die Berechnung der Fahrzeiten und Distanzen zu den einzelnen Start- und Endpunkten. Hierbei werden die im Tab "Routenplanung" ausgewählten Einstellungen (Fortbewegungsmittel, Verkehrswege vermeiden usw.) verwendet. Der Fortschritt der Verarbeitung kann in der Oberfläche (1) eingesehen werden. Nach der erfolgreichen Verarbeitung wird automatisch eine Ergebnisdatei (CSV-Datei) heruntergeladen. Sollten einzelne Routen nicht berechnet werden können, wird eine Leerzeile (ID;;;;;;;) in der Ergebnisdatei (3) ausgegeben und eine entsprechende Fehlermeldung (2) nach der Stapelverarbeitung ausgegeben.
+
+![routing_9.png](https://geodienste.hamburg.de/lgv-config/img/routing_9.png)
+
+Die Ergebnisdatei (3) enthält dann Angaben zur benötigten Zeit (in Minuten) und Entfernung (in Meter) zur Route zwischen dem Start- und Endpunkt sowie zum gewählten Fortbewegungsmittel (Profil).
+
+### Erreichbarkeit
+
+In dem Tab "Erreichbarkeit" können Analysen zur Erreichbarkeit von einer geographischen Position (Startpunkt) aus innerhalb von vorgegebenen Zeiten oder Entfernungen durchgeführt werden. Als Ergebnis der Berechnung werden dann Erreichbarkeitszonen (Polygone) ausgeben bzw. in der Kartenansicht dargestellt. Zur Erreichbarkeit stehen folgende Eingabemöglichkeiten zur Auswahl:
+
+#### Auswahl Fortbewegungsmittel
+
+![routing_2.png](https://geodienste.hamburg.de/lgv-config/img/routing_2.png)
+
+Es kann zwischen verschiedenen Fortbewegungsmitteln (PKW, LKW etc.) gewählt werden. Das aktive Fortbewegungsmittel ist rot markiert.
+
+#### Hinzufügen des Startpunktes
+
+Startpunkte können über die Eingabe von Orten, Adressen oder Koordinaten in das Suchfeld (1) oder durch Klick in die Karte hinzugefügt werden.
+
+![routing_10.png](https://geodienste.hamburg.de/lgv-config/img/routing_10.png)
+
+Neben der Eingabe von Adressen und Orten (1) ist es auch möglich, direkt geographische Koordinaten (WGS-84) als Wegpunkte in die Suchfelder einzugeben. Hierzu sind die Koordinaten in Dezimalgrad (Länge/Breite) getrennt durch ein Komma und ein Leerzeichen einzugeben. Beispieleingaben:
+
+-   8, 52
+-   8.48552, 50.5448
+-   8.999, 48.6
+
+#### Optimierung nach/Verkehrswege vermeiden
+
+Unter (1) kann ausgewählt werden, ob die Erreichbarkeit anhand vorgegebener Zeiten (in min) oder Entfernungen (in km) berechnet werden soll. Des Weiteren können unter (2) bestimmte Verkehrswege von der Erreichbarkeitsberechnung ausgeschlossen werden.
+
+![routing_11.png](https://geodienste.hamburg.de/lgv-config/img/routing_11.png)
+
+#### Intervalle und maximale Distanz
+
+Über die Schieberegler Maximale Reisedauer/Entfernung (1) und Intervall (2) kann ausgewählt werden, welche Erreichbarkeiten für den Startpunkt berechnet werden sollen. Die Einstellung Maximale Reisedauer/Entfernung (1) gibt hierbei die maximale Erreichbarkeit an. Über den Schieberregler Intervall (2) kann bestimmt werden, wie viele weitere Erreichbarkeitszonen innerhalb der maximalen Reisedauer/Entfernung bestimmt werden sollen. Z.B. werden bei einer gewählten maximalen Reisedauer von 60 min und einem gewählten Intervall von 15 min vier Erreichbarkeitszonen (15, 30, 45, 60 min) berechnet.
+
+![routing_12.png](https://geodienste.hamburg.de/lgv-config/img/routing_12.png)
+
+#### Berechnung durchführen
+
+Mit Klick auf den Button "Berechnen" (1) wird die Erreichbarkeitsanalyse durchgeführt. Sobald die Berechnung abgeschlossen ist, werden die berechneten Erreichbarkeitszonen (2) in der Kartenansicht dargestellt. Über die Legende (3) in der Oberfläche können weitere Informationen zu den Erreichbarkeitszonen eingesehen werden.
+
+![routing_13.png](https://geodienste.hamburg.de/lgv-config/img/routing_13.png)
+
+#### Export von Erreichbarkeitszonen
+
+Es ist auch möglich die erzeugten Erreichbarkeitszonen für weitere Bearbeitungen (z.B. im GIS) zu exportieren. Hierzu stehen die Formate GEOJSON und KML zur Verfügung.
+
+![routing_7.png](https://geodienste.hamburg.de/lgv-config/img/routing_7.png)
+
+### Stapelverarbeitung Erreichbarkeit
+
+Unter dem Tab "Erreichbarkeit" ist es auch möglich massenhafte Berechnungen von Erreichbarkeiten durchzuführen. Hierzu muss die Checkbox "Stapelverarbeitung" (1) aktiviert werden. Hiernach kann eine CSV-Datei mit Startpunkten per Drag and Drop (2) oder über eine Dateiauswahl (3) in die Applikation geladen werden. Die CSV-Datei muss dabei folgende Formatierung und Struktur aufweisen:
+
+![routing_14.png](https://geodienste.hamburg.de/lgv-config/img/routing_14.png)
+
+- CSV-Format / UTF8 Encoding
+
+- Koordinaten der Startpunkte in WGS84 (EPSG:4326)
+
+- Separierung der Werte durch Semikolon ";" und Dezimaltrenner ist der Punkt "."
+
+- Struktur: ID;lon(Startpunkt);lat(Startpunkt)
+
+- Beispiel: 1;8.12;50.67
+
+* * * * *
+
+Nach dem Upload der Datei beginnt automatisch die Berechnung Erreichbarkeiten zu den einzelnen Startpunkten. Hierfür werden die im Tab "Erreichbarkeit" ausgewählten Einstellungen (Fortbewegungsmittel, Reisedauer, Intervall usw.) verwendet. Der Fortschritt der Verarbeitung kann in der Oberfläche (1) eingesehen werden. Nach der erfolgreichen Verarbeitung wird automatisch eine Ergebnisdatei mit Polygonen zu den Erreichbarkeitszonen im GEOJSON-Format heruntergeladen. Sollten einzelne Erreichbarkeiten nicht berechnet werden können, wird in der GEOJSON-Datei jeweils ein Punktfeature mit den Koordinaten des Startpunktes und der Fehlermeldung erzeugt und eine entsprechende Fehlermeldung (2) wird nach der Stapelverarbeitung ausgegeben.
+
+![routing_15.png](https://geodienste.hamburg.de/lgv-config/img/routing_15.png)
+
+Die erzeugte GEOJSON-Datei enthält dann die berechneten Geometrien (Polygone) der einzelnen Erreichbarkeiten sowie dazugehörige Informationen (wie z.B. ID, Distanz oder Zeit, gewähltes Fortbewegungsmittel, Intervall) als Attribute (2). Die heruntergeladene Datei kann direkt zur weiteren Bearbeitung in GIS-Systeme (z.B. QGIS) (1) eingebunden werden.
+
+![routing_16.png](https://geodienste.hamburg.de/lgv-config/img/routing_16.png)
