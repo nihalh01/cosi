@@ -157,7 +157,7 @@ Diese Datensätze beinhalten Zeitreihen, welche (je nach Datensatz) von ca. 2012
 ### Fachdaten
 CoSI bietet ganz ähnlich wie der FHH-Atlas Fachdatensätze in einem Themenbaum an. Während der FHH-Atlas grundsätzlich alle auf der Urban Data Platform verfügbaren und innerhalb der FHH freigegebenen Datensätze anzeigt, wird für CoSI in Abstimmung mit der Nutzendengruppe AG CoSI eine Auwahl getroffen. Dies dient der Übersicht und ermöglicht den Test und ggf. die Anpassung der Analysefunktionen an die angebotenen Daten.
 
-Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
+Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
 
 ### Prognosedaten
 Die Prognosedaten enthalten die prognostizierte jährliche Bevölkerungsentwicklung in den Stadtteilen Hamburgs nach vier Altersgruppen und Geschlecht bis zum Jahr 2035. Stichtag ist jeweils der 31.12.
@@ -295,13 +295,14 @@ ___
 ### Manuelle Flächenauswahl für Fachdaten
 Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, innerhalb dessen Fachdaten angezeigt werden. Einrichtungen oder andere Fachdatenmarker, die außerhalb dieses Polygons liegen, werden ausgeblendet.
 
-![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
+![Screenshot_81](https://github.com/nihalh01/cosi/assets/140716054/5c047dc2-d686-4b55-8ab3-fa885cecebb8)
+
 *Abbildung 4: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
-   > Klicken Sie auf diesesn Button, um ein neues Polygon auf der Karte zu zeichnen.
+   > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
 2. **Eingabe löschen**
-   > Löschte die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
+   > Löscht die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
 3. **Einwohnerabfrage**
    > Für die aktuelle Flächenauswahl eine [Einwohnerabfrage](#markdown-header-einwohnerabfrage) durchführen.
 
@@ -398,7 +399,7 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 9. **Berechnen**
 10. **Ergebnis ausblenden** 
 11. **Legende & Isochronen**
-    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen die vom den Einrichtungen aus erreichbaren Gebiete abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
+    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen die von den Einrichtungen aus erreichbaren Gebiete abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 12. **Ergebnisverzeichnis**
     > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis) verwaltet werden.
 
@@ -468,7 +469,8 @@ Das Werkzeug erlaubt die Ermittlung aller Gebiete (Stadtteile oder statistische 
 ### Filter
 Die aktiven, ausgewählten Themen können durch Klick auf den Reiter "Filter" nach den Kategorien ihrer Datensätze durchsucht und gefiltert werden. Die Karte zoomt automatisch auf die Filterergebnisse. Es werden nur Ergebnisse in den ausgewählten Gebieten einbezogen. Der Filter ist für alle Fachdatensätze verfügbar, welche sinnvolle filterbare Attribute (wie Fläche, Nutzung, Träger, etc.) aufweisen.  
 
-![Abbildung 10: Filter](https://user-images.githubusercontent.com/43250699/142924026-a46ada10-7289-4882-9b2e-c41528289930.jpg)
+![Screenshot_91](https://github.com/nihalh01/cosi/assets/140716054/1cdeb603-b12f-45c9-9c99-f59694837a11)
+
 
 *Abbildung 10: Filter*  
 
@@ -476,12 +478,12 @@ Die aktiven, ausgewählten Themen können durch Klick auf den Reiter "Filter" na
    > Angezeigt werden die ausgewählten Themen. Themen können jederzeit hinzugefügt werden. Dazu Themenbau anklicken und Thema auswählen.
 2. **Filteroptionen:**
     - es können mehrere Filteroptionen gewählt werden. Kennzeichnung der Auswahl erfolgt automatisch durch Haken. 
-    - Schieberegler (von / bis): es kann z.B. eine gewünschte Flächengröße eingegeben werden.
+    - Schieberegler (von / bis): es kann z.B. eine gewünschte Schülerzahl eingegeben werden.
 3. **Ergebnis wird sofort mit Wahl der Filteroption angezeigt:**
     - Ergebnis wird in der Karte durch Symbol oder Flächenfarbe angezeigt. Durch Anklicken des Reiters "Legende” wird diese eingeblendet. Mousehover blendet Infofeld zu Einrichtung / Fläche ein.
     - Im Ergebnisfeld der Suche werden Namen der Gebiete / Einrichtungen angezeigt. Durch Anklicken der Namen wird die Auswahl in der Karte markiert. 
 4. **Filter löschen:** 
-   > Einzelne Auswahl durch Anklicken des roten "X" oder gesamte Auswahl löschen durch Anklicken des Buttons "Alle löschen”.
+   > Einzelne Auswahl durch Anklicken des roten "X" oder gesamte Auswahl löschen durch Anklicken des Buttons "Zurücksetzen”.
 
 <div style="page-break-after: always;"></div>
 
@@ -602,7 +604,7 @@ Nach dem Sie Ihre gewünschten Gebiete und Fachdaten ausgewählt haben, können 
 4. **Y-Achse stapeln**
     > Die Werte der Datensätze werden aufsummiert und farblich abgetrennt dargestellt.
 5. **Ergebnisverzeichnis**
-   > Das [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis) verwaltet die unterschiedlichen erstellten Graphen und erlaubt sie als Bild oder gesamelt als ZIP herunterzuladen.
+   > Das [Ergebnisverzeichnis](#markdown-header-ergebnisverzeichnis) verwaltet die unterschiedlichen erstellten Graphen und erlaubt, sie als Bild oder gesamelt als ZIP herunterzuladen.
 
 <div style="page-break-after: always;"></div>
 
@@ -786,7 +788,8 @@ ___
 ## Dienste
 ### Werkzeuge des Dienstemenüs
 ___
-![Abbildung 22: Dienste](https://user-images.githubusercontent.com/43250699/142929329-caca93bf-aee3-4a5d-838e-cff33bca5502.png)
+
+![Screenshot_96](https://github.com/nihalh01/cosi/assets/140716054/354408a0-b2d4-4464-be52-aebbd803c8d7)
 
 *Abbildung 22 - Dienste*
 
@@ -796,13 +799,16 @@ ___
 3. **Mousehover ein-/ ausschalten**
    > Den Tooltip, der am Mauszeiger in der Karte eingeblendet wird (de-)aktivieren
 4. **[Geodaten Importieren](#markdown-header-geodaten-importieren)**
-5. **WMS hinzufügen**
+5. **Report Template**
+6. **WMS hinzufügen**
    > Beliebige andere Kartendienste können aus dem FHH-Atlas oder anderen Quellen über die Webadresse (URL) des Dienstes eingebunden werden. Die URLs entnehmen Sie z.B. dem Metadatenkatalog der FHH oder dem Geoportal unter dem Info-Button im Themenbaum (s. Themenbaum).
-6. **[Sitzung speichen / laden](#markdown-header-sitzung-speichern)**
+7. **[Sitzung speichen / laden](#markdown-header-sitzung-speichern)**
    > Die aktuelle Sitzung mit aktiven Daten, gewählten Gebieten und Filtern speichern. Sitzungen können im Browser gespeichert werden. Diese können beim Programmstart wieder aus dem Verlauf geladen werden.
    Wenn Browserverlauf oder Cache geleert werden, geht dieser Speicherstand verloren! Es kann immer nur eine Sitzung parallel vorgehalten werden.   
    Sitzungen als Datei auf dem Rechner speichern. Diese können jederzeit wieder geladen oder mit anderen CoSI Nutzer:innen geteilt werden.
-7. **[Vorlagen](#markdown-header-vorlagen)**
+8. **[Vorlagen](#markdown-header-vorlagen)**
+9. **ExportPdf**
+10. **Virtueller Nutzer**
 
    >*Hinweis: Manuell hinzugefügte Kartendienste (WMS) und erstellte Berechnungen bleiben nicht erhalten. Das Speichern aller Arbeitsergebnisse ist Teil des aktuell laufenden Weiterentwicklungsprojekts.*
 
@@ -876,7 +882,8 @@ Sobald Ihre Datei hier hochgeladen wurde, erscheint ein neues Fenster, in welche
 
 ### Sitzung Speichern/Laden 
 
-![Abbildung 29: Sitzung Speichern](../cosi/utils/assets/screenshots/sitzungspeichern.png)
+![Screenshot_102](https://github.com/nihalh01/cosi/assets/140716054/fccee60e-5482-42d9-a703-e5075ec5c28c)
+
 *Abbildung 29: Sitzung speichern / laden*
 
 Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informationen der aktuellen Arbeitssitzung abgespeichert werden um diese zu einem späteren Zeitpunkt wieder öffnen und weiterbearbeiten zu können. Dies umfasst
@@ -904,7 +911,8 @@ Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informatione
 <div style="page-break-after: always;"></div>
 
 ### Vorlagen
-![Abbildung 30: Vorlagen](../cosi/utils/assets/screenshots/vorlagen.png)
+
+![Screenshot_105](https://github.com/nihalh01/cosi/assets/140716054/ab4d95f3-e3e0-49b5-8430-3faebe4b27f6)
 
 *Abbildung 30: Vorlagen*
 
@@ -923,6 +931,9 @@ Mit dem Dienst **Sitzung speichern/laden** können aktuelle diverse Informatione
 3. **Vorlage laden**
    > Die ausgewählte Vorlage laden.
 
+![Screenshot_109](https://github.com/nihalh01/cosi/assets/140716054/1694d425-5e6a-4e1f-916b-7f41b236d3c8)
+
+
 <div style="page-break-after: always;"></div>
 
 ___
@@ -930,8 +941,14 @@ ___
 ____
 
 ### Statistische Datenübersicht
-![Abbildung 31: Statistische Datenübersicht](../cosi/utils/assets/screenshots/statdashboard.png)
-*Abbildung 31: Statistische Datenübersicht*
+
+![Screenshot_130](https://github.com/nihalh01/cosi/assets/140716054/87b02aa9-5aad-4a61-b33c-5ee5054d8faa)
+
+*Abbildung 31: Statistische Datenübersicht 1*
+
+![Screenshot_126](https://github.com/nihalh01/cosi/assets/140716054/c0ce7591-490d-4284-92cb-e33a8c6d85d9)
+
+*Abbildung 31: Statistische Datenübersicht 2*
 
 1. **Gruppen ein-/ausklappen**
    > Thematische Gruppen (vgl. [Regionalstatistische Daten](#markdown-header-regionalstatistische-daten)) über das **+** ein- und ausklappen.
@@ -1033,7 +1050,7 @@ ____
 10. **Einrichtungsdiagramme erstellen**
       > Erzeugt für alle verfügbaren Datenspalten ein Balkendiagramm, in dem die Werte der jeweiligen Einrichtungen und ihre Verteilung über die ausgewählten Gebiete.
       - **10.1 Layer zusammenziehen**
-         > Wenn Sie diese Checkbox aktivieren, werden bei "Einrichtungsdiagramme erstellen"  Einrichtungen unterschiedlichen Typs zusammengezogen, wenn sie identische Attribute haben. *Beispiel: Wenn Sie Supermärkte und Drogerien ausgewählt haben, teilen sich beide das Attribut "Verkaufsfläche in m²" und werden dementsprechend im Graphen zusammen dargestellt"*
+         > Wenn Sie diese Checkbox aktivieren, werden bei "Einrichtungsdiagramme erstellen"  Einrichtungen unterschiedlichen Typs zusammengezogen, wenn sie identische Attribute haben. *Beispiel: Wenn Sie Supermärkte und Drogerien ausgewählt haben, teilen sich beide das Attribut "Verkaufsfläche in m²" und werden dementsprechend im Graphen zusammen dargestellt*
 11. **Tabelle exportieren**
       > Die ausgewählten Einträge als XLSX für Excel exportieren. Über aus Auswahlfeld *Detailansicht exportieren* können alle bzw. in der Detailansicht ausgewählte Attribute eines Einrichtungstyps exportiert werden. Ist keine Auswahl getroffen, werden alle Einrichtungen exportiert.
 12. **Standortbewertung: Themenauswahl**
@@ -1043,7 +1060,7 @@ ____
 14. **Standortvisualisierung für alle ausgewählten**
       > Erstellt ein Balkendiagramm mit der Aufschlüsselung für alle ausgewählten Einrichtungen. Wenn Sie mehr als zwei Fachdatensätze für die Auswertung (s. 12) ausgewählt haben, dann wird ein Radardiagramm generiert. Wenn Sie keine Einrichtungen ausgewählt haben, werden *alle* verfügbaren Einrichtungen in das Diagramm mit einbezogen.
 15. **Histogramm**
-      > Erzeugt ein Histogramm, dass die Verteilung der ausgewählten Einrichtungen abbildet.
+      > Erzeugt ein Histogramm, das die Verteilung der ausgewählten Einrichtungen abbildet.
 
 <div style="page-break-after: always;"></div>
 
