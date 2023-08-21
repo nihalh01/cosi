@@ -9,35 +9,40 @@ ___
 
 ### Nutzerhandbuch
 
-**2. Phase (Weiterentwicklung + Produktionsreife)**   
-**Version 1.2.0**  
-*Zur Internen Nutzung*
+**3. Phase (Weiterentwicklung + Produktionsreife)**   
+**Version 1.3.0**  
+*Zur internen Nutzung*
 
 <div style="page-break-after: always;"></div>
 
 ___
-### Projektteam
+### Projektmitarbeiter und -mitarbeiterinnen CoSI I bis III
 ___
 
-Daniel Schulz, HafenCity Universität Hamburg  
-Sebastian Duden, LGV Hamburg  
-Johanna Fischer, HafenCity Universität Hamburg   
-Nicola Stradtmann, HafenCity Universität Hamburg  
-Bertram Hillmann, a3rtgm GbR  
-Jannes Süpke, Senatskanzlei Hamburg, ITD  
-Peter Duensing, Senatskanzlei Hamburg, ITD    
-Hendrik Landgrebe, BA Hamburg-Nord  
-Gabriela Gabbert, BA Hamburg-Nord  
-Prof. Dr. Gesa Ziemer, HafenCity Universität Hamburg  
-Ogeigha Koroyin, HiTec e.V. (ehem.)  
-Dennis Rupnow, HiTec e.V. (ehem.)   
-Christian Bähnisch, HiTec e.V. (ehem.)   
-Yuxiang Zhang, HafenCity Universität Hamburg (ehem.)   
-Antje Widmayer, BA Hamburg-Nord (ehem.)   
+Alexandra Knapke, HafenCity Universität Hamburg
+Antje Widmayer, BA Hamburg-Nord
+Bertram Hillmann, a3rtgm GbR
+Christian Bähnisch, HiTec e.V.
+Daniel Schulz, HafenCity Universität Hamburg
+Dennis Rupnow, HiTec e.V.
+Feng Feng, LGV Hamburg
+Gabriela Gabbert, BA Hamburg-Nord
+Prof. Dr. Gesa Ziemer, HafenCity Universität Hamburg
+Hendrik Landgrebe, BA Hamburg-Nord
+Ingo Bruns, BA Hamburg-Nord
+Jannes Süpke, Senatskanzlei Hamburg, ITD
+Johanna Fischer, HafenCity Universität Hamburg
+Nicola Stradtmann, HafenCity Universität Hamburg
+Nihal Hedge, HafenCity Universität Hamburg
+Ogeigha Koroyin, HiTec e.V. 
+Paul Linnow, HafenCity Universität Hamburg
+Peter Duensing, Senatskanzlei Hamburg, ITD
+Sebastian Duden, LGV Hamburg
+Yuxiang Zhang, HafenCity Universität Hamburg  
 
 
 ### Stand
-03/23/2022
+08/23
 
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making  
@@ -51,9 +56,9 @@ ___
 Bei der Planung städtischer und sozialer Infrastruktur sind Entscheidungsprozesse in der öffentlichen Verwaltung häufig durch langwierige Verfahren und eine fragmentierte Datengrundlage charakterisiert. D.h. Bedarfe werden teilweise  spät erkannt, oder die Konkretisierung der Planung verzögert sich durch das aufwendige Beschaffen von strukturierten Informationen.\
 Das vorliegende Handbuch beschreibt das *Cockpit Städtische Infrastrukturen* für Hamburg als digitales Analyse- und Planungswerkzeug, welches mithilfe eines leicht zugänglichen User-Interface statistische und georeferenzierte Daten bündelt, visualisiert und integriert, um Planungsbedarfe zu identifizieren und Planungsprozesse zu beschleunigen.  
   
-Dazu wurden die durch die *Urban Data Platform* der Stadt Hamburg aufgebauten Datenbankstrukturen genutzt, um eine kartenbasierte Webapplikation zu etablieren, welche den Sozialraumplanern der Stadt eine Reihe von Analysefunktionen zur Verfügung stellt, um auf der Verwaltungsebene der statistischen Gebiete soziodemographische Zusammenhänge zu identifizieren, Trends zu erkennen sowie Verhältnisse zwischen dem existierenden Infrastrukturangebot und den relevanten Zielgruppen zu ermitteln. Das Werkzeug soll im Folgenden helfen, Standorte und Potentiale für die Entwicklung von Infrastruktur zu finden. Die Ergebnisse dieser Analysen können direkt aus CoSI heraus visualisiert und als Entscheidungs- und Diskussionsgrundlage verwendet werden. Der Workflow folgt dabei einer dreistufigen Logik von der *Visualisierung* von Daten, über die *Analyse*, also der kontextuellen Verknüpfung von Information, bis zur *Simulation* von Maßnahmen und Ableitung ihrer  Auswirkungen.  
+Dazu wurden die durch die *Urban Data Platform* der Stadt Hamburg aufgebauten Datenbankstrukturen und die Funktionalität des Masterportals genutzt, um eine kartenbasierte Webapplikation zu etablieren, welche den Quartiersplanenden der Stadt eine Reihe von Analysefunktionen zur Verfügung stellt, um auf der Verwaltungsebene der statistischen Gebiete soziodemographische Zusammenhänge zu identifizieren, Trends zu erkennen sowie Verhältnisse zwischen dem existierenden Infrastrukturangebot und den relevanten Zielgruppen zu ermitteln. Das Werkzeug soll im Folgenden helfen, Standorte und Potentiale für die Entwicklung von Infrastruktur zu finden. Die Ergebnisse dieser Analysen können direkt aus CoSI heraus visualisiert und als Entscheidungs- und Diskussionsgrundlage verwendet werden. Der Workflow folgt dabei einer dreistufigen Logik von der *Visualisierung* von Daten, über die *Analyse*, also der kontextuellen Verknüpfung von Information, bis zur *Simulation* von Maßnahmen und Ableitung ihrer  Auswirkungen.  
   
-Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts aufzustellen, wurden im Vorfeld ab Sommer 2018 eine Reihe von Stakeholder- und Userstory-Workshops mit den Mitgliedern der Hamburger Verwaltung auf verschiedenen Ebenen durchgeführt. CoSI wurde dann ab August 2019 in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt und stand den Sozialraumplanern des Bezirks Hamburg Nord seit dem 28.01.2020 bis Mai 2020 als Pilot im internen Verwaltungsnetzwerk zur Verfügung. Mitte 2020 wurde das Verfahren nach erfolgreicher Evaluation in den Produktivbetrieb überführt und steht seitdem bereits mehreren tausend Mitarbeiterinnen und Mitarbeitern zur Verfügung. Das seit dem 01.02.2021 gestartete Weiterentwicklungsprojekt hat das Ziel, bestehende Funktionen zu verbessern und neue Funktionen zu integrieren. Im Zuge der Entwicklung werden die Datenbedarfe der Sozialraum- und Stadtplaner*innen fortlaufend erfasst und an den UDH/LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt. Es werden auch Integrationsmöglichkeiten für das Tool in die täglichen Arbeit von Behörden und Fachämtern eruiert. Das CoSI-Projekt bündelt diese Informationen, erarbeitet in Anwender-Workshops vertiefte Funktionskonzepte und integriert diese in den Themenbereichen Visualisierung, Analyse und Simulation. So wird ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.  
+Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts aufzustellen, wurden im Vorfeld ab Sommer 2018 eine Reihe von Stakeholder- und Userstory-Workshops mit den Mitgliedern der Hamburger Verwaltung auf verschiedenen Ebenen durchgeführt. CoSI wurde dann von Juni 2019 bis September 2023 in den Projekten CoSI I bis III in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt. Nutzerinnen und Nutzer waren dabei von Beginn an über die AG CoSI einbezogen und konnten den jeweils neuesten Entwicklungsstand im Arbeitsalltag evaluieren, so dass aktuelle Anforderungen an Funktionen und Daten fortlaufend in die Planung der Sprints eingegangen sind. Ab Mitte 2020 wurde das Verfahren in den Produktivbetrieb überführt. Seitdem steht allen berechtigt interessierten Mitarbeiterinnen und Mitarbeitern innerhalb der FHH – im Sommer 2023 waren es über 1500 - eine fortlaufend aktualisierte Produktivversion von CoSI zur Verfügung. Das seit dem 01.02.2021 gestartete Weiterentwicklungsprojekt hat das Ziel, bestehende Funktionen zu verbessern und neue Funktionen zu integrieren. Im Zuge der Entwicklung werden die Datenbedarfe der Sozialraum- und Stadtplaner*innen fortlaufend erfasst und an den UDH/LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt. Es werden auch Integrationsmöglichkeiten für das Tool in die täglichen Arbeit von Behörden und Fachämtern eruiert. Das CoSI-Projekt bündelt diese Informationen, erarbeitet in Anwender-Workshops vertiefte Funktionskonzepte und integriert diese in den Themenbereichen Visualisierung, Analyse und Simulation. So wird ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.  
   
 <div style="page-break-after: always;"></div>
 
