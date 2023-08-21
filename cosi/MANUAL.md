@@ -124,7 +124,7 @@ Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![bsp-analysefunktionen](../cosi\manuals\bsp-analysefunktionen.png)
+![bsp-analysefunktionen](../cosi/manuals/bsp-analysefunktionen.png)
 
 Abb.: Analysefunktionen, hier Versorgungsanalyse.
 
