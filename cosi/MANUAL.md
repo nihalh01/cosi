@@ -58,7 +58,14 @@ Das vorliegende Handbuch beschreibt das *Cockpit Städtische Infrastrukturen* f�
   
 Dazu wurden die durch die *Urban Data Platform* der Stadt Hamburg aufgebauten Datenbankstrukturen und die Funktionalität des Masterportals genutzt, um eine kartenbasierte Webapplikation zu etablieren, welche den Quartiersplanenden der Stadt eine Reihe von Analysefunktionen zur Verfügung stellt, um auf der Verwaltungsebene der statistischen Gebiete soziodemographische Zusammenhänge zu identifizieren, Trends zu erkennen sowie Verhältnisse zwischen dem existierenden Infrastrukturangebot und den relevanten Zielgruppen zu ermitteln. Das Werkzeug soll im Folgenden helfen, Standorte und Potentiale für die Entwicklung von Infrastruktur zu finden. Die Ergebnisse dieser Analysen können direkt aus CoSI heraus visualisiert und als Entscheidungs- und Diskussionsgrundlage verwendet werden. Der Workflow folgt dabei einer dreistufigen Logik von der *Visualisierung* von Daten, über die *Analyse*, also der kontextuellen Verknüpfung von Information, bis zur *Simulation* von Maßnahmen und Ableitung ihrer  Auswirkungen.  
   
-Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts aufzustellen, wurden im Vorfeld ab Sommer 2018 eine Reihe von Stakeholder- und Userstory-Workshops mit den Mitgliedern der Hamburger Verwaltung auf verschiedenen Ebenen durchgeführt. CoSI wurde dann von Juni 2019 bis September 2023 in den Projekten CoSI I bis III in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt. Nutzerinnen und Nutzer waren dabei von Beginn an über die AG CoSI einbezogen und konnten den jeweils neuesten Entwicklungsstand im Arbeitsalltag evaluieren, so dass aktuelle Anforderungen an Funktionen und Daten fortlaufend in die Planung der Sprints eingegangen sind. Ab Mitte 2020 wurde das Verfahren in den Produktivbetrieb überführt. Seitdem steht allen berechtigt interessierten Mitarbeiterinnen und Mitarbeitern innerhalb der FHH – im Sommer 2023 waren es über 1500 - eine fortlaufend aktualisierte Produktivversion von CoSI zur Verfügung. Das seit dem 01.02.2021 gestartete Weiterentwicklungsprojekt hat das Ziel, bestehende Funktionen zu verbessern und neue Funktionen zu integrieren. Im Zuge der Entwicklung werden die Datenbedarfe der Sozialraum- und Stadtplaner*innen fortlaufend erfasst und an den UDH/LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt. Es werden auch Integrationsmöglichkeiten für das Tool in die täglichen Arbeit von Behörden und Fachämtern eruiert. Das CoSI-Projekt bündelt diese Informationen, erarbeitet in Anwender-Workshops vertiefte Funktionskonzepte und integriert diese in den Themenbereichen Visualisierung, Analyse und Simulation. So wird ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.  
+Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts aufzustellen, wurden im Vorfeld ab Sommer 2018 eine Reihe von Stakeholder- und Userstory-Workshops mit den Mitgliedern der Hamburger Verwaltung auf verschiedenen Ebenen durchgeführt. 
+
+CoSI wurde dann von Juni 2019 bis September 2023 in den Projekten CoSI I bis III in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt. Nutzerinnen und Nutzer waren dabei von Beginn an über die AG CoSI einbezogen und konnten den jeweils neuesten Entwicklungsstand im Arbeitsalltag evaluieren, so dass aktuelle Anforderungen an Funktionen und Daten fortlaufend in die Planung der Sprints eingegangen sind. Ab Mitte 2020 wurde das Verfahren in den Produktivbetrieb überführt. Seitdem steht allen berechtigt interessierten Mitarbeiterinnen und Mitarbeitern innerhalb der FHH – im Sommer 2023 waren es über 1500 - eine fortlaufend aktualisierte Produktivversion von CoSI zur Verfügung. 
+
+Datenbedarfe aus der AG CoSI und von den Nutzenden der Produktivversion werden fortlaufend erfasst und an den Urban Data Hub des LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt.
+Es werden auch Integrationsmöglichkeiten für das Tool in die tägliche Arbeit von Behörden und Fachämtern eruiert. Die CoSI-Projekte haben diese Informationen gebündelt, in Workshops mit der AG CoSI und Anwendenden vertiefte Funktionskonzepte erarbeitet und diese in den Themenbereichen Visualisierung, Analyse und Simulation integriert. So wurde ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.
+
+Diese Weiterentwicklung von CoSI und den zu Grunde liegenden Datenbeständen im Urban Data Portal in enger Zusammenarbeit mit den Nutzenden soll auch nach den Projekten CoSI I bis III fortgeführt werden. Dazu ist im Lebenslagenmanagement der BWFGB eine moderne fachliche Leitstelle geplant.
   
 <div style="page-break-after: always;"></div>
 
@@ -103,36 +110,63 @@ ___
 ## Datenmodell & -Infrastruktur
 ___
   
-CoSI basiert im Kern aus der Überlagerung regelmäßig aktualisierter regionalstatistischer Kenndaten der einzelnen Gebietsebenen, welche vom Statistikamt Nord für Hamburg und Schleswig-Holstein (StaNord ) geliefert werden. Ergänzt werden diese durch verschiedenster Fachdaten der unterschiedlichen Behörden und Ämter, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB). Dabei versucht CoSI mehr als nur die Darstellung der Datensätze in Karte und Tabelle neben- und übereinander zu gewährleisten. Der Anspruch ist es, eine Integration der Daten und eine Interaktion mit den Daten zu erreichen. Also einerseits Zusammenhänge und Wechselwirkungen zwischen verschiedenen Datensätzen für die Nutzerinnen und Nutzer erfahrbar zu machen und andererseits diesen zu erlauben in die Datensätze "einzugreifen", sie zu filtern, zu durchsuchen oder zu "manipulieren". Letztlich wird die Echtzeit-Veränderung von Datensätzen im laufenden Programm (s. Simulation) ermöglicht.
+CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
+![Vgl_FHH_Atlas](../cosi/manuals/Vgl_FHH_Atlas.png)
+
+Abb.: Anzeige von Themen auf der Karte wie im FHH-Atlas.
+
+Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
+
+![stat_daten-anzeige](../cosi/manuals/stat_daten-anzeige.png)
+
+Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.
+
+Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
+
+![bsp-analysefunktionen](../cosi/manuals/bsp-analysefunktion.png)
+
+Abb.: Analysefunktionen, hier Versorgungsanalyse.
+
+Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
 ### Regionalstatistische Daten
-Die Daten des StaNord liegen für alle Verwaltungsebenen der FHH (statistische Gebieten, Stadtteile, Bezirke und die Gesamtstadt) vor. Sie umfassen je nach Ebene über 60 Indikatoren, welche sich in folgende Kategorien gliedern:  
+Die Daten des StaNord liegen für alle Verwaltungsebenen der FHH (statistische Gebieten, Stadtteile, Bezirke und die Gesamtstadt) vor. Sie umfassen je nach Ebene über 120 Indikatoren, welche sich in folgende Kategorien gliedern:  
 
    - Bevölkerung
+   - Bevölkerung ab x Jahren
+   - Bevölkerung unter x Jahren
+   - Bevölkerung x bis x Jahren
+   - Bevölkerung x bis unter 18 Jahren
+   - Bevölkerung x bis über 18 Jahren
+   - Bevölkerung Migrationshintergrund
    - Fläche
    - Haushalte
-   - Sozialversicherungspflichte
+   - Sozialversicherungspflichtige
    - Arbeitslose
    - SGB II Leistungen
    - Grundsicherung im Alter
    - Wohnen
+   - Wahlbeteiligung
    - Verkehr
+   - Infrastruktur
+   - Bevölkerungsbewegung
 
 Diese Datensätze beinhalten Zeitreihen, welche (je nach Datensatz) von ca. 2012 an erfasst sind und jährlich erweitert werden.
 
 *Hinweis: Aus datenschutzrechtlichen Gründen werden bereits vom Datenbereitsteller solche Datensätze herausgefiltert, welche bei sensiblen Daten auf einzelne Individuen zurückverfolgbar wären. Diese Datensätze sind mit "–" oder mit "Keine Daten" ausgewiesen.*
 
 ### Fachdaten
-Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (v.a. Behörden, aber prinzipiell auch Privatunternehmen, Echtzeitsensoren, etc.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
+CoSI bietet ganz ähnlich wie der FHH-Atlas Fachdatensätze in einem Themenbaum an. Während der FHH-Atlas grundsätzlich alle auf der Urban Data Platform verfügbaren und innerhalb der FHH freigegebenen Datensätze anzeigt, wird für CoSI in Abstimmung mit der Nutzendengruppe AG CoSI eine Auwahl getroffen. Dies dient der Übersicht und ermöglicht den Test und ggf. die Anpassung der Analysefunktionen an die angebotenen Daten.
+
+Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
 
 ### Prognosedaten
 Die Prognosedaten enthalten die prognostizierte jährliche Bevölkerungsentwicklung in den Stadtteilen Hamburgs nach vier Altersgruppen und Geschlecht bis zum Jahr 2035. Stichtag ist jeweils der 31.12.
 
 Aus Gründen der statistischen Geheimhaltung der zugrunde liegenden Ausgangsdaten werden die vier kleinsten Stadtteile Hamburgs nur in Kombination mit einem größeren angrenzenden Stadtteil ausgewiesen.
 
-Alle Daten unterliegen der Fünferrundung, d.h. sie sind durch die Zahl Fünf teilbar.
-
+Die Einzeldaten sind jeweils auf volle fünf gerundet.
 Die Daten werden auf unregelmäßiger Basis vom Statistikamt Nord herausgegeben.
 
 ### Analyse
