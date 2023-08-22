@@ -19,26 +19,26 @@ ___
 ### Projektmitarbeiter und -mitarbeiterinnen CoSI I bis III
 ___
 
-Alexandra Knapke, HafenCity Universität Hamburg
-Antje Widmayer, BA Hamburg-Nord
-Bertram Hillmann, a3rtgm GbR
-Christian Bähnisch, HiTec e.V.
-Daniel Schulz, HafenCity Universität Hamburg
-Dennis Rupnow, HiTec e.V.
-Feng Feng, LGV Hamburg
-Gabriela Gabbert, BA Hamburg-Nord
-Prof. Dr. Gesa Ziemer, HafenCity Universität Hamburg
-Hendrik Landgrebe, BA Hamburg-Nord
-Ingo Bruns, BA Hamburg-Nord
-Jannes Süpke, Senatskanzlei Hamburg, ITD
-Johanna Fischer, HafenCity Universität Hamburg
-Nicola Stradtmann, HafenCity Universität Hamburg
-Nihal Hedge, HafenCity Universität Hamburg
-Ogeigha Koroyin, HiTec e.V. 
-Paul Linnow, HafenCity Universität Hamburg
-Peter Duensing, Senatskanzlei Hamburg, ITD
-Sebastian Duden, LGV Hamburg
-Yuxiang Zhang, HafenCity Universität Hamburg  
+- Alexandra Knapke, HafenCity Universität Hamburg
+- Antje Widmayer, BA Hamburg-Nord
+- Bertram Hillmann, a3rtgm GbR
+- Christian Bähnisch, HiTec e.V.
+- Daniel Schulz, HafenCity Universität Hamburg
+- Dennis Rupnow, HiTec e.V.
+- Feng Feng, LGV Hamburg
+- Gabriela Gabbert, BA Hamburg-Nord
+- Prof. Dr. Gesa Ziemer, HafenCity Universität Hamburg
+- Hendrik Landgrebe, BA Hamburg-Nord
+- Ingo Bruns, BA Hamburg-Nord
+- Jannes Süpke, Senatskanzlei Hamburg, ITD
+- Johanna Fischer, HafenCity Universität Hamburg
+- Nicola Stradtmann, HafenCity Universität Hamburg
+- Nihal Hegde, HafenCity Universität Hamburg
+- Ogeigha Koroyin, HiTec e.V. 
+- Paul Linnow, HafenCity Universität Hamburg
+- Peter Duensing, Senatskanzlei Hamburg, ITD
+- Sebastian Duden, LGV Hamburg
+- Yuxiang Zhang, HafenCity Universität Hamburg  
 
 
 ### Stand
@@ -62,7 +62,7 @@ Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts 
 
 CoSI wurde dann von Juni 2019 bis September 2023 in den Projekten CoSI I bis III in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt. Nutzerinnen und Nutzer waren dabei von Beginn an über die AG CoSI einbezogen und konnten den jeweils neuesten Entwicklungsstand im Arbeitsalltag evaluieren, so dass aktuelle Anforderungen an Funktionen und Daten fortlaufend in die Planung der Sprints eingegangen sind. Ab Mitte 2020 wurde das Verfahren in den Produktivbetrieb überführt. Seitdem steht allen berechtigt interessierten Mitarbeiterinnen und Mitarbeitern innerhalb der FHH – im Sommer 2023 waren es über 1500 - eine fortlaufend aktualisierte Produktivversion von CoSI zur Verfügung. 
 
-Datenbedarfe aus der AG CoSI und von den Nutzenden der Produktivversion werden fortlaufend erfasst und an den Urban Data Hub des LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt.
+Datenbedarfe aus der AG CoSI und von den Nutzenden der Produktivversion werden fortlaufend erfasst und an den Urban Data Hub des LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potenzieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt.
 Es werden auch Integrationsmöglichkeiten für das Tool in die tägliche Arbeit von Behörden und Fachämtern eruiert. Die CoSI-Projekte haben diese Informationen gebündelt, in Workshops mit der AG CoSI und Anwendenden vertiefte Funktionskonzepte erarbeitet und diese in den Themenbereichen Visualisierung, Analyse und Simulation integriert. So wurde ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.
 
 Diese Weiterentwicklung von CoSI und den zu Grunde liegenden Datenbeständen im Urban Data Portal in enger Zusammenarbeit mit den Nutzenden soll auch nach den Projekten CoSI I bis III fortgeführt werden. Dazu ist im Lebenslagenmanagement der BWFGB eine moderne fachliche Leitstelle geplant.
@@ -114,19 +114,19 @@ CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener 
 
 ![Vgl_FHH_Atlas](../cosi/manuals/Vgl_FHH_Atlas.png)
 
-Abb.: Anzeige von Themen auf der Karte wie im FHH-Atlas.
+*Abb.: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
 Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
 ![stat_daten-anzeige](../cosi/manuals/stat_daten-anzeige.png)
 
-Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.
+*Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
 ![bsp-analysefunktionen](../cosi/manuals/bsp-analysefunktionen.png)
 
-Abb.: Analysefunktionen, hier Versorgungsanalyse.
+*Abb.: Analysefunktionen, hier Versorgungsanalyse.*
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
@@ -190,11 +190,11 @@ ___
 ## Module
 ___
 ### Überblick 
-CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet" an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
+CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
 ![Abbildung 1: Das CoSI Nutzer-Interface](https://user-images.githubusercontent.com/43250699/142911085-50a9fe73-0171-47d0-b2f9-527593ae42ed.jpg)
 
-*Abbildung 1: Das CoSI Nutzer-Interface*
+*Abb.: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
@@ -253,7 +253,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 
 ![Abbildung 2: Der Themenbaum](https://user-images.githubusercontent.com/43250699/159332327-0b3301d1-4ae9-4b1f-9cb1-4fe733d51a54.png)
 
-*Abbildung 2: Der Themenbaum*
+*Abb.: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -265,8 +265,17 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 	 - **Darstellung**
       > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
 3. **Ausgewählte Themen**  
+   > Siehe nachfolgende Abbildung.
+4. **Hilfsbutton**
+   > Ruft diese Anleitung auf.
+5. **Kartenhintergrund**
+   > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
+6. **Themenbaum fixieren/ lösen**
+   > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
+   
+   **Ausgewählte Themen**  
       ![Abbildung 3: Ausgewählte Themen](https://user-images.githubusercontent.com/43250699/142911886-03547719-aab0-4f80-a3e3-cfdca1267eb7.png)  
-      *Abbildung 3: Ausgewählte Themen*  
+      *Abb.: Ausgewählte Themen.*  
       - **3.1 Informationen und Legenden**
       - **3.2 Einstellungen**  
          Über das Zahnrad öffnen sich Einstellungen für Transparenz und Ebene verschieben.
@@ -274,16 +283,14 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
          Die Transparenz lässt sich über Plus in Prozent erhöhen und über Minus verringern.
       - **3.4 Ebene nach oben/unten**  
          Über das Pfeilmenü kann die Ebene der Layer verschoben werden.
-4. **Hilfsbutton**
-   > Ruft diese Anleitung auf.
-5. **Kartenhintergrund**
-   > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
-6. **Themenbaum fixieren/ lösen**
-   > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
 
-Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In Abbildung 4 zum Beispiel stellen die Häuschen die vorhandenen Kindertagesstätten im Gebiet dar. Nummerierte Häuschen zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an. Die lilafarbenen Linien stellen Flächen dar, die zum Layer Bebauungspläne gehören.
+Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die blauen Punkte die vorhandenen Einrichtungen im Gebiet dar. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an.
 Eine Legende zu den aktiven Themen kann durch einen Klick auf den Reiter "Legende" eingeblendet werden. Unabhängig davon können über den Infobutton rechts neben dem Layer weitere Informationen zu dem jeweiligen Thema aufgerufen werden. Es werden folgende Informationen bereitgestellt: Kurzbeschreibung des Themas, Datenstand und Legende. Auch befinden sich hinter dem Info-Button die Links zu Downloadquellen und eine WFS - bzw. WMF -Adresse.
 Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Kita, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
+
+![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
+
+*Abb.: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 
@@ -296,12 +303,12 @@ Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, inne
 
 ![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
 
-*Abbildung 4: Manuelle Flächenauswahl*
+*Abb.: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
-   > Klicken Sie auf diesesn Button, um ein neues Polygon auf der Karte zu zeichnen.
+   > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
 2. **Eingabe löschen**
-   > Löschte die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
+   > Löscht die bestehende Flächenauswahl und zeigt alle Fachdaten wieder an.
 3. **Einwohnerabfrage**
    > Für die aktuelle Flächenauswahl eine [Einwohnerabfrage](#markdown-header-einwohnerabfrage) durchführen.
 

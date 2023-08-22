@@ -29,7 +29,7 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 
 ![Abbildung 1: Erreichbarkeit ab einem Referenzpunkt](https://user-images.githubusercontent.com/43250699/157067677-5f5db4a7-498a-45b2-8c06-6f2ea5ed6cbf.png)
 
-*Abbildung 1: Erreichbarkeit ab einem Referenzpunkt*
+*Abb.: Erreichbarkeit ab einem Referenzpunkt.*
   
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -44,13 +44,13 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 6. **Berechnen**
    > Berechnet die Erreichbarkeit vom Punkt. Es werden nur noch Fachdaten angezeigt, die innerhalb der Erreichbarkeit liegen. Gilt auch für die Einrichtungsübersicht und alle anderen Werkzeuge.
 7. **Ergebnis ausblenden**
-   > Die Ergebnisdarstellung auf der Karte wird ausgeblenden. Alle Fachdaten außerhalb der Isochronen werden wieder eingeblendet.
+   > Die Ergebnisdarstellung auf der Karte wird ausgeblendet. Alle Fachdaten außerhalb der Isochronen werden wieder eingeblendet.
 8. **Einwohnerabfrage**
    > (s. Einwohnerabfrage)
 9.  **Legende & Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das vom Referenzpunkt aus erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 11. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](./pagination.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](..\cosi\manuals\ergebnisverzeichnis.md) verwaltet werden.
 
 *Für **Tageszeit**, **Verkehrsfluss berücksichtigen**, und **Von Flächenaußengrenzen berechnen** siehe im folgenden "Erreichbarkeit im Gebiet"*
 
@@ -59,11 +59,11 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 Diese Analyse wird genauso hergestellt, wie ab einem Referenzpunkt. Nur wird hier statt einem Referenzpunkt auf der Karte eine Einrichtung auf der Karte angeklickt.
 
 #### Erreichbarkeit im Gebiet
-Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (z.B. Kindergärten) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann angegeben werden in Zeit oder in Metern. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
+Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungsart (im Beispiel Krankenhäuser) in dem festgelegten Einzugsbereich (Planungsgebiet). Der Einzugsbereich ist die Entfernung von der jeweiligen Einrichtung und kann in Zeit oder in Metern angegeben werden. Die Erreichbarkeit ist abhängig von dem festgelegten Verkehrsmittel.
 
-![Abbildung 2: Erreichbarkeit ausgewÃ¤hlter Einrichtungen im Gebiet](https://user-images.githubusercontent.com/43250699/157067851-a2c165c4-894c-4b3f-80a9-4bc626516771.png)
+![Abbildung 2: Erreichbarkeit ausgewählter Einrichtungen im Gebiet](https://user-images.githubusercontent.com/43250699/157067851-a2c165c4-894c-4b3f-80a9-4bc626516771.png)
 
-*Abbildung 2: Erreichbarkeit ausgewählter Einrichtungen im Gebiet*
+*Abb.: Erreichbarkeit ausgewählter Einrichtungen im Gebiet.*
 
 1. **Auswahl des Modus**
    > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet.
@@ -86,17 +86,17 @@ Zeigt die Abdeckung und Erreichbarkeit von einer zuvor festgelegten Einrichtungs
 11. **Legende & Isochronen**
     > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen die vom den Einrichtungen aus erreichbaren Gebiete abhängig von den zuvor eingegebenen Parametern. Ist "Verkehrsfluss berücksichtigen" ausgewählt, wird das theoretische Maximum bei freier Fahrt als gestrichelte Linie angezeigt.
 12. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](./pagination.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](..\cosi\manuals\ergebnisverzeichnis.md) verwaltet werden.
 
    ### Erreichbarkeit entlang einer Route
-Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarkeit in einem bestimmten Umkreis um die Route herum berechnen lassen. 
+Wenn Sie im Routing-Tool eine Route erstellt haben, können Sie die Erreichbarkeit in einem bestimmten Umkreis um die Route herum berechnen lassen.
   
-Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
+Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 ![Abbildung 3: Erreichbarkeit entlang einer Route](https://user-images.githubusercontent.com/43250699/159470252-067117b3-b8a3-481d-b007-113e7a0477c8.png)
 
-*Abbildung 3: Erreichbarkeit entlang einer Route*
+*Abb.: Erreichbarkeit entlang einer Route.*
 1. **Auswahl des Modus**
-   > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet. Beachten Sie, dass die Erreichbarkeit entlang einer Route nur auswählen können, wenn Sie im Vorfeld im Routing-Tool eine Route angelegt haben.
+   > Art der Einrichtungsanalyse. Ab einem Referenzpunkt, entlang einer Route oder Erreichbarkeit der gewählten Einrichtungen im Gebiet. Beachten Sie, dass Sie die Erreichbarkeit entlang einer Route nur auswählen können, wenn Sie im Vorfeld im Routing-Tool eine Route angelegt haben.
 2. **Route auswählen**
    > Die im Routing-Tool aktive Route wird automatisch ausgewählt.
 3. **Vorgegebene Felder**
@@ -106,6 +106,6 @@ Das Modul kann verwendet werden, ohne vorherige Gebietsauswahl.
 5. **Berechnen**
 6. **Ergebnis ausblenden** 
 7. **Legende und Isochronen**
-   > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen dasum die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
+   > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das um die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
 8. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](./pagination.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](..\cosi\manuals\ergebnisverzeichnis.md) verwaltet werden.
