@@ -9,8 +9,8 @@ ___
 
 ### Nutzerhandbuch
 
-**Version 1.2.x**  
-*Zur internen Nutzung*
+**3. Phase**   
+**Version 1.3.0**  
 
 <div style="page-break-after: always;"></div>
 
@@ -38,10 +38,11 @@ ___
 - Paul Linnow, HafenCity Universität Hamburg
 - Peter Duensing, Senatskanzlei Hamburg, ITD
 - Sebastian Duden, LGV Hamburg
-- Yuxiang Zhang, HafenCity Universität Hamburgxx
+- Yuxiang Zhang, HafenCity Universität Hamburg  
+
 
 ### Stand
-xx/xx/2023
+08/23
 
 ### Keywords
 GIS, Dashboard, Data Driven Urban Planning, Social Infrastructure, Urban Data Platform, Data Visualization, Planning Support Tools, Demand Driven Decision Making  
@@ -55,15 +56,18 @@ ___
 Bei der Planung städtischer und sozialer Infrastruktur sind Entscheidungsprozesse in der öffentlichen Verwaltung häufig durch langwierige Verfahren und eine fragmentierte Datengrundlage charakterisiert. D.h. Bedarfe werden teilweise  spät erkannt, oder die Konkretisierung der Planung verzögert sich durch das aufwendige Beschaffen von strukturierten Informationen.\
 Das vorliegende Handbuch beschreibt das *Cockpit Städtische Infrastrukturen* für Hamburg als digitales Analyse- und Planungswerkzeug, welches mithilfe eines leicht zugänglichen User-Interface statistische und georeferenzierte Daten bündelt, visualisiert und integriert, um Planungsbedarfe zu identifizieren und Planungsprozesse zu beschleunigen.  
   
-Dazu wurden die durch die Urban Data Platform der Stadt Hamburg aufgebauten Datenbankstrukturen und die Funktionalität des Masterportals genutzt, um eine kartenbasierte Webapplikation zu etablieren, welche den Quartiersplanenden der Stadt eine Reihe von Analysefunktionen zur Verfügung stellt, um auf der Verwaltungsebene der statistischen Gebiete soziodemographische Zusammenhänge zu identifizieren, Trends zu erkennen sowie Verhältnisse zwischen dem existierenden Infrastrukturangebot und den relevanten Zielgruppen zu ermitteln. Das Werkzeug soll im Folgenden helfen, Standorte und Potentiale für die Entwicklung von Infrastruktur zu finden. Die Ergebnisse dieser Analysen können direkt aus CoSI heraus visualisiert und als Entscheidungs- und Diskussionsgrundlage verwendet werden. Der Workflow folgt dabei einer dreistufigen Logik von der Visualisierung von Daten, über die Analyse, also der kontextuellen Verknüpfung von Information, bis zur Simulation von Maßnahmen und Ableitung ihrer Auswirkungen. 
+
+Dazu wurden die durch die *Urban Data Platform* der Stadt Hamburg aufgebauten Datenbankstrukturen und die Funktionalität des Masterportals genutzt, um eine kartenbasierte Webapplikation zu etablieren, welche den Quartiersplanenden der Stadt eine Reihe von Analysefunktionen zur Verfügung stellt, um auf der Verwaltungsebene der statistischen Gebiete soziodemographische Zusammenhänge zu identifizieren, Trends zu erkennen sowie Verhältnisse zwischen dem existierenden Infrastrukturangebot und den relevanten Zielgruppen zu ermitteln. Das Werkzeug soll im Folgenden helfen, Standorte und Potentiale für die Entwicklung von Infrastruktur zu finden. Die Ergebnisse dieser Analysen können direkt aus CoSI heraus visualisiert und als Entscheidungs- und Diskussionsgrundlage verwendet werden. Der Workflow folgt dabei einer dreistufigen Logik von der *Visualisierung* von Daten, über die *Analyse*, also der kontextuellen Verknüpfung von Information, bis zur *Simulation* von Maßnahmen und Ableitung ihrer  Auswirkungen.  
+
   
 Um die technischen und inhaltlichen Anforderungen des Initialisierungs-Projekts aufzustellen, wurden im Vorfeld ab Sommer 2018 eine Reihe von Stakeholder- und Userstory-Workshops mit den Mitgliedern der Hamburger Verwaltung auf verschiedenen Ebenen durchgeführt. 
 
 CoSI wurde dann von Juni 2019 bis September 2023 in den Projekten CoSI I bis III in einem agilen Verfahren, basierend auf der SCRUM-Methode, durch ein interdisziplinäres Team der HCU Hamburg und des LGV Hamburg entwickelt. Nutzerinnen und Nutzer waren dabei von Beginn an über die AG CoSI einbezogen und konnten den jeweils neuesten Entwicklungsstand im Arbeitsalltag evaluieren, so dass aktuelle Anforderungen an Funktionen und Daten fortlaufend in die Planung der Sprints eingegangen sind. Ab Mitte 2020 wurde das Verfahren in den Produktivbetrieb überführt. Seitdem steht allen berechtigt interessierten Mitarbeiterinnen und Mitarbeitern innerhalb der FHH – im Sommer 2023 waren es über 1500 - eine fortlaufend aktualisierte Produktivversion von CoSI zur Verfügung. 
 
-Datenbedarfe aus der AG CoSI und von den Nutzenden der Produktivversion werden fortlaufend erfasst und an den Urban Data Hub des LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potentieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt. 
 
-Es werden auch Integrationsmöglichkeiten für das Tool in die tägliche Arbeit von Behörden und Fachämtern eruiert. Die CoSI-Projekte haben  diese Informationen gebündelt, in Workshops mit der AG CoSI und Anwendenden vertiefte Funktionskonzepte erarbeitet und diese in den Themenbereichen Visualisierung, Analyse und Simulation integriert. So wurde ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann. 
+Datenbedarfe aus der AG CoSI und von den Nutzenden der Produktivversion werden fortlaufend erfasst und an den Urban Data Hub des LGV übergeben, Datenverantwortliche lokalisiert und die Datenbestände unter Berücksichtigung potenzieller Datenschutzrichtlinien öffentlich oder FHH-intern über die Urban Data Platform (UDP) zur Verfügung gestellt.
+Es werden auch Integrationsmöglichkeiten für das Tool in die tägliche Arbeit von Behörden und Fachämtern eruiert. Die CoSI-Projekte haben diese Informationen gebündelt, in Workshops mit der AG CoSI und Anwendenden vertiefte Funktionskonzepte erarbeitet und diese in den Themenbereichen Visualisierung, Analyse und Simulation integriert. So wurde ein Planungs-, Kollaborations- und Kommunikationstool entwickelt, welches konzeptuell auf viele weitere Themenbereiche angewendet werden kann.
+
 
 Diese Weiterentwicklung von CoSI und den zu Grunde liegenden Datenbeständen im Urban Data Portal in enger Zusammenarbeit mit den Nutzenden soll auch nach den Projekten CoSI I bis III fortgeführt werden. Dazu ist im Lebenslagenmanagement der BWFGB eine moderne fachliche Leitstelle geplant.
   
@@ -110,45 +114,50 @@ ___
 ___
 ## Datenmodell & -Infrastruktur
 ___
+  
+CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB).
 
-CoSI ermöglicht ganz ähnlich wie der FHH-Atlas auch die Anzeige verschiedener Fachdaten unterschiedlicher Behörden und Ämter in der Karte, wie z.B. dem digitalen Grünplan (BUKEA) oder den Öffentlichen Schulen (BSB). 
+![Vgl_FHH_Atlas](../cosi/manuals/Vgl_FHH_Atlas.png)
 
-![Bild1](https://github.com/nihalh01/cosi/assets/140716054/53afc6f1-7dd5-4bc1-ba32-0942f9442d3d)
-*Abbildung 1: Anzeige von Themen auf der Karte wie im FHH-Atlas*
+*Abb.: Anzeige von Themen auf der Karte wie im FHH-Atlas.*
 
-Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden. 
+Als wesentliche Erweiterung können zudem regionalstatistische Daten des Statistikamts Nord für statistische Gebiete, Stadtteile, Bezirke oder ganz Hamburg angezeigt werden.
 
-![Bild2](https://github.com/nihalh01/cosi/assets/140716054/3290b6da-d485-49f0-8413-965fd582334c)
-*Abbildung 2: Anzeige statistischer Daten auf der Karte und im Dashboard*
+![stat_daten-anzeige](../cosi/manuals/stat_daten-anzeige.png)
+
+*Abb.: Anzeige statistischer Daten auf der Karte und im Dashboard.*
 
 Die Daten werden aber nicht nur in Karte und Tabelle nebeneinander dargestellt, sondern können mit CoSIs Analysefunktionen analysiert und in Beziehung gesetzt werden, indem z.B. ein sozialräumliches Angebot wie Spielplätze, gemessen als Spielplatzfläche in Quadratmetern, mit dem Bedarf der Bevölkerung, gemessen als Anzahl der Kinder z.B. unter 6 Jahren, in der Versorgungsanalyse ausgewertet werden können.
 
-![Bild3](https://github.com/nihalh01/cosi/assets/140716054/2fc1243a-f819-41f9-9037-b656c885ebb7)
-*Abbildung 3: Analysefunktionen, hier Versorgungsanalyse*
+![bsp-analysefunktionen](../cosi/manuals/bsp-analysefunktionen.png)
+
+*Abb.: Analysefunktionen, hier Versorgungsanalyse.*
+
 
 Darüber hinaus erlaubt CoSI, in die Datensätze “einzugreifen”: sie zu filtern, zu durchsuchen oder für die Darstellung von Planungsszenarien im laufenden Programm zu verändern (s. Simulation).
 
 ### Regionalstatistische Daten
 Die Daten des StaNord liegen für alle Verwaltungsebenen der FHH (statistische Gebieten, Stadtteile, Bezirke und die Gesamtstadt) vor. Sie umfassen je nach Ebene über 120 Indikatoren, welche sich in folgende Kategorien gliedern:  
 
-- Bevölkerung
-- Bevölkerung ab x Jahren
-- Bevölkerung unter x Jahren
-- Bevölkerung x bis x Jahren
-- Bevölkerung x bis unter 18 Jahren
-- Bevölkerung x bis über 18 Jahren
-- Bevölkerung Migrationshintergrund
-- Fläche
-- Haushalte
-- Sozialversicherungspflichtige
-- Arbeitslose
-- SGB II Leistungen
-- Grundsicherung im Alter
-- Wohnen
-- Wahlbeteiligung
-- Verkehr
-- Infrastruktur
-- Bevölkerungsbewegung
+   - Bevölkerung
+   - Bevölkerung ab x Jahren
+   - Bevölkerung unter x Jahren
+   - Bevölkerung x bis x Jahren
+   - Bevölkerung x bis unter 18 Jahren
+   - Bevölkerung x bis über 18 Jahren
+   - Bevölkerung Migrationshintergrund
+   - Fläche
+   - Haushalte
+   - Sozialversicherungspflichtige
+   - Arbeitslose
+   - SGB II Leistungen
+   - Grundsicherung im Alter
+   - Wohnen
+   - Wahlbeteiligung
+   - Verkehr
+   - Infrastruktur
+   - Bevölkerungsbewegung
+
 
 Diese Datensätze beinhalten Zeitreihen, welche (je nach Datensatz) von ca. 2012 an erfasst sind und jährlich erweitert werden.
 
@@ -157,7 +166,9 @@ Diese Datensätze beinhalten Zeitreihen, welche (je nach Datensatz) von ca. 2012
 ### Fachdaten
 CoSI bietet ganz ähnlich wie der FHH-Atlas Fachdatensätze in einem Themenbaum an. Während der FHH-Atlas grundsätzlich alle auf der Urban Data Platform verfügbaren und innerhalb der FHH freigegebenen Datensätze anzeigt, wird für CoSI in Abstimmung mit der Nutzendengruppe AG CoSI eine Auwahl getroffen. Dies dient der Übersicht und ermöglicht den Test und ggf. die Anpassung der Analysefunktionen an die angebotenen Daten.
 
-Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
+
+Die Fachdatensätze, welche derzeit in CoSI eingebunden sind oder noch eingebunden werden können, werden als Geodienste von unterschiedlichsten Dateneignern (dies sind vor allem Behörden und Bezirksämter, aber prinzipiell sind auch Vereine oder Privatunternehmen denkbar.) bereitgestellt und in CoSI, wie im FHH-Atlas, über die URL des jeweiligen Dienstes abgerufen. Viele der Datensätze in ihrer aufbereiteten Form sind aus den Verhandlungs- und Koordinationsprozessen des Urban Data Hub hervorgegangen, über den sich die Behörden und Datenhalter der FHH auf gemeinsame Standards und regelmäßige Veröffentlichungen verständigen.
+
 
 ### Prognosedaten
 Die Prognosedaten enthalten die prognostizierte jährliche Bevölkerungsentwicklung in den Stadtteilen Hamburgs nach vier Altersgruppen und Geschlecht bis zum Jahr 2035. Stichtag ist jeweils der 31.12.
@@ -189,11 +200,11 @@ ___
 ## Module
 ___
 ### Überblick 
-CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet" an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
+CoSI bietet verschiedene Module (nachfolgend oft auch als "Werkzeuge" oder "Tools" bezeichnet") an, die bestimmte Funktionen zur Erstellung, Verwaltung und Analyse von Daten bereitstellen. Nachfolgend finden Sie die Übersicht über alle im UI zur Verfügung stehenden Funktionen:
 
 ![Abbildung 1: Das CoSI Nutzer-Interface](https://user-images.githubusercontent.com/43250699/142911085-50a9fe73-0171-47d0-b2f9-527593ae42ed.jpg)
 
-*Abbildung 1: Das CoSI Nutzer-Interface*
+*Abb.: Das CoSI User-Interface.*
 
 1. **Themenbau/ Layer** (s. Themen)
 2. **Analyse**
@@ -252,7 +263,7 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 
 ![Abbildung 2: Der Themenbaum](https://user-images.githubusercontent.com/43250699/159332327-0b3301d1-4ae9-4b1f-9cb1-4fe733d51a54.png)
 
-*Abbildung 2: Der Themenbaum*
+*Abb.: Der Themenbaum.*
 
 Öffnen Sie mit dem Plus die Übersicht der Themenkategorie oder minimieren sie die Ansicht wieder mit dem Minus.
 
@@ -262,12 +273,19 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
 	 - **Analyse/Simulation**
          > Die aufbereiteten Layer für CoSI-spezifische Werkzeuge (bereitgestellt als WFS, s. Glossar). Die einzelnen Datenlayer sind in Kategorien eingeteilt, die regelmäßig angepasst bzw. aktualisiert werden.
 	 - **Darstellung**
-         > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
-3. **Ausgewählte Themen**
+      > Daten zur reinen "Anzeige" in der Karte, v.a. entnommen aus dem FHH Atlas (bereitgestellt als WMS).
+3. **Ausgewählte Themen**  
+   > Siehe nachfolgende Abbildung.
+4. **Hilfsbutton**
+   > Ruft diese Anleitung auf.
+5. **Kartenhintergrund**
+   > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
+6. **Themenbaum fixieren/ lösen**
+   > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
    
+   **Ausgewählte Themen**  
       ![Abbildung 3: Ausgewählte Themen](https://user-images.githubusercontent.com/43250699/142911886-03547719-aab0-4f80-a3e3-cfdca1267eb7.png)  
-      *Abbildung 3: Ausgewählte Themen*
-   
+      *Abb.: Ausgewählte Themen.*  
       - **3.1 Informationen und Legenden**
       - **3.2 Einstellungen**  
          Über das Zahnrad öffnen sich Einstellungen für Transparenz und Ebene verschieben.
@@ -275,16 +293,14 @@ Der Themenbaum ist gegliedert in Hintergrundkarten, einen Katalog an Fachdaten u
          Die Transparenz lässt sich über Plus in Prozent erhöhen und über Minus verringern.
       - **3.4 Ebene nach oben/unten**  
          Über das Pfeilmenü kann die Ebene der Layer verschoben werden.
-5. **Hilfsbutton**
-   > Ruft diese Anleitung auf.
-6. **Kartenhintergrund**
-   > Hier können Sie für den Kartenhintergrund grau oder weiß auswählen.
-7. **Themenbaum fixieren/ lösen**
-   > Diese Funktion fixiert den Themenbaum, so dass er auch bei Interaktionen mit der Karte angezeigt bleibt.
 
-Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In Abbildung 4 zum Beispiel stellen die Häuschen die vorhandenen Kindertagesstätten im Gebiet dar. Nummerierte Häuschen zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an. Die lilafarbenen Linien stellen Flächen dar, die zum Layer Bebauungspläne gehören.
+Die Themen enthalten Informationen, die symbolisch oder durch Flächen auf der Karte dargestellt werden. In der nachfolgenden Abbildung zum Beispiel stellen die blauen Punkte die vorhandenen Einrichtungen im Gebiet dar. Nummerierte Punkte zeigen die Anzahl der an diesem Ort vorhandenen Einrichtungen an.
 Eine Legende zu den aktiven Themen kann durch einen Klick auf den Reiter "Legende" eingeblendet werden. Unabhängig davon können über den Infobutton rechts neben dem Layer weitere Informationen zu dem jeweiligen Thema aufgerufen werden. Es werden folgende Informationen bereitgestellt: Kurzbeschreibung des Themas, Datenstand und Legende. Auch befinden sich hinter dem Info-Button die Links zu Downloadquellen und eine WFS - bzw. WMF -Adresse.
 Ein Klick auf ein Objekt auf der Karte öffnet eine Infotafel für die aktuelle Auswahl (Sportstätte, Kita, etc.). Auf der Infotafel werden Informationen über das Objekt angezeigt. Datenschutzrelevante (personenbezogene) Daten werden nicht angezeigt.
+
+![Abbildung 4: Manuelle Flächenauswahl](https://user-images.githubusercontent.com/43250699/159277769-55018485-2d35-438f-8f5e-c215e53c367c.png)
+
+*Abb.: Beispiel für Kartenansicht.*
 
 <div style="page-break-after: always;"></div>
 
@@ -297,7 +313,7 @@ Mit Hilfe dieses Werkzeuges können Sie ein Polygon auf der Karte zeichnen, inne
 
 ![Screenshot_81](https://github.com/nihalh01/cosi/assets/140716054/5c047dc2-d686-4b55-8ab3-fa885cecebb8)
 
-*Abbildung 4: Manuelle Flächenauswahl*
+*Abb.: Manuelle Flächenauswahl*
 
 1. **Polygon zeichnen**
    > Klicken Sie auf diesen Button, um ein neues Polygon auf der Karte zu zeichnen.
