@@ -108,4 +108,4 @@ Das Modul kann ohne vorherige Gebietsauswahl verwendet werden.
 7. **Legende und Isochronen**
    > Eine Legende wird eingeblendet. Sie wird dynamisch für die Anfrage generiert und zeigt drei gleichmäßig verteilte Entfernungswerte. Höchstwert ist der zuvor eingegebene Wert für die Entfernung. Die Isochronen (Polygone) in der Karte sind entsprechend der Legende eingefärbt. Sie zeigen das um die Route herum erreichbare Gebiet abhängig von den zuvor eingegebenen Parametern.
 8. **Ergebnisverzeichnis**
-   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/manuals/ergebnisverzeichnis.md) verwaltet werden.
+   > Sie können mehrere Erreichbarkeitsanalysen erstellen, die über das sog. [Ergebnisverzeichnis](/cosi/manuals/ergebnisverzeichnis.md) verwaltet werden.
